@@ -6,6 +6,7 @@ public class MainBuilding : MonoBehaviour
 {
     [SerializeField] private Scanner _scanner;
     [SerializeField] private float _scanInterval = 5f;
+    [SerializeField] private float _landingRadius = 1f;
 
     private WaitForSeconds _scanWait;
     private Queue<IScannable> _scannedResources = new Queue<IScannable>();
@@ -30,13 +31,10 @@ public class MainBuilding : MonoBehaviour
             _scanner.ScannableDetected -= OnResourceScanned;
     }
 
-    public void DeliverResource(Resource resource)
+    private void OnDrawGizmos()
     {
-        resource.Pick(transform, () =>
-        {
-            Debug.Log($"Resource {resource.name} delivered to Main Building");
-            _resourceStorage.Add(resource);
-        });
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, _landingRadius);
     }
 
     private IEnumerator Scanning()
@@ -55,5 +53,24 @@ public class MainBuilding : MonoBehaviour
             scannable.Scan();
             _scannedResources.Enqueue(scannable);
         }
+    }
+
+    public void TakeResource(Resource resource)
+    {
+        resource.Collect(transform, () =>
+        {
+            _resourceStorage.Add(resource);
+        });
+    }
+
+    public Resource GetNextResource()
+    {
+        return (Resource)_scannedResources.Dequeue();
+    }
+
+    public Vector3 GetLandingPoint(Vector3 originPos)
+    {
+        Vector3 dir = (transform.position - originPos).normalized;
+        return transform.position - dir * _landingRadius;
     }
 }

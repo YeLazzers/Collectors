@@ -3,7 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
-public class Resource : MonoBehaviour, IPoolable<Resource>, IPickable, IScannable
+public class Resource : MonoBehaviour, IPoolable<Resource>, ICollectable, IScannable
 {
     [SerializeField] private ResourceConfig _resourceConfig;
 
@@ -11,6 +11,8 @@ public class Resource : MonoBehaviour, IPoolable<Resource>, IPickable, IScannabl
 
     public event Action<Resource> Expired;
 
+    public Transform Transform => transform;
+    public Vector3 Position => transform.position;
     public ResourceType Type => _resourceConfig.ResourceType;
     public int Amount => _resourceConfig.Value;
 
@@ -41,7 +43,7 @@ public class Resource : MonoBehaviour, IPoolable<Resource>, IPickable, IScannabl
         return Initialize(position);
     }
 
-    public void Pick(Transform newParent, TweenCallback onComplete = null)
+    public void Collect(Transform newParent, TweenCallback onComplete = null)
     {
         transform.SetParent(newParent);
         transform.DOLocalMove(Vector3.zero, 3f).SetEase(Ease.InOutQuart).onComplete += onComplete;

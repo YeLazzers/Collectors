@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4204329353915133240}
   - component: {fileID: 937726809901570670}
   - component: {fileID: 1361314458768288907}
+  - component: {fileID: 2739797276709859110}
+  - component: {fileID: 2883365669797131965}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -98,8 +100,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2448a2c3b11ba4c44ba9ca336207c3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainBuilding: {fileID: 0}
   _resourceHolder: {fileID: 3815589598334993673}
-  _resource: {fileID: 0}
+  _mover: {fileID: 2883365669797131965}
+  _moveSpeed: 2
+--- !u!114 &2739797276709859110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528220985189515095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d24f1efc413bb4fe590ecd400b906fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceHolder: {fileID: 3815589598334993673}
+  _mainBuilding: {fileID: 0}
+--- !u!114 &2883365669797131965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528220985189515095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1bc9b29206c243c38155932b5bfafcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _splineContainer: {fileID: 0}
   _moveSpeed: 2
 --- !u!1 &1837647111349328339
 GameObject:
