@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class MainBuilding : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(Scanning());
+        // StartCoroutine(Scanning());
 
         if (_scanner != null)
             _scanner.ScannableDetected += OnResourceScanned;
@@ -29,6 +30,11 @@ public class MainBuilding : MonoBehaviour
     {
         if (_scanner != null)
             _scanner.ScannableDetected -= OnResourceScanned;
+    }
+
+    private void Start()
+    {
+        _scanner.Scan();
     }
 
     private void OnDrawGizmos()
@@ -41,8 +47,8 @@ public class MainBuilding : MonoBehaviour
     {
         while (enabled)
         {
-            yield return _scanWait;
             _scanner.Scan();
+            yield return _scanWait;
         }
     }
 
@@ -55,11 +61,12 @@ public class MainBuilding : MonoBehaviour
         }
     }
 
-    public void TakeResource(Resource resource)
+    public void TakeResource(Resource resource, Action onDone = null)
     {
         resource.Collect(transform, () =>
         {
             _resourceStorage.Add(resource);
+            onDone?.Invoke();
         });
     }
 

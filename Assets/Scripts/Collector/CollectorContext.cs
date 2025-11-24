@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Collector))]
 public class CollectorContext : MonoBehaviour
 {
-    [SerializeField] private ResourceHolder _resourceHolder;
     [SerializeField] private MainBuilding _mainBuilding;
 
     private Collector _collector;
@@ -14,28 +13,11 @@ public class CollectorContext : MonoBehaviour
         _collector = GetComponent<Collector>();
     }
 
-    [ContextMenu("Move To Resource")]
-    public void MoveToResource()
+    [ContextMenu("Create job")]
+    private void CreateJob()
     {
         _collectable = _mainBuilding.GetNextResource();
 
-        _collector.Move(_collectable);
-    }
-
-    [ContextMenu("Grab Resource")]
-    public void GrabResource()
-    {
-        _collector.Grab();
-    }
-
-    [ContextMenu("Deliver Resource")]
-    public void DeliverResource()
-    {
-        _collector.DeliverCollectable();
-    }
-
-    private ICollectable GetResource()
-    {
-        return _collectable == null ? _mainBuilding.GetNextResource() : _collectable;
+        _collector.BeginCollect(new CollectJob(_collectable, _mainBuilding));
     }
 }

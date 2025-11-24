@@ -1,38 +1,36 @@
-using System;
 using UnityEngine;
 
-public class Collector : MonoBehaviour
+public class Collector : MonoBehaviour, ICollectWorkable
 {
-    [SerializeField] private MainBuilding _mainBuilding;
-    [SerializeField] private ResourceHolder _resourceHolder;
-    [SerializeField] private CollectorMover _mover;
+    [SerializeField] private CollectorBrain _brain;
 
-    private ICollectable _currentCollectable;
+    [SerializeField] private float _movementSpeed;
 
-    public void Move(ICollectable collectable)
+
+    private CollectJob _collectJob;
+    public CollectJob CurrentJob => _collectJob;
+    public float Speed => _movementSpeed;
+
+    private void Awake()
     {
-        _currentCollectable = collectable;
-
-        _mover.Move(_currentCollectable.Position);
+        name = $"{name} {GetInstanceID()}";
     }
 
-    public void Grab()
+    public void SetJob(IJob job)
     {
-        _currentCollectable.Collect(_resourceHolder.transform, DeliverCollectable);
+        job.ApplyTo(this);
     }
 
-    public void DeliverCollectable()
+    public void ClearJob()
     {
-        _mover.Move(_mainBuilding.GetLandingPoint(transform.position), () =>
-        {
-            _mainBuilding.TakeResource((Resource)_currentCollectable);
-            _currentCollectable = null;
-        });
+        _collectJob = null;
     }
 
-    public void SetCollectable(ICollectable collectable)
+    public void BeginCollect(CollectJob job)
     {
-        _currentCollectable = collectable;
-    }
+        Debug.Log($"Collector {GetInstanceID()} got job");
+        _collectJob = job;
 
+        _brain.BeginCollect();
+    }
 }

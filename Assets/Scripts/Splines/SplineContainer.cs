@@ -8,8 +8,10 @@ public class SplineContainer : MonoBehaviour
     public SplinePath CreateEmptySpline(int ownerId)
     {
         SplinePath spline = new GameObject($"SplinePath for {ownerId}").AddComponent<SplinePath>();
+        spline.transform.SetParent(transform);
 
         _splines[ownerId] = spline;
+
 
         return spline;
     }

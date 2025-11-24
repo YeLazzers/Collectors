@@ -874,6 +874,14 @@ PrefabInstance:
       propertyPath: _mainBuilding
       value: 
       objectReference: {fileID: 1768127875}
+    - target: {fileID: 1361314458768288907, guid: 25ffe4f8a5fb940ceacdc542580b2c14, type: 3}
+      propertyPath: _movementSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361314458768288907, guid: 25ffe4f8a5fb940ceacdc542580b2c14, type: 3}
+      propertyPath: _splineContainer
+      value: 
+      objectReference: {fileID: 1959743495}
     - target: {fileID: 1528220985189515095, guid: 25ffe4f8a5fb940ceacdc542580b2c14, type: 3}
       propertyPath: m_Name
       value: Drone
@@ -887,10 +895,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1768127875}
     - target: {fileID: 2883365669797131965, guid: 25ffe4f8a5fb940ceacdc542580b2c14, type: 3}
-      propertyPath: _moveSpeed
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2883365669797131965, guid: 25ffe4f8a5fb940ceacdc542580b2c14, type: 3}
+      propertyPath: _splineContainer
+      value: 
+      objectReference: {fileID: 1959743495}
+    - target: {fileID: 4478079228722777896, guid: 25ffe4f8a5fb940ceacdc542580b2c14, type: 3}
       propertyPath: _splineContainer
       value: 
       objectReference: {fileID: 1959743495}
