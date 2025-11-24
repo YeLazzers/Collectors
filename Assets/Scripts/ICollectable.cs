@@ -3,7 +3,7 @@ using DG.Tweening;
 
 public interface ICollectable
 {
-    Transform Transform { get; }
     Vector3 Position { get; }
+    bool IsCollected { get; }
     void Collect(Transform owner, TweenCallback onComplete = null);
 }

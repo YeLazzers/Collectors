@@ -39,7 +39,6 @@ public abstract class StateMachineBase : MonoBehaviour
             else
                 onComplete?.Invoke();
         });
-        Debug.Log($"StateChanged: {id}");
     }
     public void ChangeState<TParams>(Enum id, TParams param, Action onComplete = null)
     {

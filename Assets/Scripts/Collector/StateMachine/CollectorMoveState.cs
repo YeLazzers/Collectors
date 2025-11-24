@@ -17,6 +17,8 @@ public class CollectorMoveState : StateBase, IParameterizedState<MoveStateParams
     private float _sampleRate = 0f;
     private SplinePath _spline;
 
+    private event Action _onComplete;
+
     public CollectorMoveState(StateMachineBase machine, Collector collector, SplinePath spline)
         : base(machine)
     {
@@ -33,13 +35,18 @@ public class CollectorMoveState : StateBase, IParameterizedState<MoveStateParams
     {
         _sampleRate = 0f;
         _spline.Build(_collector.transform, _params.TargetPosition);
+
+        _onComplete = onComplete;
     }
 
     public override void OnUpdate(float deltaTime)
     {
         _sampleRate += _params.Speed * Time.deltaTime / _spline.GetCurve(_sampleRate).Length;
         if (_sampleRate > _spline.NodesCount - 1)
+        {
+            _onComplete?.Invoke();
             return;
+        }
 
         CurveSample sample = _spline.GetCurveSample(_sampleRate);
         Place(sample);

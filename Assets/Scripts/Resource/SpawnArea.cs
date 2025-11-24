@@ -12,7 +12,6 @@ public class SpawnArea : MonoBehaviour
     private void OnValidate()
     {
         transform.localScale = new Vector3(_spawnRingOuter * _radiusMultiplier, _spawnRingOuter * _radiusMultiplier, _zScale);
-        Debug.Log("OnValidate");
     }
 
     public Vector3 RandomPointInSquareRing(Vector3 center)

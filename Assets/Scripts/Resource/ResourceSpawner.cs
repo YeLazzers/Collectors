@@ -9,8 +9,6 @@ public class ResourceSpawner : PoolBase<Resource>
     [SerializeField] private float _spawnIntervalMax = 5f;
     [SerializeField] private bool _isBirstEnabled;
 
-    // private int _currentResourceCount = 0;
-
     private void OnEnable()
     {
         if (_isBirstEnabled)
@@ -23,7 +21,6 @@ public class ResourceSpawner : PoolBase<Resource>
             StartCoroutine(SpawnResources());
         }
     }
-
 
     private IEnumerator SpawnResources()
     {
@@ -40,5 +37,11 @@ public class ResourceSpawner : PoolBase<Resource>
     public Resource Spawn()
     {
         return Get().Initialize(_spawnArea.RandomPointInCircleRing(transform.position), transform);
+    }
+
+    public void Release(Resource resource)
+    {
+        resource.transform.SetParent(transform);
+        Pool.Release(resource);
     }
 }

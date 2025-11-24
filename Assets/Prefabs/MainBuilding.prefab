@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7f3f8fd7dcf42c283b3ad24519b13d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _expansionDuration: 1.5
+  _expansionDuration: 2
   _maxScale: 10
   _expansionEase: 14
 --- !u!1 &5390422286709069620
@@ -163,14 +163,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5390422286709069620}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02517a3b024c04f0da8f43df4f41d4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialCollectorsCount: 3
-  _prefab: {fileID: 1361314458768288907, guid: 25ffe4f8a5fb940ceacdc542580b2c14, type: 3}
-  _spawnRadius: 1
+  Prefab: {fileID: 1361314458768288907, guid: 25ffe4f8a5fb940ceacdc542580b2c14, type: 3}
 --- !u!114 &638046388773260615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,9 +181,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be969b20f781446199a63ae1580943e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collectorSpawner: {fileID: 237665787789056374}
+  _resourceSpawner: {fileID: 0}
   _scanner: {fileID: 840456401511194901}
-  _scanInterval: 5
+  _scanInterval: 4.5
   _landingRadius: 1
+  _initialCollectorsCount: 3
+  _spawnRadius: 1
 --- !u!1001 &3935368232991329924
 PrefabInstance:
   m_ObjectHideFlags: 0

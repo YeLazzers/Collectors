@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
@@ -8,20 +7,18 @@ public class Resource : MonoBehaviour, IPoolable<Resource>, ICollectable, IScann
     [SerializeField] private ResourceConfig _resourceConfig;
 
     private GemAnimations _gemAnimations;
+    [SerializeField] private bool _isCollected = false;
 
     public event Action<Resource> Expired;
 
-    public Transform Transform => transform;
     public Vector3 Position => transform.position;
+    public bool IsCollected => _isCollected;
     public ResourceType Type => _resourceConfig.ResourceType;
     public int Amount => _resourceConfig.Value;
 
     private void Awake()
     {
         _gemAnimations = GetComponent<GemAnimations>();
-
-
-        Initialize(Vector3.zero);
     }
 
     public Resource Initialize(Vector3 position)
@@ -31,6 +28,10 @@ public class Resource : MonoBehaviour, IPoolable<Resource>, ICollectable, IScann
 
         _gemAnimations.PlayAppearAnimation();
         _gemAnimations.PlayRotateAnimation();
+
+        _isCollected = false;
+
+        name = $"{_resourceConfig.ResourceType} {GetInstanceID()}";
 
         return this;
     }
@@ -47,6 +48,8 @@ public class Resource : MonoBehaviour, IPoolable<Resource>, ICollectable, IScann
     {
         transform.SetParent(newParent);
         transform.DOLocalMove(Vector3.zero, 3f).SetEase(Ease.InOutQuart).onComplete += onComplete;
+
+        _isCollected = true;
     }
 
     public void Scan()
