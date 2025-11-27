@@ -6,6 +6,7 @@ public class SpawnArea : MonoBehaviour
     private readonly float _zScale = 1f;
 
     [SerializeField] private Vector3 _centerOffset;
+    [SerializeField] private float _width = 1f;
     [SerializeField] private float _spawnRingInner = 2f;
     [SerializeField] private float _spawnRingOuter = 5f;
 
@@ -14,25 +15,18 @@ public class SpawnArea : MonoBehaviour
         transform.localScale = new Vector3(_spawnRingOuter * _radiusMultiplier, _spawnRingOuter * _radiusMultiplier, _zScale);
     }
 
-    public Vector3 RandomPointInSquareRing(Vector3 center)
+    private void OnDrawGizmos()
     {
-        while (true)
-        {
-            float x = Random.Range(-_spawnRingOuter, _spawnRingOuter);
-            float z = Random.Range(-_spawnRingOuter, _spawnRingOuter);
-
-            if (Mathf.Max(Mathf.Abs(x), Mathf.Abs(z)) >= _spawnRingInner)
-                return new Vector3(x, 0, z) + center + _centerOffset;
-        }
+        Gizmos.color = new Color(Color.green.r, Color.green.g, Color.green.b, 0.3f);
+        Gizmos.DrawCube(transform.position + _centerOffset, new Vector3(_width, _centerOffset.y, _width));
     }
 
-    public Vector3 RandomPointInCircleRing(Vector3 center)
+    public Vector3 GetRandomPointInArea(Vector3 center)
     {
-        float angle = Random.Range(0f, Mathf.PI * 2f);
-        float radius = Random.Range(_spawnRingInner, _spawnRingOuter);
-        float x = radius * Mathf.Cos(angle);
-        float z = radius * Mathf.Sin(angle);
-
-        return new Vector3(x, 0, z) + center + _centerOffset;
+        return new Vector3(
+            Random.Range(-_width / 2f, _width / 2f),
+            0,
+            Random.Range(-_width / 2f, _width / 2f)
+        ) + center + _centerOffset;
     }
 }

@@ -36,7 +36,7 @@ public class ResourceSpawner : PoolBase<Resource>
 
     public Resource Spawn()
     {
-        return Get().Initialize(_spawnArea.RandomPointInCircleRing(transform.position), transform);
+        return Get().Initialize(_spawnArea.GetRandomPointInArea(transform.position), transform);
     }
 
     public void Release(Resource resource)

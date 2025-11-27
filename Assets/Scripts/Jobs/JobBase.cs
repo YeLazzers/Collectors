@@ -2,8 +2,13 @@ using UnityEngine;
 
 public abstract class JobBase : IJob
 {
-    public MainBuilding Building { get; private set; }
     public JobBase(MainBuilding building) { Building = building; }
 
-    public abstract void ApplyTo(IWorkable worker);
+    public MainBuilding Building { get; private set; }
+    public IWorkable AssignedWorker { get; private set; }
+
+    public virtual void ApplyTo(IWorkable worker)
+    {
+        AssignedWorker = worker;
+    }
 }

@@ -7,8 +7,10 @@ public class CollectJob : JobBase
     {
         Collectable = collectable;
     }
-    public override void ApplyTo(IWorkable worker)
+    public new void ApplyTo(IWorkable worker)
     {
+        base.ApplyTo(worker);
+
         if (worker is ICollectWorkable collectoWorker)
             collectoWorker.BeginCollect(this);
         else

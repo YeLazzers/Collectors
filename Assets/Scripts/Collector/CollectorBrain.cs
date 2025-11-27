@@ -18,7 +18,7 @@ public class CollectorBrain : MonoBehaviour
         _stateMachine.Initialize(_collector, _splinePath, _resourceHolder.transform);
     }
 
-    public void BeginCollect()
+    public void BeginCollect(Action onComplete = null)
     {
         _isAutoMode = true;
         MoveToResource();
@@ -108,8 +108,9 @@ public class CollectorBrain : MonoBehaviour
 
     private void FinishCollect()
     {
-        _collector.ClearJob();
         _stateMachine.ChangeStateToDefault();
         _isAutoMode = false;
+        
+        _collector.FinishJob();
     }
 }

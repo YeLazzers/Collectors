@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4204329353915133240}
   - component: {fileID: 937726809901570670}
   - component: {fileID: 1361314458768288907}
-  - component: {fileID: 2739797276709859110}
   - component: {fileID: 4478079228722777896}
   m_Layer: 0
   m_Name: Drone
@@ -103,19 +102,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _brain: {fileID: 4478079228722777896}
   _movementSpeed: 0.7
---- !u!114 &2739797276709859110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1528220985189515095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24f1efc413bb4fe590ecd400b906fab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mainBuilding: {fileID: 0}
 --- !u!114 &4478079228722777896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +115,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collector: {fileID: 1361314458768288907}
-  _splineContainer: {fileID: 0}
   _resourceHolder: {fileID: 3815589598334993673}
   _stateMachine: {fileID: 1762845636752341890}
 --- !u!1 &1837647111349328339

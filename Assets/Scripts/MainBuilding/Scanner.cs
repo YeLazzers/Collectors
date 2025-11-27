@@ -11,16 +11,16 @@ public class Scanner : MonoBehaviour
 
     private Tween _scanTween;
 
+    public event Action<IScannable> ScannableDetected;
+
     private void Awake()
     {
         _scanTween = CreateScanTween();
     }
 
-    public event Action<IScannable> ScannableDetected;
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<IScannable>(out var scannable))
+        if (other.TryGetComponent(out IScannable scannable))
         {
             ScannableDetected?.Invoke(scannable);
         }

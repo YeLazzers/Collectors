@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,6 +14,7 @@ public class MainBuilding : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private ResourceStorage _resourceStorage;
+    [SerializeField] private CollectorHub _hub;
 
     [Header("Scanner Params")]
     [SerializeField] private Scanner _scanner;
@@ -37,14 +37,14 @@ public class MainBuilding : MonoBehaviour
     {
         StartCoroutine(Scanning());
 
-        if (_scanner != null)
-            _scanner.ScannableDetected += OnResourceScanned;
+        _scanner.ScannableDetected += OnResourceScanned;
+        _hub.CollectorAvailabled += OnCollectorAvailabled;
     }
 
     private void OnDisable()
     {
-        if (_scanner != null)
-            _scanner.ScannableDetected -= OnResourceScanned;
+        _scanner.ScannableDetected -= OnResourceScanned;
+        _hub.CollectorAvailabled -= OnCollectorAvailabled;
     }
 
     private void Start()
@@ -53,14 +53,9 @@ public class MainBuilding : MonoBehaviour
 
         for (int i = 0; i < _initialCollectorsCount; i++)
         {
-            _collectorSpawner.Spawn(GetCollectorSpawnPosition(i, _initialCollectorsCount, randomRotationOffset), transform.position);
+            var collector = _collectorSpawner.Spawn(GetCollectorSpawnPosition(i, _initialCollectorsCount, randomRotationOffset), transform.position);
+            _hub.RegisterCollector(collector);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, _landingRadius);
     }
 
     public void TakeResource(Resource resource, Action onDone = null)
@@ -68,15 +63,11 @@ public class MainBuilding : MonoBehaviour
         resource.Collect(transform, () =>
         {
             _resourceStorage.Add(resource.Amount);
-            _resourceSpawner.Release(resource);
             _scannedResources.Remove(resource);
+
+            _resourceSpawner.Release(resource);
             onDone?.Invoke();
         });
-    }
-
-    public Resource GetNextResource()
-    {
-        return (Resource)_scannedResources.First();
     }
 
     public Vector3 GetLandingPoint(Vector3 originPos)
@@ -98,10 +89,12 @@ public class MainBuilding : MonoBehaviour
     {
         if (!_scannedResources.Contains(scannable))
         {
-            if (scannable is ICollectable collectable && !collectable.IsCollected && _collectorSpawner.TryGetAvailableCollector(out Collector collector))
+            scannable.Scan();
+            _scannedResources.Add(scannable);
+
+            if (scannable is ICollectable collectable)
             {
-                collector.BeginCollect(new CollectJob(collectable, this));
-                _scannedResources.Add(scannable);
+                _hub.AssignCollectJob(new CollectJob(collectable, this));
             }
         }
     }
@@ -118,5 +111,23 @@ public class MainBuilding : MonoBehaviour
             _yPosition,
             transform.position.z + z
         );
+    }
+
+
+    private void OnCollectorAvailabled(Collector collector)
+    {
+        foreach (var scannable in _scannedResources)
+        {
+            if (scannable is ICollectable collectable && !IsResourceAlreadyAssigned(collectable))
+            {
+                _hub.AssignCollectJob(new CollectJob(collectable, this));
+                break;
+            }
+        }
+    }
+
+    private bool IsResourceAlreadyAssigned(ICollectable collectable)
+    {
+        return _hub.FindInActiveJobs(job => job.Collectable == collectable) != null;
     }
 }
