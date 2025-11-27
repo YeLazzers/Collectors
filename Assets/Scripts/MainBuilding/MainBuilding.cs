@@ -13,6 +13,9 @@ public class MainBuilding : MonoBehaviour
     [SerializeField] private CollectorSpawner _collectorSpawner;
     [SerializeField] private ResourceSpawner _resourceSpawner;
 
+    [Header("Components")]
+    [SerializeField] private ResourceStorage _resourceStorage;
+
     [Header("Scanner Params")]
     [SerializeField] private Scanner _scanner;
     [SerializeField] private float _scanInterval = 5f;
@@ -24,7 +27,6 @@ public class MainBuilding : MonoBehaviour
 
     private WaitForSeconds _scanWait;
     private List<IScannable> _scannedResources = new List<IScannable>();
-    private ResourceStorage _resourceStorage = new ResourceStorage();
 
     private void Awake()
     {
@@ -47,8 +49,6 @@ public class MainBuilding : MonoBehaviour
 
     private void Start()
     {
-        // _scanner.Scan();
-
         float randomRotationOffset = Random.Range(0f, Mathf.PI * 2f);
 
         for (int i = 0; i < _initialCollectorsCount; i++)
@@ -67,7 +67,7 @@ public class MainBuilding : MonoBehaviour
     {
         resource.Collect(transform, () =>
         {
-            _resourceStorage.Add(resource);
+            _resourceStorage.Add(resource.Amount);
             _resourceSpawner.Release(resource);
             _scannedResources.Remove(resource);
             onDone?.Invoke();

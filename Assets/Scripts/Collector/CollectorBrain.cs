@@ -4,7 +4,6 @@ using UnityEngine;
 public class CollectorBrain : MonoBehaviour
 {
     [SerializeField] private Collector _collector;
-    [SerializeField] private SplineContainer _splineContainer;
     [SerializeField] private ResourceHolder _resourceHolder;
 
     [Header("State machine")]
@@ -13,9 +12,10 @@ public class CollectorBrain : MonoBehaviour
     private bool _isAutoMode = false;
     private SplinePath _splinePath;
 
-    private void Awake()
+    public void Initialize(SplinePath splinePath)
     {
-        _stateMachine.Initialize(_collector, _splineContainer.CreateEmptySpline(GetInstanceID()), _resourceHolder.transform);
+        _splinePath = splinePath;
+        _stateMachine.Initialize(_collector, _splinePath, _resourceHolder.transform);
     }
 
     public void BeginCollect()

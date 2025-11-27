@@ -7,7 +7,7 @@ public class Collector : MonoBehaviour, IPoolable<Collector>, ICollectWorkable
 
     [SerializeField] private float _movementSpeed;
 
-
+    private SplinePath _splinePath;
     private CollectJob _collectJob;
 
     public event Action<Collector> Expired;
@@ -29,11 +29,14 @@ public class Collector : MonoBehaviour, IPoolable<Collector>, ICollectWorkable
         return this;
     }
 
-    public Collector Initialize(Vector3 position, Vector3 direction)
+    public Collector Initialize(Vector3 position, Vector3 direction, SplinePath splinePath)
     {
         Initialize(position);
 
         transform.LookAt(direction);
+        _splinePath = splinePath;
+
+        _brain.Initialize(_splinePath);
 
         return this;
     }

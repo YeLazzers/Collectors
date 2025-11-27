@@ -1,32 +1,31 @@
-using System.Collections.Generic;
+using System;
+using UnityEngine;
 
-public class ResourceStorage
+public class ResourceStorage : MonoBehaviour
 {
-    private Dictionary<ResourceType, int> _resources = new();
+    [SerializeField] private int _initialResources = 0;
+    [SerializeField] private Sprite _icon;
 
-    public int Get(ResourceType type) => _resources.GetValueOrDefault(type, 0);
+    private int _amount = 0;
 
-    public void Add(ResourceType type, int amount)
+    public int Amount => _amount;
+    public Sprite Icon => _icon;
+
+    public event Action<int> AmountChanged;
+
+    public void Add(int amount)
     {
-        _resources[type] = Get(type) + amount;
+        _amount += amount;
+        AmountChanged?.Invoke(_amount);
     }
 
-    public void Add(Resource resource)
+    public bool TrySpend(int amount)
     {
-        _resources[resource.Type] = Get(resource.Type) + resource.Amount;
-    }
-
-    public bool TrySpend(ResourceType type, int amount)
-    {
-        if (Get(type) < amount)
+        if (_amount < amount)
             return false;
 
-        _resources[type] -= amount;
+        _amount -= amount;
+        AmountChanged?.Invoke(_amount);
         return true;
     }
-}
-
-public enum ResourceType
-{
-    Gem,
 }

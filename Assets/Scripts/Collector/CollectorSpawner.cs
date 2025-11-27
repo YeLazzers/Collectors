@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CollectorSpawner : PoolBase<Collector>
 {
+    [SerializeField] private SplineContainer _splineContainer;
 
     private List<Collector> _activeCollectors = new();
 
@@ -10,7 +11,10 @@ public class CollectorSpawner : PoolBase<Collector>
 
     public void Spawn(Vector3 position, Vector3 direction)
     {
-        _activeCollectors.Add(Get().Initialize(position, direction));
+        Collector collector = Get();
+        collector.Initialize(position, direction, _splineContainer.CreateEmptySpline(collector.GetInstanceID()));
+
+        _activeCollectors.Add(collector);
     }
 
     public bool TryGetAvailableCollector(out Collector collector)

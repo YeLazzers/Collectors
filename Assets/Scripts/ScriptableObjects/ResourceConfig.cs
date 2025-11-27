@@ -1,5 +1,10 @@
 using UnityEngine;
 
+public enum ResourceType
+{
+    Gem,
+}
+
 [CreateAssetMenu(fileName = "New Resource", menuName = "Resources/New Resource", order = 51)]
 public class ResourceConfig : ScriptableObject
 {
