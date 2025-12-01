@@ -29,10 +29,9 @@ public class CollectorBrain : MonoBehaviour
     {
         var job = GetCurrentJob();
 
-        _stateMachine.Move(new MoveStateParams
+        _stateMachine.ChangeState(CollectorStates.Move, new MoveStateParams
         {
-            TargetPosition = job.Collectable.Position,
-            Speed = _collector.Speed,
+            TargetPosition = job.Collectable.Position
         }, OnMoveCompleted);
     }
 
@@ -46,7 +45,7 @@ public class CollectorBrain : MonoBehaviour
     {
         var job = GetCurrentJob();
 
-        _stateMachine.Grab(job.Collectable, OnGrabCompleted);
+        _stateMachine.ChangeState(CollectorStates.Grab, job.Collectable, OnGrabCompleted);
     }
 
     private void OnGrabCompleted()
@@ -59,10 +58,9 @@ public class CollectorBrain : MonoBehaviour
     {
         var job = GetCurrentJob();
 
-        _stateMachine.Move(new MoveStateParams
+        _stateMachine.ChangeState(CollectorStates.Move, new MoveStateParams
         {
             TargetPosition = job.Building.GetLandingPoint(_collector.transform.position),
-            Speed = _collector.Speed,
         }, OnReturnCompleted);
     }
 
@@ -84,7 +82,7 @@ public class CollectorBrain : MonoBehaviour
     {
         var job = GetCurrentJob();
 
-        _stateMachine.Deliver(new DeliverStateParams
+        _stateMachine.ChangeState(CollectorStates.Deliver, new DeliverStateParams
         {
             Building = job.Building,
             Collectable = job.Collectable,
@@ -110,7 +108,7 @@ public class CollectorBrain : MonoBehaviour
     {
         _stateMachine.ChangeStateToDefault();
         _isAutoMode = false;
-        
+
         _collector.FinishJob();
     }
 }

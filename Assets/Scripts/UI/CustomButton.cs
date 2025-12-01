@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -39,10 +37,7 @@ namespace FGUIStarter
             if (textRect != null)
             {
                 float height = ((RectTransform)transform).rect.height;
-                float offset = height - (height * 0.86718f);//calculation for 128x128 sprite
-                //use this code below instead of the code in line 40, in case the offset of the text doesn't make sense with respect to the thickness of the button or gameview dimensions:
-                //float offset = height - (height * 0.86718f) - insertYourCustomOffset;
-                //Example: float offset = height - (height * 0.86718f) - 10f;
+                float offset = height - (height * 0.86718f);
                 textRect.anchoredPosition = originalTextPos - new Vector2(0, offset);
             }
         }

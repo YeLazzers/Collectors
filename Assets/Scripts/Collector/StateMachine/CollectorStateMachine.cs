@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class CollectorStateMachine : StateMachineBase
@@ -12,19 +11,5 @@ public class CollectorStateMachine : StateMachineBase
         RegisterState(CollectorStates.Deliver, new CollectorDeliverState(this, collector));
 
         Init(defaultStateId: CollectorStates.Idle);
-    }
-
-    public void Move(MoveStateParams parameters, Action onComplete = null)
-    {
-        ChangeState(CollectorStates.Move, parameters, onComplete);
-    }
-
-    public void Grab(ICollectable collectable, Action onComplete = null)
-    {
-        ChangeState(CollectorStates.Grab, collectable, onComplete);
-    }
-    public void Deliver(DeliverStateParams parameters, Action onComplete = null)
-    {
-        ChangeState(CollectorStates.Deliver, parameters, onComplete);
     }
 }

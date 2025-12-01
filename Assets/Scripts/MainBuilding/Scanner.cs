@@ -11,7 +11,7 @@ public class Scanner : MonoBehaviour
 
     private Tween _scanTween;
 
-    public event Action<IScannable> ScannableDetected;
+    public event Action<ICollectable> CollectableDetected;
 
     private void Awake()
     {
@@ -20,9 +20,9 @@ public class Scanner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out IScannable scannable))
+        if (other.TryGetComponent(out ICollectable collectable))
         {
-            ScannableDetected?.Invoke(scannable);
+            CollectableDetected?.Invoke(collectable);
         }
     }
 

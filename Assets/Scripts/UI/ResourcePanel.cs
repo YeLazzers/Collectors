@@ -9,13 +9,17 @@ public class ResourcePanel : MonoBehaviour
 
     public void Initialize(Sprite icon, int amount)
     {
-        _icon.sprite = icon;
-        // SetIcon(icon);
+        SetIcon(icon);
         SetAmount(amount);
     }
 
     public void SetAmount(int amount)
     {
         _amountText.text = amount.ToString();
+    }
+
+    public void SetIcon(Sprite icon)
+    {
+        _icon.sprite = icon;
     }
 }

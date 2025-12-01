@@ -26,7 +26,7 @@ public class MainBuilding : MonoBehaviour
     [SerializeField] private float _spawnRadius = 1f;
 
     private WaitForSeconds _scanWait;
-    private List<IScannable> _scannedResources = new List<IScannable>();
+    private List<ICollectable> _scannedResources = new List<ICollectable>();
 
     private void Awake()
     {
@@ -37,13 +37,13 @@ public class MainBuilding : MonoBehaviour
     {
         StartCoroutine(Scanning());
 
-        _scanner.ScannableDetected += OnResourceScanned;
+        _scanner.CollectableDetected += OnResourceScanned;
         _hub.CollectorAvailabled += OnCollectorAvailabled;
     }
 
     private void OnDisable()
     {
-        _scanner.ScannableDetected -= OnResourceScanned;
+        _scanner.CollectableDetected -= OnResourceScanned;
         _hub.CollectorAvailabled -= OnCollectorAvailabled;
     }
 
@@ -85,16 +85,16 @@ public class MainBuilding : MonoBehaviour
         }
     }
 
-    private void OnResourceScanned(IScannable scannable)
+    private void OnResourceScanned(ICollectable collectable)
     {
-        if (!_scannedResources.Contains(scannable))
+        if (!_scannedResources.Contains(collectable))
         {
-            scannable.Scan();
-            _scannedResources.Add(scannable);
+            _hub.AssignCollectJob(new CollectJob(collectable, this));
+            _scannedResources.Add(collectable);
 
-            if (scannable is ICollectable collectable)
+            if (collectable is IHighlightable highlightable)
             {
-                _hub.AssignCollectJob(new CollectJob(collectable, this));
+                highlightable.Highlight();
             }
         }
     }

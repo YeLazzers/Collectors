@@ -451,7 +451,7 @@ MonoBehaviour:
   _maxResources: 20
   _spawnIntervalMin: 3
   _spawnIntervalMax: 5
-  _isBirstEnabled: 1
+  _isBirstEnabled: 0
 --- !u!1 &1551141177
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,18 +560,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 312465205182213662, guid: ee677607cc7f9477eb5ef56d5d34b8c0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.9
-      objectReference: {fileID: 0}
     - target: {fileID: 638046388773260615, guid: ee677607cc7f9477eb5ef56d5d34b8c0, type: 3}
       propertyPath: _resourceSpawner
       value: 
       objectReference: {fileID: 964571431}
-    - target: {fileID: 840456401511194901, guid: ee677607cc7f9477eb5ef56d5d34b8c0, type: 3}
-      propertyPath: _maxScale
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 2596951262689952601, guid: ee677607cc7f9477eb5ef56d5d34b8c0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

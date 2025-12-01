@@ -7,7 +7,6 @@ using UnityEngine;
 public struct MoveStateParams
 {
     public Vector3 TargetPosition;
-    public float Speed;
 }
 
 public class CollectorMoveState : StateBase, IParameterizedState<MoveStateParams>
@@ -41,7 +40,7 @@ public class CollectorMoveState : StateBase, IParameterizedState<MoveStateParams
 
     public override void OnUpdate(float deltaTime)
     {
-        _sampleRate += _params.Speed * Time.deltaTime / _spline.GetCurve(_sampleRate).Length;
+        _sampleRate += _collector.Speed * Time.deltaTime / _spline.GetCurve(_sampleRate).Length;
         if (_sampleRate > _spline.NodesCount - 1)
         {
             _onComplete?.Invoke();
