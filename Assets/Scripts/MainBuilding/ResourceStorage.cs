@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class ResourceStorage : MonoBehaviour
 {
-    [SerializeField] private int _initialResources = 0;
     [SerializeField] private Sprite _icon;
 
     private int _amount = 0;

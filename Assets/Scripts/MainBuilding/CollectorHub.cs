@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class CollectorHub : MonoBehaviour
 {
+    [SerializeField] private Sprite _icon;
+
     private List<Collector> _collectors = new List<Collector>();
 
+    public int CollectorsCount => _collectors.Count;
+    public Sprite Icon => _icon;
+
     public event Action<Collector> CollectorAvailabled;
+    public event Action<int> CollectorsCountChanged;
 
     void OnDisable()
     {
@@ -23,6 +29,7 @@ public class CollectorHub : MonoBehaviour
             collector.JobFinished += CollectorAvailabled;
 
             _collectors.Add(collector);
+            CollectorsCountChanged?.Invoke(_collectors.Count);
         }
     }
 

@@ -1,13 +1,14 @@
 using UnityEngine;
 
-public class ResourceStoragePresenter : MonoBehaviour
+public class BuildingHudPresenter : MonoBehaviour
 {
     [SerializeField] private ResourceStorage _resourceStorage;
-    [SerializeField] private ResourcePanel _resourcePanel;
+    [SerializeField] private CollectorHub _hub;
+    [SerializeField] private ValueRow _resources;
 
     private void Awake()
     {
-        _resourcePanel.Initialize(_resourceStorage.Icon, _resourceStorage.Amount);
+        _resources.Initialize(_resourceStorage.Icon, _resourceStorage.Amount);
     }
 
     private void OnEnable()
@@ -21,6 +22,6 @@ public class ResourceStoragePresenter : MonoBehaviour
 
     private void OnAmountChanged(int newAmount)
     {
-        _resourcePanel.SetAmount(newAmount);
+        _resources.SetAmount(newAmount);
     }
 }
