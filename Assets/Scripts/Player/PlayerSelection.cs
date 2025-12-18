@@ -5,13 +5,13 @@ public class PlayerSelection : MonoBehaviour
 {
     [SerializeField] private ObjectSelector _objectSelector;
 
-    private BuildingModel _selectedBuilding;
+    private BuildingInfo _selectedBuilding;
 
     private ISelectable _currentSelectable;
 
-    public BuildingModel SelectedBuilding => IsBuildingSelectable(_currentSelectable, out BuildingModel buildingModel) ? buildingModel : null;
+    public BuildingInfo SelectedBuilding => IsBuildingSelectable(_currentSelectable, out BuildingInfo buildingModel) ? buildingModel : null;
 
-    public event Action<BuildingModel> BuildingSelected;
+    public event Action<BuildingInfo> BuildingSelected;
     public event Action SelectionCleared;
 
     private void OnEnable()
@@ -31,7 +31,7 @@ public class PlayerSelection : MonoBehaviour
             _currentSelectable = selectable;
             _currentSelectable?.Select();
 
-            if (IsBuildingSelectable(selectable, out BuildingModel buildingModel))
+            if (IsBuildingSelectable(selectable, out BuildingInfo buildingModel))
             {
                 BuildingSelected?.Invoke(buildingModel);
             }
@@ -50,7 +50,7 @@ public class PlayerSelection : MonoBehaviour
         SelectionCleared?.Invoke();
     }
 
-    private bool IsBuildingSelectable(ISelectable selectable, out BuildingModel buildingModel)
+    private bool IsBuildingSelectable(ISelectable selectable, out BuildingInfo buildingModel)
     {
         if (selectable is BuildingInteraction buildingInteraction)
         {

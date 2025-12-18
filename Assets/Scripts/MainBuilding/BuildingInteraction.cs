@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class BuildingInteraction : MonoBehaviour, IHoverable, ISelectable
 {
-    [SerializeField] private BuildingModel _model;
-    [SerializeField] private HoverHighlighter _hoverHighlighter;
+    [SerializeField] private BuildingInfo _model;
+    [SerializeField] private Highlighter _highlighter;
     [SerializeField] private Renderer _selectionRingRenderer;
 
-    public BuildingModel Model => _model;
+    public BuildingInfo Model => _model;
     public string Name => _model.BuildingName;
 
     public void Select()
@@ -21,11 +21,11 @@ public class BuildingInteraction : MonoBehaviour, IHoverable, ISelectable
 
     public void OnHoverEnter()
     {
-        _hoverHighlighter.Highlight();
+        _highlighter.Highlight();
     }
 
     public void OnHoverExit()
     {
-        _hoverHighlighter.Unhighlight();
+        _highlighter.Unhighlight();
     }
 }

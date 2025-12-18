@@ -20,7 +20,7 @@ public class BuildingSelectionPresenter : MonoBehaviour
         _selection.SelectionCleared -= OnSelectionCleared;
     }
 
-    private void OnBuildingSelected(BuildingModel building)
+    private void OnBuildingSelected(BuildingInfo building)
     {
         ConnectBuilding(building);
         _commands = building;
@@ -47,7 +47,7 @@ public class BuildingSelectionPresenter : MonoBehaviour
         _commands?.StartPlacingFlag();
     }
 
-    private void ConnectBuilding(BuildingModel building)
+    private void ConnectBuilding(BuildingInfo building)
     {
         if (building == null)
             return;

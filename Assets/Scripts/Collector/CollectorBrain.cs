@@ -5,8 +5,6 @@ public class CollectorBrain : MonoBehaviour
 {
     [SerializeField] private Collector _collector;
     [SerializeField] private ResourceHolder _resourceHolder;
-
-    [Header("State machine")]
     [SerializeField] private CollectorStateMachine _stateMachine;
 
     private bool _isAutoMode = false;

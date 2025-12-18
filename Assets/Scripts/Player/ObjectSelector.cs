@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ObjectSelector : MonoBehaviour
 {
@@ -28,6 +29,12 @@ public class ObjectSelector : MonoBehaviour
 
     private void OnMouseMoved(Vector3 position)
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("IsPointerOverGameObject");
+            return;
+        }
+
         if (TryRaycast(position, out _hitInfo)
             && TryGetHoverable(_hitInfo, out IHoverable hoverable))
         {
@@ -57,6 +64,11 @@ public class ObjectSelector : MonoBehaviour
 
     private void OnClick(Vector3 position)
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         TryGetSelectable(_hitInfo, out ISelectable selectable);
 
         Selected?.Invoke(selectable);

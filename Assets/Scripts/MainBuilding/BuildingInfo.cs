@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class BuildingModel : MonoBehaviour, IBuildingReadModel, IBuildingCommands
+public class BuildingInfo : MonoBehaviour, IBuildingReadModel, IBuildingCommands
 {
     [Header("Systems")]
     [SerializeField] private ResourceStorage _storage;
@@ -18,7 +18,7 @@ public class BuildingModel : MonoBehaviour, IBuildingReadModel, IBuildingCommand
     public bool CanBuildUnit => _storage.Amount >= _unitPrice;
     public bool CanPlaceFlag => _hub.CollectorsCount > 1;
     public bool CanBuildNewBase => _storage.Amount >= _basePrice;
-    
+
     public event Action<IBuildingReadModel> BuildingUpdated;
 
     private void OnEnable()

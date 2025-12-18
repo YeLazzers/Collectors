@@ -3,10 +3,12 @@ using UnityEngine;
 public class CollectJob : JobBase
 {
     public ICollectable Collectable { get; private set; }
+    
     public CollectJob(ICollectable collectable, MainBuilding building) : base(building)
     {
         Collectable = collectable;
     }
+
     public new void ApplyTo(IWorkable worker)
     {
         base.ApplyTo(worker);

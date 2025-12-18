@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public abstract class JobBase : IJob
 {
     public JobBase(MainBuilding building) { Building = building; }
