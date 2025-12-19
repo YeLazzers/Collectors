@@ -5,6 +5,7 @@ public class BuildingHudPresenter : MonoBehaviour
     [SerializeField] private ResourceStorage _resourceStorage;
     [SerializeField] private CollectorHub _hub;
     [SerializeField] private ValueRow _resources;
+    private bool _isDirty = false;
 
     private void Awake()
     {
@@ -19,9 +20,15 @@ public class BuildingHudPresenter : MonoBehaviour
     {
         _resourceStorage.AmountChanged -= OnAmountChanged;
     }
-
-    private void OnAmountChanged(int newAmount)
+    private void LateUpdate()
     {
-        _resources.SetAmount(newAmount);
+        if (!_isDirty) return;
+        _isDirty = false;
+        _resources.SetAmount(_resourceStorage.Amount);
+    }
+
+    private void OnAmountChanged(int _)
+    {
+        _isDirty = true;
     }
 }

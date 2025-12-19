@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class ResourceStorage : MonoBehaviour
@@ -23,8 +24,13 @@ public class ResourceStorage : MonoBehaviour
         if (_amount < amount)
             return false;
 
+        Spend(amount);
+        return true;
+    }
+
+    public void Spend(int amount)
+    {
         _amount -= amount;
         AmountChanged?.Invoke(_amount);
-        return true;
     }
 }

@@ -2,14 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class MainBuilding : MonoBehaviour
 {
-    private readonly float _yPosition = 1f;
-
     [Header("Spawners")]
-    [SerializeField] private CollectorSpawner _collectorSpawner;
     [SerializeField] private ResourceSpawner _resourceSpawner;
 
     [Header("Components")]
@@ -23,7 +19,6 @@ public class MainBuilding : MonoBehaviour
 
     [Header("Collector Spawner Params")]
     [SerializeField] private int _initialCollectorsCount = 3;
-    [SerializeField] private float _spawnRadius = 1f;
 
     private WaitForSeconds _scanWait;
     private List<ICollectable> _scannedResources = new List<ICollectable>();
@@ -49,13 +44,7 @@ public class MainBuilding : MonoBehaviour
 
     private void Start()
     {
-        float randomRotationOffset = Random.Range(0f, Mathf.PI * 2f);
-
-        for (int i = 0; i < _initialCollectorsCount; i++)
-        {
-            var collector = _collectorSpawner.Spawn(GetCollectorSpawnPosition(i, _initialCollectorsCount, randomRotationOffset), transform.position);
-            _hub.RegisterCollector(collector);
-        }
+        _hub.TrainCollector(_initialCollectorsCount);
     }
 
     public void TakeResource(Resource resource, Action onDone = null)
@@ -98,21 +87,6 @@ public class MainBuilding : MonoBehaviour
             }
         }
     }
-
-    private Vector3 GetCollectorSpawnPosition(int index, int total, float radialOffset = 0f)
-    {
-        float range = 2 * Mathf.PI / total;
-        float angle = index * range + radialOffset;
-        float x = _spawnRadius * Mathf.Cos(angle);
-        float z = _spawnRadius * Mathf.Sin(angle);
-
-        return new Vector3(
-            transform.position.x + x,
-            _yPosition,
-            transform.position.z + z
-        );
-    }
-
 
     private void OnCollectorAvailabled(Collector collector)
     {
