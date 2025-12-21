@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerSelection : MonoBehaviour
 {
     [SerializeField] private ObjectSelector _objectSelector;
+    [SerializeField] private PlayerInputRouter _router;
 
     private BuildingInfo _selectedBuilding;
 
@@ -34,6 +35,7 @@ public class PlayerSelection : MonoBehaviour
             if (IsBuildingSelectable(selectable, out BuildingInfo buildingModel))
             {
                 BuildingSelected?.Invoke(buildingModel);
+                _router.ActivatePlacer();
             }
         }
         else

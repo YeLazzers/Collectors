@@ -33,8 +33,57 @@ Transform:
   - {fileID: 7576674911965952327}
   - {fileID: 3784210335124048204}
   - {fileID: 5924520973368168127}
+  - {fileID: 4485608642960811624}
   m_Father: {fileID: 2617576620521748953}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6194689065731824842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4485608642960811624}
+  - component: {fileID: 5795584520475472344}
+  m_Layer: 0
+  m_Name: PlayerInputRouter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4485608642960811624
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6194689065731824842}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8302053602840113857}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5795584520475472344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6194689065731824842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63e6ca21c47a430d9ed48b10296d40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reader: {fileID: 5485331387924603824}
+  _selector: {fileID: 628486660808352442}
+  _placer: {fileID: 8695544040965991190}
+  _raycastDistance: 1000
 --- !u!1 &6410459366073639231
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,16 +349,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7129611982602071855}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f0f784f4692943c99bcc53623f16600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _router: {fileID: 5795584520475472344}
   _buildingPreviewPrefab: {fileID: 1373379599099714449, guid: 9bd3b08b867f3422982fef77fc73d3dd, type: 3}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  _raycastDistance: 1000
 --- !u!1 &7353797277889814582
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,6 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectSelector: {fileID: 628486660808352442}
+  _router: {fileID: 5795584520475472344}
 --- !u!114 &3891532062603482850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,10 +588,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputReader: {fileID: 5485331387924603824}
   _cursor: {fileID: 5619289783307278902}
-  "_\u0441amera": {fileID: 0}
-  selectableMask:
+  _selectableLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1024
 --- !u!114 &6243875556266124301
 MonoBehaviour:
   m_ObjectHideFlags: 0

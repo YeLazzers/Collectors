@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 public class BuildingPlacementPreview : MonoBehaviour
@@ -20,13 +19,14 @@ public class BuildingPlacementPreview : MonoBehaviour
 
         _prefabInstance.MeshView.SetMaterial(_previewMaterial);
         _placementFootprint.Initialize(_config.footprintSize);
-
-        Validate();
     }
 
-    public void Initialize(Vector3 position, BuildingConfig config)
+    public void Initialize(Vector3 position)
     {
+        Initialize();
         UpdatePosition(position);
+
+        Validate();
     }
 
     public void UpdatePosition(Vector3 position)

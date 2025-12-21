@@ -6,18 +6,23 @@ public class InputReader : MonoBehaviour
     private readonly string Horizontal;
     private readonly string Vertical;
     private readonly int MouseLeftButton = 0;
+    private readonly int MouseRightButton = 1;
 
     public event Action<float> HorizontalMoving;
     public event Action<float> VerticalMoving;
     public event Action<Vector3> MouseMoved;
-    public event Action<Vector3> Clicked;
+    public event Action<Vector3> LmbClicked;
+    public event Action<Vector3> RmbClicked;
 
     private Vector3 _lastMousePosition;
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(MouseLeftButton))
-            Clicked?.Invoke(Input.mousePosition);
+            LmbClicked?.Invoke(Input.mousePosition);
+
+        if (Input.GetMouseButtonDown(MouseRightButton))
+            RmbClicked?.Invoke(Input.mousePosition);
 
 
         if (_lastMousePosition != Input.mousePosition)
