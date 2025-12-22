@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063e35eb2e63a4ebf857859af21f07c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _resourceSpawner: {fileID: 964571431}
   _buildingPrefab: {fileID: 638046388773260615, guid: ee677607cc7f9477eb5ef56d5d34b8c0, type: 3}
   _factoryConfig: {fileID: 11400000, guid: c97a4d711feab47909fa6fd7b9303a68, type: 2}
 --- !u!4 &624200627

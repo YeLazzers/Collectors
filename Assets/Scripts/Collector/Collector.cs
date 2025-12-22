@@ -1,21 +1,18 @@
 using System;
 using UnityEngine;
 
-public class Collector : MonoBehaviour, IPoolable<Collector>, ICollectWorkable
+public class Collector : MonoBehaviour, IPoolable<Collector>
 {
+    [SerializeField] private JobRunner _jobRunner;
     [SerializeField] private CollectorBrain _brain;
     [SerializeField] private float _movementSpeed;
 
     private SplinePath _splinePath;
-    private CollectJob _collectJob;
 
     public event Action<Collector> Expired;
-    public event Action<Collector> JobAssigned;
-    public event Action<Collector> JobFinished;
 
-    public CollectJob CurrentJob => _collectJob;
-    public bool IsBusy => _collectJob != null;
     public float Speed => _movementSpeed;
+    public JobRunner JobRunner => _jobRunner;
 
     private void Awake()
     {
@@ -25,7 +22,6 @@ public class Collector : MonoBehaviour, IPoolable<Collector>, ICollectWorkable
     public Collector Initialize(Vector3 position)
     {
         transform.position = position;
-        ClearJob();
 
         return this;
     }
@@ -40,29 +36,5 @@ public class Collector : MonoBehaviour, IPoolable<Collector>, ICollectWorkable
         _brain.Initialize(_splinePath);
 
         return this;
-    }
-
-    public void SetJob(IJob job)
-    {
-        job.ApplyTo(this);
-    }
-
-    public void FinishJob()
-    {
-        ClearJob();
-        JobFinished?.Invoke(this);
-    }
-
-    private void ClearJob()
-    {
-        _collectJob = null;
-    }
-
-    public void BeginCollect(CollectJob job)
-    {
-        _collectJob = job;
-        _brain.BeginCollect();
-
-        JobAssigned?.Invoke(this);
     }
 }

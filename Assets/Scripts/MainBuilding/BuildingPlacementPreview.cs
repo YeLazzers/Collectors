@@ -2,31 +2,18 @@ using UnityEngine;
 
 public class BuildingPlacementPreview : MonoBehaviour
 {
-    [SerializeField] private Material _previewMaterial;
-    [SerializeField] private PlacementFootprint _placementFootprint;
+    [SerializeField] private BuildingView _view;
     [SerializeField] private LayerMask _footprintMask;
 
     private BuildingConfig _config;
-    private BuildingModelPresenter _prefabInstance;
 
-    [ContextMenu("Initialize")]
-    public void Initialize()
+    public BuildingConfig Config => _config;
+
+    public void Initialize(BuildingConfig config, Vector3 position)
     {
-        if (_config == null)
-            _config = (BuildingConfig)Resources.Load("BuildingConfigs/Factory");
+        _view.RenderModel(config);
 
-        _prefabInstance = Instantiate(_config.Model, transform);
-
-        _prefabInstance.MeshView.SetMaterial(_previewMaterial);
-        _placementFootprint.Initialize(_config.footprintSize);
-    }
-
-    public void Initialize(Vector3 position)
-    {
-        Initialize();
         UpdatePosition(position);
-
-        Validate();
     }
 
     public void UpdatePosition(Vector3 position)
@@ -38,9 +25,9 @@ public class BuildingPlacementPreview : MonoBehaviour
 
     public bool Validate()
     {
-        bool isValid = _placementFootprint.HasOverlapWithMask(_footprintMask);
+        bool isValid = _view.Footprint.HasOverlapWithMask(_footprintMask);
 
-        _prefabInstance.MeshView.SetColor(isValid ? Color.red : Color.green);
+        _view.Model.MeshView.SetColor(isValid ? Color.red : Color.green);
 
         return isValid;
     }

@@ -9,6 +9,9 @@ public class CollectorBrain : MonoBehaviour
 
     private bool _isAutoMode = false;
     private SplinePath _splinePath;
+    private ResourceGatheringJob _gatheringJob;
+
+    public Action BecameIdle;
 
     public void Initialize(SplinePath splinePath)
     {
@@ -22,14 +25,19 @@ public class CollectorBrain : MonoBehaviour
         MoveToResource();
     }
 
+    public void BeginGathering(ResourceGatheringJob job)
+    {
+        _gatheringJob = job;
+        _isAutoMode = true;
+        MoveToResource();
+    }
+
     [ContextMenu("Move To Resource")]
     public void MoveToResource()
     {
-        var job = GetCurrentJob();
-
         _stateMachine.ChangeState(CollectorStates.Move, new MoveStateParams
         {
-            TargetPosition = job.Collectable.Position
+            TargetPosition = _gatheringJob.Resource.Position
         }, OnMoveCompleted);
     }
 
@@ -41,9 +49,7 @@ public class CollectorBrain : MonoBehaviour
     [ContextMenu("Grab Resource")]
     public void Grab()
     {
-        var job = GetCurrentJob();
-
-        _stateMachine.ChangeState(CollectorStates.Grab, job.Collectable, OnGrabCompleted);
+        _stateMachine.ChangeState(CollectorStates.Grab, (ICollectable)_gatheringJob.Resource, OnGrabCompleted);
     }
 
     private void OnGrabCompleted()
@@ -54,11 +60,9 @@ public class CollectorBrain : MonoBehaviour
     [ContextMenu("Return To Building")]
     private void ReturnToBuilding()
     {
-        var job = GetCurrentJob();
-
         _stateMachine.ChangeState(CollectorStates.Move, new MoveStateParams
         {
-            TargetPosition = job.Building.GetLandingPoint(_collector.transform.position),
+            TargetPosition = _gatheringJob.Destination.GetLandingPoint(_collector.transform.position),
         }, OnReturnCompleted);
     }
 
@@ -78,35 +82,27 @@ public class CollectorBrain : MonoBehaviour
     [ContextMenu("Deliver Collectable")]
     public void DeliverCollectable()
     {
-        var job = GetCurrentJob();
-
         _stateMachine.ChangeState(CollectorStates.Deliver, new DeliverStateParams
         {
-            Building = job.Building,
-            Collectable = job.Collectable,
+            Building = _gatheringJob.Destination,
+            Collectable = (ICollectable)_gatheringJob.Resource,
         }, OnDeliverCompleted);
     }
 
     private void OnDeliverCompleted()
     {
-        HandleCompletion(FinishCollect);
+        HandleCompletion(FinishGathering);
     }
 
-    private CollectJob GetCurrentJob()
-    {
-        var job = _collector.CurrentJob;
-        if (job != null)
-            return job;
 
-        FinishCollect();
-        throw new Exception($"There isn`t assigned job for {_collector.name} {_collector.GetInstanceID()}");
-    }
-
-    private void FinishCollect()
+    private void FinishGathering()
     {
+        Debug.Log("Collector finished gathering");
+        
         _stateMachine.ChangeStateToDefault();
         _isAutoMode = false;
 
-        _collector.FinishJob();
+
+        BecameIdle?.Invoke();
     }
 }

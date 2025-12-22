@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class MainBuilding : MonoBehaviour
 {
-    [Header("Spawners")]
-    [SerializeField] private ResourceSpawner _resourceSpawner;
-
-    [Header("Components")]
+    [Header("Systems")]
     [SerializeField] private ResourceStorage _resourceStorage;
     [SerializeField] private CollectorHub _hub;
     [SerializeField] private BuildingView _view;
+    [SerializeField] private JobBoard _jobBoard;
 
     [Header("Scanner Params")]
     [SerializeField] private Scanner _scanner;
@@ -24,6 +22,7 @@ public class MainBuilding : MonoBehaviour
     private WaitForSeconds _scanWait;
     private List<ICollectable> _scannedResources = new List<ICollectable>();
     private BuildingConfig _config;
+    private ResourceSpawner _resourceSpawner;
 
     public BuildingConfig Config => _config;
 
@@ -40,13 +39,11 @@ public class MainBuilding : MonoBehaviour
         StartCoroutine(Scanning());
 
         _scanner.CollectableDetected += OnResourceScanned;
-        _hub.CollectorAvailabled += OnCollectorAvailabled;
     }
 
     private void OnDisable()
     {
         _scanner.CollectableDetected -= OnResourceScanned;
-        _hub.CollectorAvailabled -= OnCollectorAvailabled;
     }
 
     private void Start()
@@ -54,8 +51,9 @@ public class MainBuilding : MonoBehaviour
         _hub.TrainCollector(_initialCollectorsCount);
     }
 
-    public void Initialize(BuildingConfig config, Vector3 position)
+    public void Initialize(ResourceSpawner resourceSpawner, BuildingConfig config, Vector3 position)
     {
+        _resourceSpawner = resourceSpawner;
         transform.position = position;
 
         _config = config;
@@ -94,7 +92,9 @@ public class MainBuilding : MonoBehaviour
     {
         if (!_scannedResources.Contains(collectable))
         {
-            _hub.AssignCollectJob(new CollectJob(collectable, this));
+            var jobContext = new ResourceGatheringJobContext((Resource)collectable, this);
+            _jobBoard.Publish(new ResourceGatheringJob(jobContext, 1));
+
             _scannedResources.Add(collectable);
 
             if (collectable is IHighlightable highlightable)
@@ -102,22 +102,5 @@ public class MainBuilding : MonoBehaviour
                 highlightable.Highlight();
             }
         }
-    }
-
-    private void OnCollectorAvailabled(Collector collector)
-    {
-        foreach (var scannable in _scannedResources)
-        {
-            if (scannable is ICollectable collectable && !IsResourceAlreadyAssigned(collectable))
-            {
-                _hub.AssignCollectJob(new CollectJob(collectable, this));
-                break;
-            }
-        }
-    }
-
-    private bool IsResourceAlreadyAssigned(ICollectable collectable)
-    {
-        return _hub.FindInActiveJobs(job => job.Collectable == collectable) != null;
     }
 }
