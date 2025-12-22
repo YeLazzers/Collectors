@@ -3,14 +3,12 @@ using UnityEngine;
 
 public class PlayerSelection : MonoBehaviour
 {
-    [SerializeField] private ObjectSelector _objectSelector;
+    [SerializeField] private SelectingMode _objectSelector;
     [SerializeField] private PlayerInputRouter _router;
-
-    private BuildingInfo _selectedBuilding;
 
     private ISelectable _currentSelectable;
 
-    public BuildingInfo SelectedBuilding => IsBuildingSelectable(_currentSelectable, out BuildingInfo buildingModel) ? buildingModel : null;
+    // public BuildingInfo SelectedBuilding => IsBuildingSelectable(_currentSelectable, out BuildingInfo buildingModel) ? buildingModel : null;
 
     public event Action<BuildingInfo> BuildingSelected;
     public event Action SelectionCleared;
@@ -35,7 +33,7 @@ public class PlayerSelection : MonoBehaviour
             if (IsBuildingSelectable(selectable, out BuildingInfo buildingModel))
             {
                 BuildingSelected?.Invoke(buildingModel);
-                _router.ActivatePlacer();
+                _router.ActivateBuildingPlacementMode(new BuildingPlacementContext(buildingModel.Config, buildingModel));
             }
         }
         else

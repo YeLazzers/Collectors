@@ -6,6 +6,8 @@ public class BuildingInfo : MonoBehaviour, IBuildingReadModel, IBuildingCommands
     [Header("Systems")]
     [SerializeField] private ResourceStorage _storage;
     [SerializeField] private CollectorHub _hub;
+    [SerializeField] private MainBuilding _building;
+    [SerializeField] private BuildingBuilder _builder;
 
     [Header("Settings")]
     [SerializeField] private string _name = "Factory";
@@ -18,6 +20,7 @@ public class BuildingInfo : MonoBehaviour, IBuildingReadModel, IBuildingCommands
     public bool CanBuildUnit => _storage.Amount >= _unitPrice;
     public bool CanPlaceFlag => _hub.CollectorsCount > 1;
     public bool CanBuildNewBase => _storage.Amount >= _basePrice;
+    public BuildingConfig Config => _building.Config;
 
     public event Action<IBuildingReadModel> BuildingUpdated;
 
@@ -33,9 +36,9 @@ public class BuildingInfo : MonoBehaviour, IBuildingReadModel, IBuildingCommands
         _hub.CollectorsCountChanged -= OnCollectorsCountChanged;
     }
 
-    public void BuildNewBaseAt(Vector3 position)
+    public void BuildNewBuilding(BuildingPlacementPreview preview)
     {
-        throw new System.NotImplementedException();
+        _builder.InitBuilding(preview);
     }
 
     public void BuildUnit()

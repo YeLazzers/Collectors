@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: -8046140476582069337, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 27dbec685b37a46c799f56eae3f121a5, type: 2}
+      objectReference: {fileID: 2314244366012375026, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
     - target: {fileID: -5952114229333920901, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
       propertyPath: m_Name
-      value: GarbageRecyclerCranbearry
+      value: GarbageRecyclerMeshView
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
       propertyPath: m_Layer
@@ -111,7 +111,7 @@ PrefabInstance:
     - target: {fileID: 4450261502870695659, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 27dbec685b37a46c799f56eae3f121a5, type: 2}
+      objectReference: {fileID: 2314244366012375026, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
     - target: {fileID: 5864884316178224433, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -119,7 +119,7 @@ PrefabInstance:
     - target: {fileID: 5864884316178224433, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 27dbec685b37a46c799f56eae3f121a5, type: 2}
+      objectReference: {fileID: 2314244366012375026, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
     - target: {fileID: 5962443714719044719, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -135,7 +135,7 @@ PrefabInstance:
     - target: {fileID: 6404275940135043450, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 27dbec685b37a46c799f56eae3f121a5, type: 2}
+      objectReference: {fileID: 2314244366012375026, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
     - target: {fileID: 6651124574737792731, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -143,7 +143,7 @@ PrefabInstance:
     - target: {fileID: 6651124574737792731, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 27dbec685b37a46c799f56eae3f121a5, type: 2}
+      objectReference: {fileID: 2314244366012375026, guid: 36f54e6a9d07d471988b276a28ddd5b7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

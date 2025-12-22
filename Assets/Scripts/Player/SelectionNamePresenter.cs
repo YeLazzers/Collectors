@@ -4,7 +4,7 @@ using UnityEngine;
 public class SelectionNamePresenter : MonoBehaviour
 {
     [SerializeField] private InputReader _inputReader;
-    [SerializeField] private ObjectSelector _selector;
+    [SerializeField] private SelectingMode _selector;
     [SerializeField] private TextMeshProUGUI _nameLabel;
     [SerializeField] private Vector3 _labelOffset;
 

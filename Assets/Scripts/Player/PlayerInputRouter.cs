@@ -5,8 +5,8 @@ using UnityEngine.EventSystems;
 public class PlayerInputRouter : MonoBehaviour
 {
     [SerializeField] private InputReader _reader;
-    [SerializeField] private ObjectSelector _selector;
-    [SerializeField] private BuildingPlacer _placer;
+    [SerializeField] private SelectingMode _selector;
+    [SerializeField] private BuildingPlacementMode _placer;
     [SerializeField] private float _raycastDistance = 1000f;
 
     private Camera _camera;
@@ -37,8 +37,11 @@ public class PlayerInputRouter : MonoBehaviour
     public void ActivateSelector()
         => SwitchTo(_selector);
 
-    public void ActivatePlacer()
-        => SwitchTo(_placer);
+    public void ActivateBuildingPlacementMode(BuildingPlacementContext context)
+    {
+        _placer.Configure(context);
+        SwitchTo(_placer);
+    }
 
     private void SwitchTo(IInputMode next)
     {

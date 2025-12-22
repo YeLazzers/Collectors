@@ -11,6 +11,7 @@ public class MainBuilding : MonoBehaviour
     [Header("Components")]
     [SerializeField] private ResourceStorage _resourceStorage;
     [SerializeField] private CollectorHub _hub;
+    [SerializeField] private BuildingView _view;
 
     [Header("Scanner Params")]
     [SerializeField] private Scanner _scanner;
@@ -22,10 +23,16 @@ public class MainBuilding : MonoBehaviour
 
     private WaitForSeconds _scanWait;
     private List<ICollectable> _scannedResources = new List<ICollectable>();
+    private BuildingConfig _config;
+
+    public BuildingConfig Config => _config;
 
     private void Awake()
     {
         _scanWait = new WaitForSeconds(_scanInterval);
+
+        if (_config == null)
+            _config = (BuildingConfig)Resources.Load("BuildingConfigs/Factory");
     }
 
     private void OnEnable()
@@ -45,6 +52,15 @@ public class MainBuilding : MonoBehaviour
     private void Start()
     {
         _hub.TrainCollector(_initialCollectorsCount);
+    }
+
+    public void Initialize(BuildingConfig config, Vector3 position)
+    {
+        transform.position = position;
+
+        _config = config;
+
+        _view.RenderModel(config);
     }
 
     public void TakeResource(Resource resource, Action onDone = null)

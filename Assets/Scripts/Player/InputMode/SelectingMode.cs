@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ObjectSelector : MonoBehaviour, IInputMode
+public class SelectingMode : MonoBehaviour, IInputMode
 {
     [SerializeField] private InputReader _inputReader;
     [SerializeField] private CursorChanger _cursor;

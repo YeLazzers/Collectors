@@ -22,8 +22,7 @@ public class MeshView : MonoBehaviour, IMeshView
     {
         _renderer = GetComponent<Renderer>();
 
-        _block = new MaterialPropertyBlock();
-        CacheBaseProperties();
+        Init();
     }
 
     public void SetEmission(Color color)
@@ -70,6 +69,8 @@ public class MeshView : MonoBehaviour, IMeshView
     public void SetMaterial(Material material)
     {
         _renderer.sharedMaterial = material;
+
+        Init();
     }
 
     public void ResetMaterial()
@@ -82,6 +83,13 @@ public class MeshView : MonoBehaviour, IMeshView
         ResetEmission();
         SetColor(_baseColor);
         SetMaterial(_baseMaterial);
+    }
+
+    private void Init()
+    {
+
+        _block = new MaterialPropertyBlock();
+        CacheBaseProperties();
     }
 
     private void CacheBaseProperties()

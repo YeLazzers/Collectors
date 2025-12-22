@@ -3,29 +3,30 @@ using UnityEngine;
 public class BuildingInteraction : MonoBehaviour, IHoverable, ISelectable
 {
     [SerializeField] private BuildingInfo _model;
-    [SerializeField] private Highlighter _highlighter;
-    [SerializeField] private Renderer _selectionRingRenderer;
+    [SerializeField] private BuildingView _view;
 
     public BuildingInfo Model => _model;
     public string Name => _model.BuildingName;
 
     public void Select()
     {
-        _selectionRingRenderer.enabled = true;
+        _view.ShowSelectionRing();
+        _view.ShowFootprint();
     }
 
     public void Deselect()
     {
-        _selectionRingRenderer.enabled = false;
+        _view.HideSelectionRing();
+        _view.HideFootprint();
     }
 
     public void OnHoverEnter()
     {
-        _highlighter.Highlight();
+        _view.Highlight();
     }
 
     public void OnHoverExit()
     {
-        _highlighter.Unhighlight();
+        _view.Unhighlight();
     }
 }

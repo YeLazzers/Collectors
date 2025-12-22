@@ -1,14 +1,33 @@
+using System.Diagnostics;
 using UnityEngine;
 
-public class BuildingPlacer : MonoBehaviour, IInputMode
+public readonly struct BuildingPlacementContext
+{
+    public readonly BuildingConfig Config;
+    public readonly BuildingInfo Source;
+
+    public BuildingPlacementContext(BuildingConfig config, BuildingInfo source)
+    {
+        Config = config;
+        Source = source;
+    }
+}
+
+public class BuildingPlacementMode : MonoBehaviour, IInputMode
 {
     [SerializeField] private PlayerInputRouter _router;
     [SerializeField] private BuildingPlacementPreview _buildingPreviewPrefab;
     [SerializeField] private LayerMask _groundLayer;
 
     private BuildingPlacementPreview _previewInstance;
+    private BuildingPlacementContext _context;
 
     public LayerMask RaycastLayer => _groundLayer;
+
+    public void Configure(BuildingPlacementContext context)
+    {
+        _context = context;
+    }
 
     public void OnMouseMove(PointerContext context)
     {
@@ -23,40 +42,33 @@ public class BuildingPlacer : MonoBehaviour, IInputMode
         Cursor.visible = false;
 
         _previewInstance = Instantiate(_buildingPreviewPrefab);
-        _previewInstance.Initialize(context.HitInfo.point);
+        _previewInstance.Initialize(_context.Config, context.HitInfo.point);
     }
 
     public void OnExit()
     {
         Cursor.visible = true;
+
+        ClearPreviewInstance();
     }
 
     public void OnLmbDown(PointerContext context)
     {
-        PlaceBuilding();
+        
+        // ClearPreviewInstance();
     }
 
     public void OnRmbDown(PointerContext context)
     {
-        CancelPlacement();
+        _router.ActivateSelector();
     }
 
-    private void PlaceBuilding()
-    {
-        if (_previewInstance == null)
-            return;
-
-        Debug.Log("PlaceBuilding");
-        // _previewInstance = null;
-    }
-
-    private void CancelPlacement()
+    private void ClearPreviewInstance()
     {
         if (_previewInstance != null)
         {
             Destroy(_previewInstance.gameObject);
             _previewInstance = null;
-            _router.ActivateSelector();
         }
     }
 }

@@ -11,8 +11,8 @@ public class PlayerCursorMode : MonoBehaviour
     private readonly PlayerCursorModes DefaultCursorMode = PlayerCursorModes.Select;
 
     [SerializeField] private CursorChanger _cursor;
-    [SerializeField] private ObjectSelector _selector;
-    [SerializeField] private BuildingPlacer _placer;
+    [SerializeField] private SelectingMode _selector;
+    [SerializeField] private BuildingPlacementMode _placer;
 
     private PlayerCursorModes _cursorMode;
 

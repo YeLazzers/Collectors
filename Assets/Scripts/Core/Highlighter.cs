@@ -3,15 +3,21 @@ using UnityEngine;
 public class Highlighter : MonoBehaviour
 {
     [SerializeField] private float _highlightIntensity = 2f;
-    [SerializeField] private MeshViewArray _meshViewArray;
+
+    private IMeshView _meshView;
+
+    public void Initialize(IMeshView meshView)
+    {
+        _meshView = meshView;
+    }
 
     public void Highlight()
     {
-        _meshViewArray.SetEmissionIntensity(_highlightIntensity);
+        _meshView.SetEmissionIntensity(_highlightIntensity);
     }
 
     public void Unhighlight()
     {
-        _meshViewArray.ResetEmission();
+        _meshView.ResetEmission();
     }
 }
