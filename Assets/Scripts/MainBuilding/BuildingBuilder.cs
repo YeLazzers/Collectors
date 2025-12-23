@@ -2,20 +2,31 @@ using UnityEngine;
 
 public class BuildingBuilder : MonoBehaviour
 {
-    [SerializeField] private CollectorHub _hub;
+    [SerializeField] private BuildingConstructionSite _constructionSitePrefab;
+    [SerializeField] private CustomLineRenderer _lineRenderer;
 
-    private BuildingPlacementPreview _preview;
+    private IJob _buildingJob;
+    private bool _isBuildingInProgress = false;
+    private BuildingConstructionSite _currentConstructionSite;
 
-    public void InitBuilding(BuildingPlacementPreview preview)
+    public bool IsBuildingInProgress => _isBuildingInProgress;
+
+    public void InitBuilding(BuildingConfig config, Vector3 position)
     {
-        _preview = preview;
-        _preview.transform.SetParent(transform);
+        _currentConstructionSite = Instantiate(_constructionSitePrefab, position, Quaternion.identity);
+        _currentConstructionSite.Initialize(config);
 
-        // _hub.
+        _isBuildingInProgress = true;
+
+        _lineRenderer.DrawLine(new Vector3[] { transform.position, position });
     }
 
-    private void OnCollectorAvailabled(Collector collector)
+    public void ReplaceConstructionSite(Vector3 newPosition)
     {
-
+        if (_currentConstructionSite != null)
+        {
+            _currentConstructionSite.transform.position = newPosition;
+            _lineRenderer.DrawLine(new Vector3[] { transform.position, newPosition });
+        }
     }
 }

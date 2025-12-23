@@ -1,6 +1,8 @@
+using UnityEngine;
+
 public interface IBuildingCommands
 {
     void BuildUnit();
     void StartPlacingFlag();
-    void BuildNewBuilding(BuildingPlacementPreview preview);
+    void BuildNewBuilding(BuildingConfig config, Vector3 position);
 }

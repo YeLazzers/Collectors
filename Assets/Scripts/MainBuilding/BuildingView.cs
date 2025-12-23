@@ -22,10 +22,10 @@ public class BuildingView : MonoBehaviour
         => _ring.gameObject.SetActive(false);
 
     public void ShowFootprint()
-        => _footprint.gameObject.SetActive(true);
+        => _footprint.Show();
 
     public void HideFootprint()
-        => _footprint.gameObject.SetActive(false);
+        => _footprint.Hide();
 
     public void Highlight()
         => _highlighter.Highlight();

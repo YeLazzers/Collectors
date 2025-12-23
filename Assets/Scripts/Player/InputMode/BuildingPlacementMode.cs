@@ -1,12 +1,11 @@
-using System.Diagnostics;
 using UnityEngine;
 
 public readonly struct BuildingPlacementContext
 {
     public readonly BuildingConfig Config;
-    public readonly BuildingInfo Source;
+    public readonly BuildingBuilder Source;
 
-    public BuildingPlacementContext(BuildingConfig config, BuildingInfo source)
+    public BuildingPlacementContext(BuildingConfig config, BuildingBuilder source)
     {
         Config = config;
         Source = source;
@@ -41,6 +40,11 @@ public class BuildingPlacementMode : MonoBehaviour, IInputMode
     {
         Cursor.visible = false;
 
+        // if (_context.Source.IsBuildingInProgress)
+        // {
+        //     _context.Source.HideConstructionSite();
+        // }
+
         _previewInstance = Instantiate(_buildingPreviewPrefab);
         _previewInstance.Initialize(_context.Config, context.HitInfo.point);
     }
@@ -48,18 +52,32 @@ public class BuildingPlacementMode : MonoBehaviour, IInputMode
     public void OnExit()
     {
         Cursor.visible = true;
-
         ClearPreviewInstance();
     }
 
     public void OnLmbDown(PointerContext context)
     {
-        
-        // ClearPreviewInstance();
+        if (_previewInstance.IsValidPosition)
+        {
+            if (_context.Source.IsBuildingInProgress)
+            {
+                _context.Source.ReplaceConstructionSite(_previewInstance.transform.position);
+            }
+            else
+            {
+                _context.Source.InitBuilding(_context.Config, _previewInstance.transform.position);
+            }
+            _router.ActivateSelector();
+        }
     }
 
     public void OnRmbDown(PointerContext context)
     {
+        // if (_context.Source.IsBuildingInProgress)
+        // {
+        //     _context.Source.ShowConstructionSite();
+        // }
+
         _router.ActivateSelector();
     }
 

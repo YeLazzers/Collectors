@@ -8,9 +8,16 @@ public class PlacementFootprint : MonoBehaviour
     public void Initialize(Vector2 size)
     {
         transform.localScale = new Vector3(size.x, _height, size.y);
+        Hide();
     }
 
-    public bool HasOverlapWithMask(LayerMask mask)
+    public void Show()
+        => gameObject.SetActive(true);
+
+    public void Hide()
+        => gameObject.SetActive(false);
+
+    public bool HasOverlapWithFootprint(LayerMask mask, GameObject[] ignoreObjects = null)
     {
 
         Collider[] colliders = Physics.OverlapBox(
@@ -20,7 +27,10 @@ public class PlacementFootprint : MonoBehaviour
             mask
         );
 
-        Collider[] filtered = colliders.Where(col => col.gameObject != gameObject).ToArray();
+        Collider[] filtered = colliders
+            .Where(col => col.gameObject != gameObject)
+            .Where(col => ignoreObjects == null || ignoreObjects.FirstOrDefault(obj => obj == col.gameObject) == null)
+            .ToArray();
 
         return filtered.Length > 0;
     }

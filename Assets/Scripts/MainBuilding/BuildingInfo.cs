@@ -21,6 +21,7 @@ public class BuildingInfo : MonoBehaviour, IBuildingReadModel, IBuildingCommands
     public bool CanPlaceFlag => _hub.CollectorsCount > 1;
     public bool CanBuildNewBase => _storage.Amount >= _basePrice;
     public BuildingConfig Config => _building.Config;
+    public BuildingBuilder Builder => _builder;
 
     public event Action<IBuildingReadModel> BuildingUpdated;
 
@@ -36,9 +37,9 @@ public class BuildingInfo : MonoBehaviour, IBuildingReadModel, IBuildingCommands
         _hub.CollectorsCountChanged -= OnCollectorsCountChanged;
     }
 
-    public void BuildNewBuilding(BuildingPlacementPreview preview)
+    public void BuildNewBuilding(BuildingConfig config, Vector3 position)
     {
-        _builder.InitBuilding(preview);
+        _builder.InitBuilding(config, position);
     }
 
     public void BuildUnit()

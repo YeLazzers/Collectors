@@ -92,8 +92,8 @@ public class MainBuilding : MonoBehaviour
     {
         if (!_scannedResources.Contains(collectable))
         {
-            var jobContext = new ResourceGatheringJobContext((Resource)collectable, this);
-            _jobBoard.Publish(new ResourceGatheringJob(jobContext, 1));
+            var jobContext = new GatheringJobContext((Resource)collectable, this);
+            _jobBoard.Publish(new GatheringJob(jobContext, 1));
 
             _scannedResources.Add(collectable);
 

@@ -30,10 +30,10 @@ public class PlayerSelection : MonoBehaviour
             _currentSelectable = selectable;
             _currentSelectable?.Select();
 
-            if (IsBuildingSelectable(selectable, out BuildingInfo buildingModel))
+            if (IsSelectableBuilding(selectable, out BuildingInfo buildingModel))
             {
                 BuildingSelected?.Invoke(buildingModel);
-                _router.ActivateBuildingPlacementMode(new BuildingPlacementContext(buildingModel.Config, buildingModel));
+                _router.ActivateBuildingPlacementMode(new BuildingPlacementContext(buildingModel.Config, buildingModel.Builder));
             }
         }
         else
@@ -50,7 +50,7 @@ public class PlayerSelection : MonoBehaviour
         SelectionCleared?.Invoke();
     }
 
-    private bool IsBuildingSelectable(ISelectable selectable, out BuildingInfo buildingModel)
+    private bool IsSelectableBuilding(ISelectable selectable, out BuildingInfo buildingModel)
     {
         if (selectable is BuildingInteraction buildingInteraction)
         {

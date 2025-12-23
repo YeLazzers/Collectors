@@ -15,12 +15,6 @@ public class SpawnArea : MonoBehaviour
         transform.localScale = new Vector3(_spawnRingOuter * _radiusMultiplier, _spawnRingOuter * _radiusMultiplier, _zScale);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = new Color(Color.green.r, Color.green.g, Color.green.b, 0.3f);
-        Gizmos.DrawCube(transform.position + _centerOffset, new Vector3(_width, _centerOffset.y, _width));
-    }
-
     public Vector3 GetRandomPointInArea(Vector3 center)
     {
         return new Vector3(

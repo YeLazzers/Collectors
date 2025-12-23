@@ -6,12 +6,15 @@ public class BuildingPlacementPreview : MonoBehaviour
     [SerializeField] private LayerMask _footprintMask;
 
     private BuildingConfig _config;
+    private bool _isValidPosition = false;
 
     public BuildingConfig Config => _config;
+    public bool IsValidPosition => _isValidPosition;
 
     public void Initialize(BuildingConfig config, Vector3 position)
     {
         _view.RenderModel(config);
+        _view.ShowFootprint();
 
         UpdatePosition(position);
     }
@@ -23,12 +26,10 @@ public class BuildingPlacementPreview : MonoBehaviour
         Validate();
     }
 
-    public bool Validate()
+    private void Validate()
     {
-        bool isValid = _view.Footprint.HasOverlapWithMask(_footprintMask);
+        _isValidPosition = _view.Footprint.HasOverlapWithFootprint(_footprintMask) == false;
 
-        _view.Model.MeshView.SetColor(isValid ? Color.red : Color.green);
-
-        return isValid;
+        _view.Model.MeshView.SetColor(_isValidPosition ? Color.green : Color.red);
     }
 }
