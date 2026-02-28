@@ -1,0 +1,36 @@
+root = true
+
+[*.cs]
+dotnet_diagnostic.SA0001.severity = none
+
+[Assets/Scripts/**/*.cs]
+# Balanced StyleCop profile for project code
+dotnet_analyzer_diagnostic.category-StyleCop.CSharp.DocumentationRules.severity = none
+dotnet_analyzer_diagnostic.category-StyleCop.CSharp.OrderingRules.severity = suggestion
+dotnet_analyzer_diagnostic.category-StyleCop.CSharp.LayoutRules.severity = suggestion
+dotnet_analyzer_diagnostic.category-StyleCop.CSharp.ReadabilityRules.severity = suggestion
+dotnet_analyzer_diagnostic.category-StyleCop.CSharp.SpacingRules.severity = suggestion
+dotnet_analyzer_diagnostic.category-StyleCop.CSharp.MaintainabilityRules.severity = suggestion
+
+# Enforced ordering rules (warnings)
+dotnet_diagnostic.SA1200.severity = warning  # Usings outside namespace
+dotnet_diagnostic.SA1201.severity = warning  # Element kind order (fields → events → properties → methods)
+dotnet_diagnostic.SA1202.severity = warning  # Access modifier order within each kind (public → private)
+dotnet_diagnostic.SA1400.severity = warning  # Access modifier must be declared
+dotnet_diagnostic.SA1516.severity = warning  # Blank line between elements
+
+# Enforced naming rules (warnings)
+dotnet_diagnostic.SA1300.severity = warning  # Element names must begin with upper-case letter
+dotnet_diagnostic.SA1302.severity = warning  # Interface names must begin with I
+dotnet_diagnostic.SA1303.severity = warning  # Const field names must begin with upper-case letter
+dotnet_diagnostic.SA1311.severity = warning  # Static readonly fields must begin with upper-case letter
+
+# Project naming conventions — underscore prefix for private fields
+dotnet_diagnostic.SA1309.severity = none     # Allow underscore prefix (_fieldName)
+dotnet_diagnostic.SA1310.severity = none     # Allow underscores in field names (consistent with SA1309)
+
+[Assets/Plugins/**/*.cs]
+dotnet_analyzer_diagnostic.severity = none
+
+[Assets/External/**/*.cs]
+dotnet_analyzer_diagnostic.severity = none

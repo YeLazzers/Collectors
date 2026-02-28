@@ -6,7 +6,8 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private int _vSyncCount = 1;
     [SerializeField] private Game _game;
 
-    void Awake()
+
+    private void Awake()
     {
         Application.targetFrameRate = _targetFrameRate;
         QualitySettings.vSyncCount = _vSyncCount;
