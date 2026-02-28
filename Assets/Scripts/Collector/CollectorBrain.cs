@@ -9,7 +9,8 @@ public class CollectorBrain : MonoBehaviour
 
     private bool _isAutoMode = false;
     private SplinePath _splinePath;
-    private ResourceGatheringJob _gatheringJob;
+    private GatheringJob _gatheringJob;
+    private BuildingJob _buildingJob;
 
     public Action BecameIdle;
 
@@ -19,17 +20,18 @@ public class CollectorBrain : MonoBehaviour
         _stateMachine.Initialize(_collector, _splinePath, _resourceHolder.transform);
     }
 
-    public void BeginCollect(Action onComplete = null)
-    {
-        _isAutoMode = true;
-        MoveToResource();
-    }
-
-    public void BeginGathering(ResourceGatheringJob job)
+    public void BeginGathering(GatheringJob job)
     {
         _gatheringJob = job;
         _isAutoMode = true;
         MoveToResource();
+    }
+
+    public void BeginBuilding(BuildingJob job)
+    {
+        _buildingJob = job;
+        _isAutoMode = true;
+        MoveTo(_buildingJob.Position);
     }
 
     [ContextMenu("Move To Resource")]
@@ -40,6 +42,22 @@ public class CollectorBrain : MonoBehaviour
             TargetPosition = _gatheringJob.Resource.Position
         }, OnMoveCompleted);
     }
+
+    public void MoveTo(Vector3 position)
+    {
+        Vector3 dir = (position - transform.position).normalized;
+        Vector3 targetPos = transform.position - dir * 1f;
+
+        _stateMachine.ChangeState(CollectorStates.Move, new MoveStateParams
+        {
+            TargetPosition = targetPos
+        }, () => HandleCompletion(_buildingJob.Source.FinishBuilding));
+    }
+
+    // public void CompleteBuilding()
+    // {
+    //     _buildingJob.Source.FinishBuilding();
+    // }
 
     private void OnMoveCompleted()
     {
@@ -91,14 +109,14 @@ public class CollectorBrain : MonoBehaviour
 
     private void OnDeliverCompleted()
     {
-        HandleCompletion(FinishGathering);
+        HandleCompletion(FinishJob);
     }
 
 
-    private void FinishGathering()
+    private void FinishJob()
     {
-        Debug.Log("Collector finished gathering");
-        
+        Debug.Log("Collector finished a job");
+
         _stateMachine.ChangeStateToDefault();
         _isAutoMode = false;
 

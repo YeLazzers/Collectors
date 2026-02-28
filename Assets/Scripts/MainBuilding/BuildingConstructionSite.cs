@@ -10,10 +10,14 @@ public class BuildingConstructionSite : MonoBehaviour
 {
     [SerializeField] private BuildingView _view;
 
-    // private ConstructionSiteState _state;
+    private BuildingConfig _config;
+
+    public BuildingConfig Config => _config;
+    public Vector3 Position => transform.position;
 
     public void Initialize(BuildingConfig config)
     {
+        _config = config;
         _view.RenderModel(config);
     }
 

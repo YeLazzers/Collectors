@@ -6,7 +6,7 @@ public class ResourceStorage : MonoBehaviour
 {
     [SerializeField] private Sprite _icon;
 
-    private int _amount = 0;
+    private int _amount = 4;
 
     public int Amount => _amount;
     public Sprite Icon => _icon;

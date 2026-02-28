@@ -4,12 +4,12 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
 {
     [SerializeField] private CollectorBrain _brain;
 
-    private IJob2 _currentJob;
+    private IJob _currentJob;
     private JobBoard _jobBoard;
     private bool _isRunning = false;
 
     public bool IsIdle => _currentJob == null;
-    public IJob2 CurrentJob => _currentJob;
+    public IJob CurrentJob => _currentJob;
 
     private void OnEnable()
     {
@@ -43,14 +43,14 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
         _isRunning = false;
     }
 
-    public void AssignJob(IJob2 job)
+    public void AssignJob(IJob job)
     {
         _currentJob = job;
 
         switch (job.Type)
         {
             case JobType.ResourceGathering:
-                var resourceGatheringJob = (ResourceGatheringJob)job;
+                var resourceGatheringJob = (GatheringJob)job;
                 _brain.BeginGathering(resourceGatheringJob);
                 // _fsm.EnterCollect((CollectJob)job);
                 break;
@@ -59,7 +59,7 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
                 // _fsm.EnterBuild((BuildJob)job);
                 break;
         }
-        // Debug.Log($"Job assigned: {_currentJob.Name}");
+        Debug.Log($"Job assigned: {_currentJob.Name}");
     }
 
     public bool CanExecute(JobType jobType)

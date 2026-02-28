@@ -14,13 +14,11 @@ public enum JobStatus
 
 public interface IJob
 {
-    void ApplyTo(IWorkable worker);
-}
-
-public interface IJob2
-{
     string Name { get; }
     int Priority { get; }
     JobType Type { get; }
     JobStatus Status { get; }
+
+    void SetPriority(int priority);
+    void SetStatus(JobStatus status);
 }

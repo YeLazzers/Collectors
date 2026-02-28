@@ -11,4 +11,6 @@ public class Game : MonoBehaviour
         var building = Instantiate(_buildingPrefab);
         building.Initialize(_resourceSpawner, _factoryConfig, Vector3.zero);
     }
+
+    
 }

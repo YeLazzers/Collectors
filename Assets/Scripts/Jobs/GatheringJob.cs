@@ -1,24 +1,22 @@
-using UnityEngine;
-
-public readonly struct ResourceGatheringJobContext
+public readonly struct GatheringJobContext
 {
     public readonly Resource Resource;
     public readonly MainBuilding Destination;
 
-    public ResourceGatheringJobContext(Resource resource, MainBuilding destination)
+    public GatheringJobContext(Resource resource, MainBuilding destination)
     {
         Resource = resource;
         Destination = destination;
     }
 }
 
-public class ResourceGatheringJob : IJob2
+public class GatheringJob : IJob
 {
     private readonly string _name = "Resource Gathering Job";
 
     private int _priority;
     private JobStatus _status;
-    private ResourceGatheringJobContext _context;
+    private GatheringJobContext _context;
 
     public string Name => _name;
     public int Priority => _priority;
@@ -28,7 +26,7 @@ public class ResourceGatheringJob : IJob2
     public Resource Resource => _context.Resource;
     public MainBuilding Destination => _context.Destination;
 
-    public ResourceGatheringJob(ResourceGatheringJobContext context, int priority)
+    public GatheringJob(GatheringJobContext context, int priority)
     {
         _context = context;
         _priority = priority;
@@ -38,5 +36,10 @@ public class ResourceGatheringJob : IJob2
     public void SetPriority(int priority)
     {
         _priority = priority;
+    }
+
+    public void SetStatus(JobStatus status)
+    {
+        _status = status;
     }
 }
