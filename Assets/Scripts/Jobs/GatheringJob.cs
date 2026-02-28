@@ -10,7 +10,7 @@ public readonly struct GatheringJobContext
     }
 }
 
-public class GatheringJob : IJob
+public class GatheringJob : IJob, IJobPlan
 {
     private readonly string _name = "Resource Gathering Job";
 
@@ -22,6 +22,7 @@ public class GatheringJob : IJob
     public int Priority => _priority;
     public JobType Type => JobType.ResourceGathering;
     public JobStatus Status => _status;
+    public WorkerState EntryState => WorkerState.MoveToResource;
 
     public Resource Resource => _context.Resource;
     public MainBuilding Destination => _context.Destination;
@@ -41,5 +42,16 @@ public class GatheringJob : IJob
     public void SetStatus(JobStatus status)
     {
         _status = status;
+    }
+
+    public void Configure(WorkContext context, TransitionScheme scheme)
+    {
+        context.Resource = Resource;
+        context.Building = Destination;
+
+        scheme.Add(WorkerState.MoveToResource, WorkerSignal.Arrived,   WorkerState.Grab)
+              .Add(WorkerState.Grab,            WorkerSignal.Collected, WorkerState.ReturnToBase)
+              .Add(WorkerState.ReturnToBase,    WorkerSignal.Arrived,   WorkerState.Deliver)
+              .Add(WorkerState.Deliver,         WorkerSignal.Delivered, WorkerState.Idle);
     }
 }

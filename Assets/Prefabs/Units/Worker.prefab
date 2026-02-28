@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 76904607506868545}
   - component: {fileID: 4204329353915133240}
   - component: {fileID: 937726809901570670}
-  - component: {fileID: 1361314458768288907}
-  - component: {fileID: 4478079228722777896}
+  - component: {fileID: 493240176262371835}
   - component: {fileID: 4116964355341375395}
   m_Layer: 0
-  m_Name: Drone
+  m_Name: Worker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +88,7 @@ CapsuleCollider:
   m_Height: 0.5
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1361314458768288907
+--- !u!114 &493240176262371835
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,27 +97,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1528220985189515095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2448a2c3b11ba4c44ba9ca336207c3c4, type: 3}
+  m_Script: {fileID: 11500000, guid: e9265a3b432f649149c5d5d7a173e480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jobRunner: {fileID: 4116964355341375395}
-  _brain: {fileID: 4478079228722777896}
-  _movementSpeed: 0.7
---- !u!114 &4478079228722777896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1528220985189515095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feed5f9f628a74fd480975eb2f451a77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _collector: {fileID: 1361314458768288907}
-  _resourceHolder: {fileID: 3815589598334993673}
   _stateMachine: {fileID: 1762845636752341890}
+  _resourceHolder: {fileID: 3815589598334993673}
+  _jobRunner: {fileID: 4116964355341375395}
+  _speed: 0.7
 --- !u!114 &4116964355341375395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b1c98e17b7b4da996ec346d5a23e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _brain: {fileID: 4478079228722777896}
+  _worker: {fileID: 493240176262371835}
 --- !u!1 &1837647111349328339
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +202,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3403585874333479292}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3143ecf15533841a990eb499159a1187, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a08dc315784848d3ae06671c66ea467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1691555259688133221
@@ -294,7 +279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 28723f10c2a8e094a9351e892f5271b8, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 28723f10c2a8e094a9351e892f5271b8, type: 3}
       propertyPath: m_Materials.Array.data[1]

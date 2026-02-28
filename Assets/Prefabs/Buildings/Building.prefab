@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51990f78059544e58ff26b9d6244756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buildingPrefab: {fileID: 0}
   _constructionSitePrefab: {fileID: 2378170747898412982, guid: 2005ea35b12ab44a790a594ffe895fb7, type: 3}
   _lineRenderer: {fileID: 5848179204738148078}
 --- !u!1 &2235752068424285240
@@ -491,9 +492,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 265028008463660120}
-  - component: {fileID: 270052644432006157}
+  - component: {fileID: 421634062143806973}
   m_Layer: 0
-  m_Name: CollectorSpawner
+  m_Name: WorkerSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -514,19 +515,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3951477262255098769}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &270052644432006157
+--- !u!114 &421634062143806973
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4310925291989307778}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02517a3b024c04f0da8f43df4f41d4a2, type: 3}
+  m_Script: {fileID: 11500000, guid: de1e5e0c390934f66b2489738cad5c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 1361314458768288907, guid: 25ffe4f8a5fb940ceacdc542580b2c14, type: 3}
+  Prefab: {fileID: 493240176262371835, guid: 25ffe4f8a5fb940ceacdc542580b2c14, type: 3}
   _splineContainer: {fileID: 953634957809539798}
 --- !u!1 &4670091189016714308
 GameObject:
@@ -1180,7 +1181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jobBoard: {fileID: 849132350361276813}
   _icon: {fileID: 21300000, guid: 26986dc9cbff74c458ba04e03e102a44, type: 3}
-  _spawner: {fileID: 270052644432006157}
+  _spawner: {fileID: 0}
   _spawnRadius: 1
 --- !u!1 &8346828008635746749
 GameObject:

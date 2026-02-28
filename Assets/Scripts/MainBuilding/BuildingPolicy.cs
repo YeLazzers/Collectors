@@ -25,6 +25,7 @@ public class BuildingPolicy : MonoBehaviour
         _builder.SitePlaced += OnSitePlaced;
         _storage.AmountChanged += OnResourceChanged;
     }
+
     private void OnDisable()
     {
         _builder.SitePlaced -= OnSitePlaced;
@@ -45,7 +46,7 @@ public class BuildingPolicy : MonoBehaviour
             case BuildingPolicyType.Idle:
                 break;
             case BuildingPolicyType.Production:
-                _trainer.TryTrainCollector();
+                _trainer.TryTrainWorker();
                 break;
             case BuildingPolicyType.Construction:
                 TryBuildConstruction(newAmount);

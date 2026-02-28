@@ -4,61 +4,63 @@ using UnityEngine;
 
 public abstract class StateMachineBase : MonoBehaviour
 {
-    private Dictionary<Enum, IState> _states = new();
+    private readonly Dictionary<Enum, IState> _states = new();
+
     private IState _currentState;
+    private Enum _currentStateId;
     private Enum _defaultStateId;
+    private TransitionScheme _scheme;
+
+    public event Action<Enum> StateEntered;
 
     private void Update()
     {
-        _currentState.OnUpdate(Time.deltaTime);
+        _currentState?.OnUpdate(Time.deltaTime);
     }
-
-    public delegate void StateCallback();
 
     public void RegisterState(Enum id, IState state)
     {
         _states[id] = state;
     }
+
     public void Init(Enum defaultStateId, Enum initialStateId = null)
     {
         _defaultStateId = defaultStateId;
-
-        ChangeState(initialStateId == null ? defaultStateId : initialStateId);
+        ChangeState(initialStateId ?? defaultStateId);
     }
 
-    public void ChangeState(Enum id, Action onComplete = null)
+    public void LoadScheme(TransitionScheme scheme)
+    {
+        _scheme = scheme;
+    }
+
+    public void ClearScheme()
+    {
+        _scheme = null;
+    }
+
+    public void ChangeState(Enum id)
     {
         _currentState?.OnExit();
-
-
+        _currentStateId = id;
         _currentState = _states[id];
-        _currentState.OnEnter(() =>
-        {
-            if (onComplete == null)
-                ChangeStateToDefault();
-            else
-                onComplete?.Invoke();
-        });
-    }
-    public void ChangeState<TParams>(Enum id, TParams param, Action onComplete = null)
-    {
-        if (_states[id] is IParameterizedState<TParams> paramState)
-        {
-            paramState.Inject(param);
-        }
-        else
-        {
-            ChangeStateToDefault();
-            throw new Exception(
-                $"State '{id}' does not support parameters '{typeof(TParams)}'"
-            );
-        }
-
-        ChangeState(id, onComplete);
+        _currentState.OnEnter();
+        StateEntered?.Invoke(id);
     }
 
     public void ChangeStateToDefault()
     {
+        ChangeState(_defaultStateId);
+    }
+
+    public void FireSignal(Enum signal)
+    {
+        if (_scheme != null && _scheme.TryResolve(_currentStateId, signal, out Enum nextId))
+        {
+            ChangeState(nextId);
+            return;
+        }
+
         ChangeState(_defaultStateId);
     }
 }

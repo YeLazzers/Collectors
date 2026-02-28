@@ -2,7 +2,7 @@ using UnityEngine;
 
 public sealed class JobRunner : MonoBehaviour, IJobExecutor
 {
-    [SerializeField] private CollectorBrain _brain;
+    [SerializeField] private Worker _worker;
 
     private IJob _currentJob;
     private JobBoard _jobBoard;
@@ -13,18 +13,20 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
 
     private void OnEnable()
     {
-        _brain.BecameIdle += OnBecameIdle;
+        _worker.BecameIdle += OnBecameIdle;
     }
 
     private void OnDisable()
     {
-        _brain.BecameIdle -= OnBecameIdle;
+        _worker.BecameIdle -= OnBecameIdle;
     }
 
     public void SetJobBoard(JobBoard board)
     {
         if (_jobBoard != null)
+        {
             _jobBoard.Changed -= TryGetJob;
+        }
 
         _jobBoard = board;
         _jobBoard.Changed += TryGetJob;
@@ -47,29 +49,17 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
     {
         _currentJob = job;
 
-        switch (job.Type)
+        if (job is IJobPlan plan)
         {
-            case JobType.ResourceGathering:
-                var resourceGatheringJob = (GatheringJob)job;
-                _brain.BeginGathering(resourceGatheringJob);
-                // _fsm.EnterCollect((CollectJob)job);
-                break;
-
-            case JobType.Building:
-                // _fsm.EnterBuild((BuildJob)job);
-                break;
+            _worker.ExecuteJob(plan);
         }
-        Debug.Log($"Job assigned: {_currentJob.Name}");
-    }
 
-    public bool CanExecute(JobType jobType)
-    {
-        throw new System.NotImplementedException();
+        Debug.Log($"Job assigned: {_currentJob.Name}");
     }
 
     private void TryGetJob()
     {
-        if (_isRunning && IsIdle && _jobBoard.TryGetJob(out var job))
+        if (_isRunning && IsIdle && _jobBoard.TryGetJob(out IJob job))
         {
             AssignJob(job);
         }
@@ -77,11 +67,7 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
 
     private void OnBecameIdle()
     {
-        if (_currentJob != null)
-        {
-            _currentJob = null;
-        }
-
+        _currentJob = null;
         TryGetJob();
     }
 }

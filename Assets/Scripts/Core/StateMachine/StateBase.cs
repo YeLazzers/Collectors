@@ -1,14 +1,13 @@
-using System;
-
 public abstract class StateBase : IState
 {
-    protected StateMachineBase ParentMachine;
-    public StateBase(StateMachineBase machine)
+    protected StateMachineBase Machine;
+
+    protected StateBase(StateMachineBase machine)
     {
-        ParentMachine = machine;
+        Machine = machine;
     }
 
-    public abstract void OnEnter(Action onComplete);
+    public abstract void OnEnter();
     public abstract void OnUpdate(float deltaTime);
     public abstract void OnExit();
 }

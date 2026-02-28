@@ -1,8 +1,6 @@
-using System;
-
 public interface IState
 {
-    void OnEnter(Action onComplete);
+    void OnEnter();
     void OnUpdate(float deltaTime);
     void OnExit();
 }

@@ -10,16 +10,16 @@ public class CollectorTrainer : MonoBehaviour
     {
         if (amount >= _cost)
         {
-            _hub.TrainCollector(1);
+            _hub.TrainWorker(1);
             _storage.Spend(amount);
         }
     }
 
-    public void TryTrainCollector()
+    public void TryTrainWorker()
     {
         if (_storage.Amount >= _cost)
         {
-            _hub.TrainCollector(1);
+            _hub.TrainWorker(1);
             _storage.Spend(_cost);
         }
     }

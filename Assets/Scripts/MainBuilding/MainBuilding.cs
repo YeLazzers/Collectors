@@ -48,7 +48,7 @@ public class MainBuilding : MonoBehaviour
 
     private void Start()
     {
-        _hub.TrainCollector(_initialCollectorsCount);
+        _hub.TrainWorker(_initialCollectorsCount);
     }
 
     public void Initialize(ResourceSpawner resourceSpawner, BuildingConfig config, Vector3 position)

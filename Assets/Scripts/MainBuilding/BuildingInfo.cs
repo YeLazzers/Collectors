@@ -16,9 +16,9 @@ public class BuildingInfo : MonoBehaviour, IBuildingReadModel, IBuildingCommands
 
     public string BuildingName => _name;
     public int ResourcesCount => _storage.Amount;
-    public int UnitsCount => _hub.CollectorsCount;
+    public int UnitsCount => _hub.WorkersCount;
     public bool CanBuildUnit => _storage.Amount >= _unitPrice;
-    public bool CanPlaceFlag => _hub.CollectorsCount > 1;
+    public bool CanPlaceFlag => _hub.WorkersCount > 1;
     public bool CanBuildNewBase => _storage.Amount >= _basePrice;
     public BuildingConfig Config => _building.Config;
     public BuildingBuilder Builder => _builder;
@@ -28,13 +28,13 @@ public class BuildingInfo : MonoBehaviour, IBuildingReadModel, IBuildingCommands
     private void OnEnable()
     {
         _storage.AmountChanged += OnResourcesChanged;
-        _hub.CollectorsCountChanged += OnCollectorsCountChanged;
+        _hub.WorkersCountChanged += OnWorkersCountChanged;
     }
 
     private void OnDisable()
     {
         _storage.AmountChanged -= OnResourcesChanged;
-        _hub.CollectorsCountChanged -= OnCollectorsCountChanged;
+        _hub.WorkersCountChanged -= OnWorkersCountChanged;
     }
 
     public void BuildNewBuilding(BuildingConfig config, Vector3 position)
@@ -57,7 +57,7 @@ public class BuildingInfo : MonoBehaviour, IBuildingReadModel, IBuildingCommands
         BuildingUpdated?.Invoke(this);
     }
 
-    private void OnCollectorsCountChanged(int count)
+    private void OnWorkersCountChanged(int count)
     {
         BuildingUpdated?.Invoke(this);
     }
