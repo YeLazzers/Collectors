@@ -10,7 +10,7 @@ public class GemAnimations : MonoBehaviour
     [SerializeField] private AppearTweenConfig _appear;
     [SerializeField] private VacuumTweenConfig _vacuum;
     [SerializeField] private RotateTweenConfig _rotate;
-    [SerializeField] private HightlightTweenConfig _highlight;
+    [SerializeField] private HighlightTweenConfig _highlight;
 
 
     private Tween _appearTween;

@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 
 [Serializable]
-public class HightlightTweenConfig : TweenConfigBase
+public class HighlightTweenConfig : TweenConfigBase
 {
     private readonly float _blinkDurationDivider = 2f;
     private readonly string _colorPropertyName = "_EmissionColor";
