@@ -1181,7 +1181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jobBoard: {fileID: 849132350361276813}
   _icon: {fileID: 21300000, guid: 26986dc9cbff74c458ba04e03e102a44, type: 3}
-  _spawner: {fileID: 0}
+  _spawner: {fileID: 421634062143806973}
   _spawnRadius: 1
 --- !u!1 &8346828008635746749
 GameObject:

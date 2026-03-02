@@ -5,7 +5,6 @@ public class Worker : MonoBehaviour, IPoolable<Worker>
 {
     [SerializeField] private WorkerStateMachine _stateMachine;
     [SerializeField] private ResourceHolder _resourceHolder;
-    [SerializeField] private JobRunner _jobRunner;
     [SerializeField] private float _speed;
 
     private readonly WorkContext _context = new();
@@ -15,7 +14,6 @@ public class Worker : MonoBehaviour, IPoolable<Worker>
     public event Action BecameIdle;
 
     public float Speed => _speed;
-    public JobRunner JobRunner => _jobRunner;
 
     private void Awake()
     {

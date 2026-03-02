@@ -31,6 +31,3 @@ public class JobBoard : MonoBehaviour
         return false;
     }
 }
-
-// https://api.telegram.org/bot8547108805:AAEfTlYpWXC93Vbrc8zlP8JkztH6wkUhEEQ/setWebhook?url=https://yelazzers.app.n8n.cloud/webhook/1a35cc04-3b47-440c-833f-18fc9087c637
-// https://api.telegram.org/bot8547108805:AAEfTlYpWXC93Vbrc8zlP8JkztH6wkUhEEQ/getWebhookInfo

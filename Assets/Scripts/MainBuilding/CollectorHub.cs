@@ -15,7 +15,7 @@ public class CollectorHub : MonoBehaviour
     private List<Worker> _workers = new List<Worker>();
 
     public int WorkersCount => _workers.Count;
-    
+
     public Sprite Icon => _icon;
 
     public event Action<int> WorkersCountChanged;
@@ -28,8 +28,8 @@ public class CollectorHub : MonoBehaviour
         {
             Worker worker = _spawner.Spawn(GetSpawnPosition(i, count, randomRotationOffset), transform.position);
 
-            worker.JobRunner.SetJobBoard(_jobBoard);
-            worker.JobRunner.Run();
+            worker.GetComponent<JobRunner>().SetJobBoard(_jobBoard);
+            worker.GetComponent<JobRunner>().Run();
 
             _workers.Add(worker);
 

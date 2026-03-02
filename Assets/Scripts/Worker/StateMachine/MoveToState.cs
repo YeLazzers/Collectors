@@ -1,26 +1,27 @@
+using System;
 using SplineMesh;
 using UnityEngine;
 
-public abstract class WorkerMoveStateBase : StateBase
+public sealed class MoveToState : StateBase
 {
     private readonly Worker _worker;
     private readonly SplinePath _spline;
+    private readonly Func<Vector3> _getTarget;
 
     private float _sampleRate;
 
-    protected WorkerMoveStateBase(StateMachineBase machine, Worker worker, SplinePath spline)
+    public MoveToState(StateMachineBase machine, Worker worker, SplinePath spline, Func<Vector3> getTarget)
         : base(machine)
     {
         _worker = worker;
         _spline = spline;
+        _getTarget = getTarget;
     }
-
-    protected abstract Vector3 GetTarget();
 
     public override void OnEnter()
     {
         _sampleRate = 0f;
-        _spline.Build(_worker.transform, GetTarget());
+        _spline.Build(_worker.transform, _getTarget());
     }
 
     public override void OnUpdate(float deltaTime)
