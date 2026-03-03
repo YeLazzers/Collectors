@@ -61,7 +61,7 @@ public class MainBuilding : MonoBehaviour
         _view.RenderModel(config);
     }
 
-    public void TakeResource(Resource resource, Action onDone = null)
+    public void Deposit(Resource resource, Action onDone = null)
     {
         resource.Collect(transform, () =>
         {

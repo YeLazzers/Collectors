@@ -9,7 +9,7 @@ public class WorkerDeliverState : StateBase
 
     public override void OnEnter()
     {
-        _context.Building.TakeResource((Resource)_context.Resource, () => Machine.FireSignal(WorkerSignal.Delivered));
+        _context.Building.Deposit((Resource)_context.Resource, () => Machine.FireSignal(WorkerSignal.Delivered));
     }
 
     public override void OnUpdate(float deltaTime)
