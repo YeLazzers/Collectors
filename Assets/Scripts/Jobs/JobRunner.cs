@@ -25,15 +25,9 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
         }
     }
 
-    private void OnEnable()
-    {
-        _worker.BecameIdle += OnBecameIdle;
-    }
-
     private void OnDisable()
     {
         CancelActivePlan(markFailed: false);
-        _worker.BecameIdle -= OnBecameIdle;
     }
 
     public void SetJobBoard(JobBoard board)
@@ -92,12 +86,6 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
         {
             AssignJob(job);
         }
-    }
-
-    private void OnBecameIdle()
-    {
-        _currentJob = null;
-        TryGetJob();
     }
 
     private void StartPlan(IWorkerPlan plan)
