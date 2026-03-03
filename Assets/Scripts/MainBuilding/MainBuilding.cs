@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class MainBuilding : MonoBehaviour
@@ -61,16 +61,21 @@ public class MainBuilding : MonoBehaviour
         _view.RenderModel(config);
     }
 
-    public void Deposit(Resource resource, Action onDone = null)
+    public bool TryDeposit(Resource resource)
     {
-        resource.Collect(transform, () =>
-        {
-            _resourceStorage.Add(resource.Amount);
-            _scannedResources.Remove(resource);
+        if (resource == null)
+            return false;
 
-            _resourceSpawner.Release(resource);
-            onDone?.Invoke();
-        });
+        resource.Transform.DOMove(transform.position, 1f)
+            .SetEase(Ease.OutExpo)
+            .OnComplete(() =>
+            {
+                _resourceStorage.Add(resource.Amount);
+                _scannedResources.Remove(resource);
+                _resourceSpawner.Release(resource);
+            });
+
+        return true;
     }
 
     public Vector3 GetLandingPoint(Vector3 originPos)

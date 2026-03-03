@@ -4,7 +4,7 @@ using UnityEngine;
 public sealed class JobRunner : MonoBehaviour, IJobExecutor
 {
     [SerializeField] private Worker _worker;
-    [SerializeField] private ResourceHolder _resourceHolder;
+    [SerializeField] private CollectableGrabber _grabber;
 
     private readonly GatheringPlanBuilder _gatheringPlanBuilder = new();
 
@@ -19,9 +19,9 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
 
     private void Awake()
     {
-        if (_resourceHolder == null && _worker != null)
+        if (_grabber == null && _worker != null)
         {
-            _resourceHolder = _worker.GetComponentInChildren<ResourceHolder>();
+            _grabber = _worker.GetComponentInChildren<CollectableGrabber>();
         }
     }
 
@@ -63,7 +63,7 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
         switch (job)
         {
             case GatheringJob gatheringJob:
-                if (_gatheringPlanBuilder.TryBuild(gatheringJob, _worker, _resourceHolder, out IWorkerPlan pipelinePlan))
+                if (_gatheringPlanBuilder.TryBuild(gatheringJob, _worker, _grabber, out IWorkerPlan pipelinePlan))
                 {
                     StartPlan(pipelinePlan);
                 }

@@ -4,26 +4,23 @@ using UnityEngine;
 public sealed class CollectStep : StepBase
 {
     private readonly ICollectable _collectable;
-    private readonly Transform _holder;
+    private readonly ICollector _collector;
 
-    public CollectStep(ICollectable collectable, Transform holder)
+    public CollectStep(ICollectable collectable, ICollector collector)
     {
         _collectable = collectable;
-        _holder = holder;
+        _collector = collector;
     }
 
     protected override IEnumerator Run()
     {
-        if (_collectable == null || _holder == null)
+        if (_collectable == null || _collector == null)
         {
             Fail();
             yield break;
         }
 
-        string collectableName = _collectable is Component component ? component.name : _collectable.GetType().Name;
-        Debug.Log($"[JobPipeline] CollectStep started. Collectable={collectableName}, Holder={_holder.name}");
-
-        _collectable.Collect(_holder, () =>
+        _collector.Collect(_collectable, () =>
         {
             if (Result == StepResult.None)
             {

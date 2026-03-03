@@ -718,7 +718,7 @@ MonoBehaviour:
   _jobBoard: {fileID: 849132350361276813}
   _scanner: {fileID: 840456401511194901}
   _scanInterval: 4.5
-  _landingRadius: 1
+  _landingRadius: 1.5
   _initialCollectorsCount: 3
 --- !u!114 &8909313827679673878
 MonoBehaviour:

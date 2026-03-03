@@ -20,19 +20,13 @@ public sealed class DepositStep : StepBase
             yield break;
         }
 
-        Debug.Log($"[JobPipeline] DepositStep started. Resource={_resource.name}, Building={_building.name}");
-
-        _building.Deposit(_resource, () =>
+        if (_building.TryDeposit(_resource))
         {
-            if (Result == StepResult.None)
-            {
-                Succeed();
-            }
-        });
-
-        while (Result == StepResult.None)
+            Succeed();
+        }
+        else
         {
-            yield return null;
+            Fail();
         }
     }
 }

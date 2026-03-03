@@ -1,5 +1,4 @@
 using System;
-using DG.Tweening;
 using UnityEngine;
 
 public class Resource : MonoBehaviour, IPoolable<Resource>, ICollectable, IHighlightable
@@ -9,8 +8,7 @@ public class Resource : MonoBehaviour, IPoolable<Resource>, ICollectable, IHighl
     private GemAnimations _gemAnimations;
 
     public event Action<Resource> Expired;
-
-    public Vector3 Position => transform.position;
+    public Transform Transform => transform;
     public ResourceType Type => _resourceConfig.ResourceType;
     public int Amount => _resourceConfig.Value;
 
@@ -38,12 +36,6 @@ public class Resource : MonoBehaviour, IPoolable<Resource>, ICollectable, IHighl
             transform.SetParent(parent);
 
         return Initialize(position);
-    }
-
-    public void Collect(Transform newParent, TweenCallback onComplete = null)
-    {
-        transform.SetParent(newParent);
-        transform.DOLocalMove(Vector3.zero, 3f).SetEase(Ease.InOutQuart).onComplete += onComplete;
     }
 
     public void Highlight()

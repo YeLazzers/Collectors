@@ -2,7 +2,7 @@ using UnityEngine;
 
 public sealed class GatheringPlanBuilder
 {
-    public bool TryBuild(GatheringJob gatheringJob, Worker worker, ResourceHolder resourceHolder, out IWorkerPlan plan)
+    public bool TryBuild(GatheringJob gatheringJob, Worker worker, ICollector collector, out IWorkerPlan plan)
     {
         if (gatheringJob == null)
         {
@@ -18,16 +18,16 @@ public sealed class GatheringPlanBuilder
             return false;
         }
 
-        if (resourceHolder == null)
+        if (collector == null)
         {
-            Debug.LogError("GatheringPlanBuilder.TryBuild failed: resourceHolder is null.");
+            Debug.LogError("GatheringPlanBuilder.TryBuild failed: collector is null.");
             plan = null;
             return false;
         }
 
         plan = new WorkerPlanBuilder()
-            .Add(new MoveStep(worker, () => gatheringJob.Resource.Position))
-            .Add(new CollectStep(gatheringJob.Resource, resourceHolder.transform))
+            .Add(new MoveStep(worker, () => gatheringJob.Resource.Transform.position))
+            .Add(new CollectStep(gatheringJob.Resource, collector))
             .Add(new MoveStep(worker, () => gatheringJob.Destination.GetLandingPoint(worker.transform.position)))
             .Add(new DepositStep(gatheringJob.Destination, gatheringJob.Resource))
             .Build();

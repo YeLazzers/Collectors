@@ -23,9 +23,6 @@ public sealed class MoveStep : StepBase
             yield break;
         }
 
-        Vector3 startTarget = _getTarget();
-        Debug.Log($"[JobPipeline] MoveStep started. Actor={_worker.name}, Target={startTarget}");
-
         float stopDistanceSqr = _stopDistance * _stopDistance;
 
         while (IsCancelled == false)
