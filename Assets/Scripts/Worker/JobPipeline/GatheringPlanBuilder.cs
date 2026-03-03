@@ -26,9 +26,9 @@ public sealed class GatheringPlanBuilder
         }
 
         plan = new WorkerPlanBuilder()
-            .Add(new MoveStep(worker.transform, worker.Speed, () => gatheringJob.Resource.Position))
+            .Add(new MoveStep(worker, () => gatheringJob.Resource.Position))
             .Add(new CollectStep(gatheringJob.Resource, resourceHolder.transform))
-            .Add(new MoveStep(worker.transform, worker.Speed, () => gatheringJob.Destination.GetLandingPoint(worker.transform.position)))
+            .Add(new MoveStep(worker, () => gatheringJob.Destination.GetLandingPoint(worker.transform.position)))
             .Add(new DepositStep(gatheringJob.Destination, gatheringJob.Resource))
             .Build();
 

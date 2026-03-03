@@ -4,10 +4,13 @@ using UnityEngine;
 public class Worker : MonoBehaviour, IPoolable<Worker>
 {
     [SerializeField] private float _speed;
+    [SerializeField] private float _rotationSpeed;
 
     public event Action<Worker> Expired;
 
     public float Speed => _speed;
+
+    public float RotationSpeed => _rotationSpeed;
 
     private void Awake()
     {

@@ -4,54 +4,47 @@ using UnityEngine;
 
 public sealed class MoveStep : StepBase
 {
-    private readonly Transform _actor;
-    private readonly float _speed;
+    private readonly Worker _worker;
     private readonly Func<Vector3> _getTarget;
     private readonly float _stopDistance;
 
-    public MoveStep(Transform actor, float speed, Func<Vector3> getTarget, float stopDistance = 0.1f)
+    public MoveStep(Worker worker, Func<Vector3> getTarget, float stopDistance = 0.1f)
     {
-        _actor = actor;
-        _speed = speed;
+        _worker = worker;
         _getTarget = getTarget;
         _stopDistance = stopDistance;
     }
 
     protected override IEnumerator Run()
     {
-        if (_actor == null || _getTarget == null)
+        if (_worker == null || _getTarget == null)
         {
             Fail();
             yield break;
         }
 
         Vector3 startTarget = _getTarget();
-        Debug.Log($"[JobPipeline] MoveStep started. Actor={_actor.name}, Target={startTarget}");
+        Debug.Log($"[JobPipeline] MoveStep started. Actor={_worker.name}, Target={startTarget}");
 
         float stopDistanceSqr = _stopDistance * _stopDistance;
 
         while (IsCancelled == false)
         {
             Vector3 target = _getTarget();
-            Vector3 delta = target - _actor.position;
+            Vector3 horizontalDelta = target - _worker.transform.position;
+            horizontalDelta.y = 0f;
 
-            if (delta.sqrMagnitude <= stopDistanceSqr)
+            if (horizontalDelta.sqrMagnitude <= stopDistanceSqr)
             {
                 Succeed();
                 yield break;
             }
 
-            float distance = delta.magnitude;
-            float stepDistance = _speed * Time.deltaTime;
+            float targetAngle = Vector3.SignedAngle(Vector3.forward, horizontalDelta, Vector3.up);
+            float newAngle = Mathf.MoveTowardsAngle(_worker.transform.eulerAngles.y, targetAngle, _worker.RotationSpeed * Time.deltaTime);
+            _worker.transform.rotation = Quaternion.Euler(0f, newAngle, 0f);
 
-            if (stepDistance >= distance)
-            {
-                _actor.position = target;
-            }
-            else
-            {
-                _actor.position += (delta / distance) * stepDistance;
-            }
+            _worker.transform.position += _worker.transform.forward * _worker.Speed * Time.deltaTime;
 
             yield return null;
         }
