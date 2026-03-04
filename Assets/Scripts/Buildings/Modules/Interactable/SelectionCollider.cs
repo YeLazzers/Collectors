@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public class SelectionCollider : MonoBehaviour
+namespace YeLazzers.Buildings.Modules
 {
+    public class SelectionCollider : MonoBehaviour
+    {
+    }
 }

@@ -1,35 +1,37 @@
 using UnityEngine;
 
-namespace YeLazzers.Buildings
+namespace YeLazzers.Buildings.Modules
 {
-    public class BuildingInteraction : MonoBehaviour, IHoverable, ISelectable
+    public class Interactable : MonoBehaviour, IHoverable, ISelectable
     {
-        [SerializeField] private BuildingInfo _model;
-        [SerializeField] private BuildingView _view;
+        [SerializeField] private SelectionRing _ring;
+        [SerializeField] private Highlighter _highlighter;
 
-        public BuildingInfo Model => _model;
-        public string Name => _model.BuildingName;
+        public string Name => gameObject.name;
+
+        public void Initialize(IMeshView meshView)
+        {
+            _highlighter.Initialize(meshView);
+        }
 
         public void Select()
         {
-            _view.ShowSelectionRing();
-            _view.ShowFootprint();
+            _ring.gameObject.SetActive(true);
         }
 
         public void Deselect()
         {
-            _view.HideSelectionRing();
-            _view.HideFootprint();
+            _ring.gameObject.SetActive(false);
         }
 
         public void OnHoverEnter()
         {
-            _view.Highlight();
+            _highlighter.Highlight();
         }
 
         public void OnHoverExit()
         {
-            _view.Unhighlight();
+            _highlighter.Unhighlight();
         }
     }
 }

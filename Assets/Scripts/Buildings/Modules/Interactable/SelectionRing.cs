@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public class SelectionRing : MonoBehaviour
+namespace YeLazzers.Buildings.Modules
 {
-
+    public class SelectionRing : MonoBehaviour
+    {
+    }
 }

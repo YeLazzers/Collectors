@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using YeLazzers.Buildings;
+using YeLazzers.Buildings.Modules;
 
 public class PlayerSelection : MonoBehaviour
 {
@@ -53,10 +54,10 @@ public class PlayerSelection : MonoBehaviour
 
     private bool IsSelectableBuilding(ISelectable selectable, out BuildingInfo buildingModel)
     {
-        if (selectable is BuildingInteraction buildingInteraction)
+        if (selectable is Interactable interactable)
         {
-            buildingModel = buildingInteraction.Model;
-            return true;
+            buildingModel = interactable.GetComponentInParent<BuildingInfo>();
+            return buildingModel != null;
         }
 
         buildingModel = null;

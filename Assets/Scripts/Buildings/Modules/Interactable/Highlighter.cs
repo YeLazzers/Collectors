@@ -1,23 +1,26 @@
 using UnityEngine;
 
-public class Highlighter : MonoBehaviour
+namespace YeLazzers.Buildings.Modules
 {
-    [SerializeField] private float _highlightIntensity = 2f;
-
-    private IMeshView _meshView;
-
-    public void Initialize(IMeshView meshView)
+    public class Highlighter : MonoBehaviour
     {
-        _meshView = meshView;
-    }
+        [SerializeField] private float _highlightIntensity = 2f;
 
-    public void Highlight()
-    {
-        _meshView.SetEmissionIntensity(_highlightIntensity);
-    }
+        private IMeshView _meshView;
 
-    public void Unhighlight()
-    {
-        _meshView.ResetEmission();
+        public void Initialize(IMeshView meshView)
+        {
+            _meshView = meshView;
+        }
+
+        public void Highlight()
+        {
+            _meshView.SetEmissionIntensity(_highlightIntensity);
+        }
+
+        public void Unhighlight()
+        {
+            _meshView.ResetEmission();
+        }
     }
 }
