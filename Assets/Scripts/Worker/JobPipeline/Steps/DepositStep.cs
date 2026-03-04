@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using YeLazzers.Buildings;
 
 public sealed class DepositStep : StepBase
 {
-    private readonly MainBuilding _building;
+    private readonly Station _building;
     private readonly Resource _resource;
 
-    public DepositStep(MainBuilding building, Resource resource)
+    public DepositStep(Station building, Resource resource)
     {
         _building = building;
         _resource = resource;

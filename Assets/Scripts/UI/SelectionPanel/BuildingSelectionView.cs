@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using YeLazzers.Buildings;
 
 public class BuildingSelectionView : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class BuildingSelectionView : MonoBehaviour
 
     }
 
-    public void RenderStats(IBuildingReadModel model)
+    public void RenderStats(IStationReadModel model)
     {
         _resources.SetAmount(model.ResourcesCount);
 

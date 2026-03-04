@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using YeLazzers.Buildings;
 
 public sealed class BuildStep : StepBase
 {
-    private readonly BuildingBuilder _builder;
+    private readonly BuildingConstructor _builder;
 
-    public BuildStep(BuildingBuilder builder)
+    public BuildStep(BuildingConstructor builder)
     {
         _builder = builder;
     }

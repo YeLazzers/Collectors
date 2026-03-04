@@ -1,12 +1,13 @@
 using UnityEngine;
+using YeLazzers.Buildings;
 
 public readonly struct BuildingJobContext
 {
     public readonly BuildingConfig Config;
     public readonly Vector3 Position;
-    public readonly BuildingBuilder Source;
+    public readonly BuildingConstructor Source;
 
-    public BuildingJobContext(BuildingConfig config, Vector3 position, BuildingBuilder source)
+    public BuildingJobContext(BuildingConfig config, Vector3 position, BuildingConstructor source)
     {
         Config = config;
         Position = position;
@@ -29,7 +30,7 @@ public class BuildingJob : IJob
 
     public BuildingConfig Config => _context.Config;
     public Vector3 Position => _context.Position;
-    public BuildingBuilder Source => _context.Source;
+    public BuildingConstructor Source => _context.Source;
 
     public BuildingJob(BuildingJobContext context, int priority)
     {

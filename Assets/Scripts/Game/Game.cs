@@ -1,9 +1,10 @@
 using UnityEngine;
+using YeLazzers.Buildings;
 
 public class Game : MonoBehaviour
 {
     [SerializeField] private ResourceSpawner _resourceSpawner;
-    [SerializeField] private MainBuilding _buildingPrefab;
+    [SerializeField] private Station _buildingPrefab;
     [SerializeField] private BuildingConfig _factoryConfig;
 
     public void Initialize()

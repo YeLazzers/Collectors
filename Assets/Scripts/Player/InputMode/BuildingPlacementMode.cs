@@ -1,11 +1,12 @@
 using UnityEngine;
+using YeLazzers.Buildings;
 
 public readonly struct BuildingPlacementContext
 {
     public readonly BuildingConfig Config;
-    public readonly BuildingBuilder Source;
+    public readonly BuildingConstructor Source;
 
-    public BuildingPlacementContext(BuildingConfig config, BuildingBuilder source)
+    public BuildingPlacementContext(BuildingConfig config, BuildingConstructor source)
     {
         Config = config;
         Source = source;

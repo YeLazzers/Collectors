@@ -1,12 +1,13 @@
 using TMPro;
 using UnityEngine;
+using YeLazzers.Buildings;
 
 public class SelectionPanel : MonoBehaviour
 {
     [SerializeField] private BuildingSelectionView _buildingSelectionView;
     [SerializeField] private TextMeshProUGUI _titleText;
 
-    public void UpdateStats(IBuildingReadModel model)
+    public void UpdateStats(IStationReadModel model)
     {
         _buildingSelectionView.RenderStats(model);
     }

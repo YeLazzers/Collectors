@@ -1,9 +1,11 @@
+using YeLazzers.Buildings;
+
 public readonly struct GatheringJobContext
 {
     public readonly Resource Resource;
-    public readonly MainBuilding Destination;
+    public readonly Station Destination;
 
-    public GatheringJobContext(Resource resource, MainBuilding destination)
+    public GatheringJobContext(Resource resource, Station destination)
     {
         Resource = resource;
         Destination = destination;
@@ -24,7 +26,7 @@ public class GatheringJob : IJob
     public JobStatus Status => _status;
 
     public Resource Resource => _context.Resource;
-    public MainBuilding Destination => _context.Destination;
+    public Station Destination => _context.Destination;
 
     public GatheringJob(GatheringJobContext context, int priority)
     {

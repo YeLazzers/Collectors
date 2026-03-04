@@ -1,12 +1,13 @@
 using UnityEngine;
+using YeLazzers.Buildings;
 
 public class BuildingSelectionPresenter : MonoBehaviour
 {
     [SerializeField] private PlayerSelection _selection;
     [SerializeField] private SelectionPanel _view;
 
-    private IBuildingReadModel _readModel;
-    private IBuildingCommands _commands;
+    private IStationReadModel _readModel;
+    private IStationCommands _commands;
 
     private void OnEnable()
     {
