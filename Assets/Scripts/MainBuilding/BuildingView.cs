@@ -36,6 +36,7 @@ public class BuildingView : MonoBehaviour
     public void RenderModel(BuildingConfig config)
     {
         _modelPresenter = Instantiate(config.Model, transform);
+        _modelPresenter.gameObject.name = "Model";
         _modelPresenter.MeshView.SetMaterial(_material);
 
         _highlighter?.Initialize(_modelPresenter.MeshView);

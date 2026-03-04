@@ -3,7 +3,6 @@ using UnityEngine;
 public class BuildingHudPresenter : MonoBehaviour
 {
     [SerializeField] private ResourceStorage _resourceStorage;
-    [SerializeField] private CollectorHub _hub;
     [SerializeField] private ValueRow _resources;
     private bool _isDirty = false;
 

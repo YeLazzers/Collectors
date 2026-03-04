@@ -31,7 +31,7 @@ public class MainBuilding : MonoBehaviour
         _scanWait = new WaitForSeconds(_scanInterval);
 
         if (_config == null)
-            _config = (BuildingConfig)Resources.Load("BuildingConfigs/Factory");
+            _config = (BuildingConfig)Resources.Load("BuildingConfigs/Station");
     }
 
     private void OnEnable()
