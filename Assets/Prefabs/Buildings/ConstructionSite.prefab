@@ -1,71 +1,12 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5451704064113786013
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5292914736588840119}
-  - component: {fileID: 700049914252925915}
-  - component: {fileID: 8320781692815996475}
-  m_Layer: 0
-  m_Name: ConstructionSite
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5292914736588840119
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5451704064113786013}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3814155, y: 0.17423505, z: -0.021512276}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 9127525195832129475}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &700049914252925915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5451704064113786013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0dfc14c3e7784e04be2473fb7e84fda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _view: {fileID: 1015669427051822063}
---- !u!114 &8320781692815996475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5451704064113786013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1adcd1d0526b94a20907c4aa615f576c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1001 &7300389144072094684
+--- !u!1001 &3663767859969717675
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5292914736588840119}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2016287657235674143, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -109,26 +50,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4031609176674419976, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
       propertyPath: m_Name
-      value: Building
+      value: ConstructionSite Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4031609176674419976, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5393828441829306490}
   m_SourcePrefab: {fileID: 100100000, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
---- !u!114 &1015669427051822063 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7730517585240586291, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
-  m_PrefabInstance: {fileID: 7300389144072094684}
+--- !u!1 &372521525659480227 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4031609176674419976, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
+  m_PrefabInstance: {fileID: 3663767859969717675}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &5393828441829306490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372521525659480227}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af9142cf392c847a689ce74258a25288, type: 3}
+  m_Script: {fileID: 11500000, guid: 1adcd1d0526b94a20907c4aa615f576c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &9127525195832129475 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2016287657235674143, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
-  m_PrefabInstance: {fileID: 7300389144072094684}
-  m_PrefabAsset: {fileID: 0}

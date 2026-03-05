@@ -8,6 +8,9 @@ namespace YeLazzers.Buildings
     [RequireComponent(typeof(Building))]
     public class Station : MonoBehaviour
     {
+        [Header("Building")]
+        [SerializeField] private BuildingConfig _config;
+
         [Header("Systems")]
         [SerializeField] private ResourceStorage _resourceStorage;
         [SerializeField] private WorkerHub _hub;
@@ -51,9 +54,9 @@ namespace YeLazzers.Buildings
             _hub.TrainWorker(_initialCollectorsCount);
         }
 
-        public void Initialize(ResourceSpawner resourceSpawner, BuildingConfig config, Vector3 position)
+        public void Initialize(ResourceSpawner resourceSpawner, Vector3 position)
         {
-            _building.Initialize(config, position);
+            _building.Initialize(_config, position);
             _resourceSpawner = resourceSpawner;
         }
 

@@ -5,7 +5,7 @@ namespace YeLazzers.Buildings
 {
     public class BuildingConstructor : MonoBehaviour
     {
-        [SerializeField] private Station _buildingPrefab;
+        [SerializeField] private Building _buildingPrefab;
         [SerializeField] private ConstructionSite _constructionSitePrefab;
         [SerializeField] private CustomLineRenderer _lineRenderer;
 
@@ -45,7 +45,7 @@ namespace YeLazzers.Buildings
             if (_currentConstructionSite != null)
             {
                 var building = Instantiate(_buildingPrefab);
-                building.Initialize(null, _currentConstructionSite.Config, _currentConstructionSite.Position);
+                building.Initialize(_currentConstructionSite.Config, _currentConstructionSite.Position);
 
                 _isBuildingInProgress = false;
                 _lineRenderer.ClearLine();
