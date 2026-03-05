@@ -19,7 +19,7 @@ namespace YeLazzers.Buildings
 
         private StationPolicyType _currentPolicy = StationPolicyType.Production;
 
-        private BuildingConstructionSite _activeSite;
+        private ConstructionSite _activeSite;
         private BuildingJob _activeBuildingJob;
 
         private void OnEnable()
@@ -34,7 +34,7 @@ namespace YeLazzers.Buildings
             _storage.AmountChanged -= OnResourceChanged;
         }
 
-        private void OnSitePlaced(BuildingConstructionSite site)
+        private void OnSitePlaced(ConstructionSite site)
         {
             _activeSite = site;
             _currentPolicy = StationPolicyType.Construction;

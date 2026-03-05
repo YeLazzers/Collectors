@@ -9,6 +9,7 @@ namespace YeLazzers.Buildings
         private BuildingConfig _config;
 
         public BuildingConfig Config => _config;
+        public BuildingView View => _view;
 
         public void Initialize(BuildingConfig config, Vector3 position)
         {

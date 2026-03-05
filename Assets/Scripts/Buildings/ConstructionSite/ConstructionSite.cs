@@ -1,42 +1,33 @@
 using UnityEngine;
 
-// public enum ConstructionSiteState
-// {
-//     Building,
-//     Completed
-// }
-
 namespace YeLazzers.Buildings
 {
-    public class BuildingConstructionSite : MonoBehaviour
+    [RequireComponent(typeof(Building))]
+    public class ConstructionSite : MonoBehaviour
     {
-        [SerializeField] private BuildingView _view;
+        private Building _building;
 
-        private BuildingConfig _config;
-
-        public BuildingConfig Config => _config;
+        public BuildingConfig Config => _building.Config;
         public Vector3 Position => transform.position;
+
+        private void Awake()
+        {
+            _building = GetComponent<Building>();
+        }
 
         public void Initialize(BuildingConfig config)
         {
-            _config = config;
-            _view.RenderModel(config);
+            _building.Initialize(config, transform.position);
         }
 
         public void Initialize(BuildingConfig config, Vector3 position)
         {
-            Initialize(config);
-            SetPosition(position);
+            _building.Initialize(config, position);
         }
 
         public void CompleteConstruction()
         {
             // _state = ConstructionSiteState.Completed;
-        }
-
-        public void SetPosition(Vector3 position)
-        {
-            transform.position = position;
         }
 
         public void Show()

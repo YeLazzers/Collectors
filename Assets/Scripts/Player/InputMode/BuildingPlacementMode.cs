@@ -16,10 +16,10 @@ public readonly struct BuildingPlacementContext
 public class BuildingPlacementMode : MonoBehaviour, IInputMode
 {
     [SerializeField] private PlayerInputRouter _router;
-    [SerializeField] private BuildingPlacementPreview _buildingPreviewPrefab;
+    [SerializeField] private PlacementPreview _buildingPreviewPrefab;
     [SerializeField] private LayerMask _groundLayer;
 
-    private BuildingPlacementPreview _previewInstance;
+    private PlacementPreview _previewInstance;
     private BuildingPlacementContext _context;
 
     public LayerMask RaycastLayer => _groundLayer;

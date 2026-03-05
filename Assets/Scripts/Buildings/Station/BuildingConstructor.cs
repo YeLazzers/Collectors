@@ -6,17 +6,17 @@ namespace YeLazzers.Buildings
     public class BuildingConstructor : MonoBehaviour
     {
         [SerializeField] private Station _buildingPrefab;
-        [SerializeField] private BuildingConstructionSite _constructionSitePrefab;
+        [SerializeField] private ConstructionSite _constructionSitePrefab;
         [SerializeField] private CustomLineRenderer _lineRenderer;
 
         private IJob _buildingJob;
         private bool _isBuildingInProgress = false;
-        private BuildingConstructionSite _currentConstructionSite;
+        private ConstructionSite _currentConstructionSite;
 
         public bool IsBuildingInProgress => _isBuildingInProgress;
 
-        public event Action<BuildingConstructionSite> SitePlaced;
-        public event Action<BuildingConstructionSite> SiteMoved;
+        public event Action<ConstructionSite> SitePlaced;
+        public event Action<ConstructionSite> SiteMoved;
         public event Action SiteCompleted;
 
         public void InitBuilding(BuildingConfig config, Vector3 position)

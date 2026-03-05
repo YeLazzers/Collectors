@@ -2,23 +2,26 @@ using UnityEngine;
 
 namespace YeLazzers.Buildings
 {
-    public class BuildingPlacementPreview : MonoBehaviour
+    [RequireComponent(typeof(Building))]
+    public class PlacementPreview : MonoBehaviour
     {
-        [SerializeField] private BuildingView _view;
         [SerializeField] private LayerMask _footprintMask;
 
-        private BuildingConfig _config;
+        private Building _building;
         private bool _isValidPosition = false;
 
-        public BuildingConfig Config => _config;
+        public BuildingConfig Config => _building.Config;
         public bool IsValidPosition => _isValidPosition;
+
+        private void Awake()
+        {
+            _building = GetComponent<Building>();
+        }
 
         public void Initialize(BuildingConfig config, Vector3 position)
         {
-            _view.RenderModel(config);
-            _view.ShowFootprint();
-
-            UpdatePosition(position);
+            _building.Initialize(config, position);
+            _building.View.ShowFootprint();
         }
 
         public void UpdatePosition(Vector3 position)
@@ -30,9 +33,9 @@ namespace YeLazzers.Buildings
 
         private void Validate()
         {
-            _isValidPosition = _view.Footprint.HasOverlapWithFootprint(_footprintMask) == false;
+            _isValidPosition = _building.View.Footprint.HasOverlapWithFootprint(_footprintMask) == false;
 
-            _view.Model.MeshView.SetColor(_isValidPosition ? Color.green : Color.red);
+            _building.View.Model.MeshView.SetColor(_isValidPosition ? Color.green : Color.red);
         }
     }
 }
