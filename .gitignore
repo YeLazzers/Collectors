@@ -104,6 +104,7 @@ InitTestScene*.unity*
 # Local AI tooling/docs (project-specific)
 docs/
 .codex/
+.claude/
 AGENTS.md
 CLAUDE.md
 memory/

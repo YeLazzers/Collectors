@@ -125,7 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a197e97ea63b4d07b338b7b74f4f910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _highlightIntensity: 2
+  _highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  _highlightIntensity: 0.5
 --- !u!1 &4144746332932271815
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &929128099025482544
 Transform:
   m_ObjectHideFlags: 0

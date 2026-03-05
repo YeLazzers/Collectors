@@ -10,10 +10,11 @@ public class SelectingMode : MonoBehaviour, IInputMode
 
     private IHoverable _currentHoverable;
 
-    public LayerMask RaycastLayer => _selectableLayer;
-
     public event Action<IHoverable> Hovered;
+    
     public event Action<ISelectable> Selected;
+
+    public LayerMask RaycastLayer => _selectableLayer;
 
     public void OnMouseMove(PointerContext context)
     {
