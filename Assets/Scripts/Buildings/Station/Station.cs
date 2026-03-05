@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace YeLazzers.Buildings
 {
+    [RequireComponent(typeof(Building))]
     public class Station : MonoBehaviour
     {
         [Header("Systems")]
         [SerializeField] private ResourceStorage _resourceStorage;
         [SerializeField] private WorkerHub _hub;
-        [SerializeField] private BuildingView _view;
         [SerializeField] private JobBoard _jobBoard;
 
         [Header("Scanner Params")]
@@ -21,19 +21,17 @@ namespace YeLazzers.Buildings
         [Header("Collector Spawner Params")]
         [SerializeField] private int _initialCollectorsCount = 3;
 
+        private Building _building;
         private WaitForSeconds _scanWait;
         private List<ICollectable> _scannedResources = new List<ICollectable>();
-        private BuildingConfig _config;
         private ResourceSpawner _resourceSpawner;
 
-        public BuildingConfig Config => _config;
+        public BuildingConfig Config => _building.Config;
 
         private void Awake()
         {
+            _building = GetComponent<Building>();
             _scanWait = new WaitForSeconds(_scanInterval);
-
-            if (_config == null)
-                _config = (BuildingConfig)Resources.Load("BuildingConfigs/Station");
         }
 
         private void OnEnable()
@@ -55,12 +53,8 @@ namespace YeLazzers.Buildings
 
         public void Initialize(ResourceSpawner resourceSpawner, BuildingConfig config, Vector3 position)
         {
+            _building.Initialize(config, position);
             _resourceSpawner = resourceSpawner;
-            transform.position = position;
-
-            _config = config;
-
-            _view.RenderModel(config);
         }
 
         public bool TryDeposit(Resource resource)

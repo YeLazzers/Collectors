@@ -23,11 +23,16 @@ namespace YeLazzers.Buildings
 
         public void RenderModel(BuildingConfig config)
         {
-            _modelPresenter = Instantiate(config.Model, transform);
-            _modelPresenter.gameObject.name = "Model";
-            _modelPresenter.MeshView.SetMaterial(_material);
+            if (_modelPresenter == null)
+            {
+                _modelPresenter = Instantiate(config.Model, transform);
+                _modelPresenter.gameObject.name = "Model";
+            }
 
-            _footprint?.Initialize(config.footprintSize);
+            if (_material != null)
+                _modelPresenter.MeshView.SetMaterial(_material);
+
+            _footprint?.Initialize(config.FootprintSize);
         }
     }
 }

@@ -1,0 +1,20 @@
+using UnityEngine;
+
+namespace YeLazzers.Buildings
+{
+    public class Building : MonoBehaviour
+    {
+        [SerializeField] private BuildingView _view;
+
+        private BuildingConfig _config;
+
+        public BuildingConfig Config => _config;
+
+        public void Initialize(BuildingConfig config, Vector3 position)
+        {
+            _config = config;
+            transform.position = position;
+            _view.RenderModel(_config);
+        }
+    }
+}

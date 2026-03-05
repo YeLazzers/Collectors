@@ -8,6 +8,6 @@ namespace YeLazzers.Buildings
         public string Name;
         public int Cost;
         public BuildingModelPresenter Model;
-        public Vector2 footprintSize;
+        public Vector2 FootprintSize;
     }
 }
