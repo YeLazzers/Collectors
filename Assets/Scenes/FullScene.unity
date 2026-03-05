@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resourceSpawner: {fileID: 964571431}
-  _stationPrefab: {fileID: 8480665188586203368, guid: 6610a3ca7ef1c4bf6ab64dd941af1f02, type: 3}
+  _stationPrefab: {fileID: 6414593141469456763, guid: 6610a3ca7ef1c4bf6ab64dd941af1f02, type: 3}
 --- !u!4 &624200627
 Transform:
   m_ObjectHideFlags: 0
