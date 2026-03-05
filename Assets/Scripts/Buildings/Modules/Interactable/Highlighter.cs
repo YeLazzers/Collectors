@@ -4,23 +4,24 @@ namespace YeLazzers.Buildings.Modules
 {
     public class Highlighter : MonoBehaviour
     {
-        [SerializeField] private float _highlightIntensity = 2f;
+        [SerializeField] private Color _highlightColor = Color.white;
+        [SerializeField] private float _highlightIntensity = 1f;
 
-        private IMeshView _meshView;
+        private MeshView _meshView;
 
-        public void Initialize(IMeshView meshView)
+        public void Initialize(MeshView meshView)
         {
             _meshView = meshView;
         }
 
         public void Highlight()
         {
-            _meshView.SetEmissionIntensity(_highlightIntensity);
+            _meshView.SetEmission(_highlightColor * _highlightIntensity);
         }
 
         public void Unhighlight()
         {
-            _meshView.ResetEmission();
+            _meshView.SetEmission(Color.black);
         }
     }
 }

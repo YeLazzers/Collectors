@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using YeLazzers.Buildings.Modules;
 
 namespace YeLazzers.Buildings
 {
@@ -10,6 +11,9 @@ namespace YeLazzers.Buildings
     {
         [Header("Building")]
         [SerializeField] private BuildingConfig _config;
+
+        [Header("Modules")]
+        [SerializeField] private Interactable _interactable;
 
         [Header("Systems")]
         [SerializeField] private ResourceStorage _resourceStorage;
@@ -57,6 +61,7 @@ namespace YeLazzers.Buildings
         public void Initialize(ResourceSpawner resourceSpawner, Vector3 position)
         {
             _building.Initialize(_config, position);
+            _interactable.Initialize(_building.View);
             _resourceSpawner = resourceSpawner;
         }
 

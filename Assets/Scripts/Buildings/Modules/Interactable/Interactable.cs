@@ -9,9 +9,9 @@ namespace YeLazzers.Buildings.Modules
 
         public string Name => gameObject.name;
 
-        public void Initialize(IMeshView meshView)
+        public void Initialize(BuildingView view)
         {
-            _highlighter.Initialize(meshView);
+            _highlighter.Initialize(view.MeshView);
         }
 
         public void Select()

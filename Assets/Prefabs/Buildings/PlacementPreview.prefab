@@ -50,8 +50,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4031609176674419976, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
       propertyPath: m_Name
-      value: PlacementPreview Variant
+      value: PlacementPreview
       objectReference: {fileID: 0}
+    - target: {fileID: 7730517585240586291, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
+      propertyPath: _material
+      value: 
+      objectReference: {fileID: 2100000, guid: 58a44512d7b2a406f9141e20fe86755a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -59,6 +63,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4031609176674419976, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7934922794390084031}
+    - targetCorrespondingSourceObject: {fileID: 4031609176674419976, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6578036834237250378}
   m_SourcePrefab: {fileID: 100100000, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
 --- !u!1 &2574444358444760703 stripped
 GameObject:
@@ -80,3 +87,18 @@ MonoBehaviour:
   _footprintMask:
     serializedVersion: 2
     m_Bits: 0
+  _previewView: {fileID: 6578036834237250378}
+--- !u!114 &6578036834237250378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2574444358444760703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22e5dea664f714bd0aaa051a98733828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _validColor: {r: 0, g: 0.9150943, b: 0.09883917, a: 0}
+  _invalidColor: {r: 1, g: 0, b: 0, a: 0}

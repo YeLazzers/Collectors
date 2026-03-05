@@ -6,6 +6,7 @@ namespace YeLazzers.Buildings
     public class PlacementPreview : MonoBehaviour
     {
         [SerializeField] private LayerMask _footprintMask;
+        [SerializeField] private PlacementPreviewView _previewView;
 
         private Building _building;
         private bool _isValidPosition = false;
@@ -21,7 +22,7 @@ namespace YeLazzers.Buildings
         public void Initialize(BuildingConfig config, Vector3 position)
         {
             _building.Initialize(config, position);
-            _building.View.ShowFootprint();
+            _building.View.Footprint.Show();
         }
 
         public void UpdatePosition(Vector3 position)
@@ -35,7 +36,7 @@ namespace YeLazzers.Buildings
         {
             _isValidPosition = _building.View.Footprint.HasOverlapWithFootprint(_footprintMask) == false;
 
-            _building.View.Model.MeshView.SetColor(_isValidPosition ? Color.green : Color.red);
+            _previewView.SetValid(_isValidPosition);
         }
     }
 }

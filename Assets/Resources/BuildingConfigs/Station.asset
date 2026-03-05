@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Station
   Cost: 5
-  Model: {fileID: 4537179235106762807, guid: 28730aa8cb47a4860ab7e3243099dc76, type: 3}
+  Model: {fileID: 7400671650963170251, guid: 28730aa8cb47a4860ab7e3243099dc76, type: 3}
   FootprintSize: {x: 3, y: 3}

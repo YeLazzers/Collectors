@@ -10,27 +10,22 @@ namespace YeLazzers.Buildings
         [Header("Components")]
         [SerializeField] private PlacementFootprint _footprint;
 
-        private BuildingModelPresenter _modelPresenter;
+        private MeshView _meshView;
 
         public PlacementFootprint Footprint => _footprint;
-        public BuildingModelPresenter Model => _modelPresenter;
 
-        public void ShowFootprint()
-            => _footprint.Show();
-
-        public void HideFootprint()
-            => _footprint.Hide();
+        public MeshView MeshView => _meshView;
 
         public void RenderModel(BuildingConfig config)
         {
-            if (_modelPresenter == null)
+            if (_meshView == null)
             {
-                _modelPresenter = Instantiate(config.Model, transform);
-                _modelPresenter.gameObject.name = "Model";
+                _meshView = Instantiate(config.Model, transform);
+                _meshView.gameObject.name = "Model";
             }
 
             if (_material != null)
-                _modelPresenter.MeshView.SetMaterial(_material);
+                _meshView.SetMaterial(_material);
 
             _footprint?.Initialize(config.FootprintSize);
         }
