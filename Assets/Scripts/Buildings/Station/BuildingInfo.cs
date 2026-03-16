@@ -9,7 +9,7 @@ namespace YeLazzers.Buildings
         [Header("Systems")]
         [SerializeField] private ResourceStorage _storage;
         [SerializeField] private WorkerHub _hub;
-        [SerializeField] private Station _building;
+        [SerializeField] private Building _building;
         [SerializeField] private BuildingConstructor _builder;
 
         [Header("Settings")]
@@ -17,16 +17,23 @@ namespace YeLazzers.Buildings
         [SerializeField] private int _unitPrice = 3;
         [SerializeField] private int _basePrice = 5;
 
-        public string BuildingName => _name;
-        public int ResourcesCount => _storage.Amount;
-        public int UnitsCount => _hub.WorkersCount;
-        public bool CanBuildUnit => _storage.Amount >= _unitPrice;
-        public bool CanPlaceFlag => _hub.WorkersCount > 1;
-        public bool CanBuildNewBase => _storage.Amount >= _basePrice;
-        public BuildingConfig Config => _building.Config;
-        public BuildingConstructor Builder => _builder;
-
         public event Action<IStationReadModel> BuildingUpdated;
+
+        public string BuildingName => _name;
+
+        public int ResourcesCount => _storage.Amount;
+
+        public int UnitsCount => _hub.WorkersCount;
+
+        public bool CanBuildUnit => _storage.Amount >= _unitPrice;
+
+        public bool CanPlaceFlag => _hub.WorkersCount > 1;
+
+        public bool CanBuildNewBase => _storage.Amount >= _basePrice;
+
+        public BuildingConfig Config => _building.Config;
+
+        public BuildingConstructor Builder => _builder;
 
         private void OnEnable()
         {

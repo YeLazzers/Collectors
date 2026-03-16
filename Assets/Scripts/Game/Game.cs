@@ -1,14 +1,31 @@
 using UnityEngine;
 using YeLazzers.Buildings;
 
-public class Game : MonoBehaviour
+namespace YeLazzers.Game
 {
-    [SerializeField] private ResourceSpawner _resourceSpawner;
-    [SerializeField] private Station _stationPrefab;
-
-    public void Initialize()
+    public class Game : MonoBehaviour
     {
-        var station = Instantiate(_stationPrefab);
-        station.Initialize(_resourceSpawner, Vector3.zero);
+        [SerializeField] private Level _level;
+        [SerializeField] private BuildingConfig _startBuilding;
+
+        public void Initialize()
+        {
+            _level.Initialize();
+            _level.BuildingSpawned += OnBuildingSpawned;
+            _level.SpawnBuilding(_startBuilding, Vector3.zero);
+        }
+
+        private void OnBuildingSpawned(Building building)
+        {
+            if (building.TryGetModule<ResourceStorage>(out var storage))
+            {
+                storage.ResourceDeposited += OnResourceDeposited;
+            }
+        }
+
+        private void OnResourceDeposited(Resource resource)
+        {
+            _level.ResourceSpawner.Release(resource);
+        }
     }
 }

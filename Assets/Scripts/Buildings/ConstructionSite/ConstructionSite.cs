@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace YeLazzers.Buildings
@@ -7,7 +8,10 @@ namespace YeLazzers.Buildings
     {
         private Building _building;
 
+        public event Action<ConstructionSite> SiteCompleted;
+
         public BuildingConfig Config => _building.Config;
+
         public Vector3 Position => transform.position;
 
         private void Awake()
@@ -15,29 +19,14 @@ namespace YeLazzers.Buildings
             _building = GetComponent<Building>();
         }
 
-        public void Initialize(BuildingConfig config)
-        {
-            _building.Initialize(config, transform.position);
-        }
-
         public void Initialize(BuildingConfig config, Vector3 position)
         {
             _building.Initialize(config, position);
         }
 
-        public void CompleteConstruction()
+        public void Complete()
         {
-            // _state = ConstructionSiteState.Completed;
-        }
-
-        public void Show()
-        {
-            gameObject.SetActive(true);
-        }
-
-        public void Hide()
-        {
-            gameObject.SetActive(false);
+            SiteCompleted?.Invoke(this);
         }
     }
 }

@@ -3,9 +3,9 @@ using YeLazzers.Buildings;
 public readonly struct GatheringJobContext
 {
     public readonly Resource Resource;
-    public readonly Station Destination;
+    public readonly Building Destination;
 
-    public GatheringJobContext(Resource resource, Station destination)
+    public GatheringJobContext(Resource resource, Building destination)
     {
         Resource = resource;
         Destination = destination;
@@ -20,20 +20,24 @@ public class GatheringJob : IJob
     private JobStatus _status;
     private GatheringJobContext _context;
 
-    public string Name => _name;
-    public int Priority => _priority;
-    public JobType Type => JobType.ResourceGathering;
-    public JobStatus Status => _status;
-
-    public Resource Resource => _context.Resource;
-    public Station Destination => _context.Destination;
-
     public GatheringJob(GatheringJobContext context, int priority)
     {
         _context = context;
         _priority = priority;
         _status = JobStatus.Pending;
     }
+
+    public string Name => _name;
+
+    public int Priority => _priority;
+
+    public JobType Type => JobType.ResourceGathering;
+
+    public JobStatus Status => _status;
+
+    public Resource Resource => _context.Resource;
+
+    public Building Destination => _context.Destination;
 
     public void SetPriority(int priority)
     {

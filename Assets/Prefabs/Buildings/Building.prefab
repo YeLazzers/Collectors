@@ -72,7 +72,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2016287657235674143}
   - component: {fileID: 2913232742993177534}
-  - component: {fileID: 7730517585240586291}
   m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
@@ -111,21 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0dfc14c3e7784e04be2473fb7e84fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 7730517585240586291}
---- !u!114 &7730517585240586291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4031609176674419976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af9142cf392c847a689ce74258a25288, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _material: {fileID: 0}
-  _footprint: {fileID: 3569215003641070915}
+  _view: {fileID: 6342756205608335779}
+  _landingRadius: 1.5
 --- !u!1 &5505326486008383970
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,6 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7380371646778268691}
+  - component: {fileID: 6342756205608335779}
   m_Layer: 0
   m_Name: View
   m_TagString: Untagged
@@ -158,6 +145,20 @@ Transform:
   - {fileID: 5411049193399352483}
   m_Father: {fileID: 2016287657235674143}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6342756205608335779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5505326486008383970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af9142cf392c847a689ce74258a25288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _material: {fileID: 0}
+  _footprint: {fileID: 3569215003641070915}
 --- !u!1 &6992838263621820957
 GameObject:
   m_ObjectHideFlags: 0

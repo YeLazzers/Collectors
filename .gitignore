@@ -103,6 +103,7 @@ InitTestScene*.unity*
 
 # Local AI tooling/docs (project-specific)
 docs/
+.agents/
 .codex/
 .claude/
 AGENTS.md

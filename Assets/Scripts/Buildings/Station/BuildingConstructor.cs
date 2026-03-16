@@ -13,16 +13,18 @@ namespace YeLazzers.Buildings
         private bool _isBuildingInProgress = false;
         private ConstructionSite _currentConstructionSite;
 
-        public bool IsBuildingInProgress => _isBuildingInProgress;
-
         public event Action<ConstructionSite> SitePlaced;
+
         public event Action<ConstructionSite> SiteMoved;
+
         public event Action SiteCompleted;
+
+        public bool IsBuildingInProgress => _isBuildingInProgress;
 
         public void InitBuilding(BuildingConfig config, Vector3 position)
         {
-            _currentConstructionSite = Instantiate(_constructionSitePrefab, position, Quaternion.identity);
-            _currentConstructionSite.Initialize(config);
+            _currentConstructionSite = Instantiate(_constructionSitePrefab);
+            _currentConstructionSite.Initialize(config, position);
 
             _isBuildingInProgress = true;
 

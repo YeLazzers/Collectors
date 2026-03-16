@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0bf5abac67a948c9bfac66508beb163, type: 3}
   m_Name: Station
   m_EditorClassIdentifier: 
+  Prefab: {fileID: 2503611455548645364, guid: 6610a3ca7ef1c4bf6ab64dd941af1f02, type: 3}
   Name: Station
   Cost: 5
   Model: {fileID: 7400671650963170251, guid: 28730aa8cb47a4860ab7e3243099dc76, type: 3}

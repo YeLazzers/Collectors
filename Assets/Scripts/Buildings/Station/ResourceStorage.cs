@@ -9,10 +9,19 @@ namespace YeLazzers.Buildings
 
         private int _amount = 4;
 
+        public event Action<int> AmountChanged;
+
+        public event Action<Resource> ResourceDeposited;
+
         public int Amount => _amount;
+
         public Sprite Icon => _icon;
 
-        public event Action<int> AmountChanged;
+        public void Deposit(Resource resource)
+        {
+            Add(resource.Amount);
+            ResourceDeposited?.Invoke(resource);
+        }
 
         public void Add(int amount)
         {

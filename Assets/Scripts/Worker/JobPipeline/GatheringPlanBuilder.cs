@@ -1,27 +1,22 @@
 using UnityEngine;
+using YeLazzers.Buildings;
 
 public sealed class GatheringPlanBuilder
 {
     public bool TryBuild(GatheringJob gatheringJob, Worker worker, ICollector collector, out IWorkerPlan plan)
     {
-        if (gatheringJob == null)
+        plan = null;
+
+        ResourceStorage storage = null;
+
+        if (gatheringJob?.Destination != null)
         {
-            Debug.LogError("GatheringPlanBuilder.TryBuild failed: gatheringJob is null.");
-            plan = null;
-            return false;
+            gatheringJob.Destination.TryGetModule(out storage);
         }
 
-        if (worker == null)
+        if (gatheringJob == null || worker == null || collector == null || gatheringJob.Destination == null || storage == null)
         {
-            Debug.LogError("GatheringPlanBuilder.TryBuild failed: worker is null.");
-            plan = null;
-            return false;
-        }
-
-        if (collector == null)
-        {
-            Debug.LogError("GatheringPlanBuilder.TryBuild failed: collector is null.");
-            plan = null;
+            Debug.LogError($"GatheringPlanBuilder: gatheringJob={gatheringJob}, worker={worker}, collector={collector}, destination={gatheringJob?.Destination}, storage={storage}");
             return false;
         }
 
@@ -29,7 +24,7 @@ public sealed class GatheringPlanBuilder
             .Add(new MoveStep(worker, () => gatheringJob.Resource.Transform.position))
             .Add(new CollectStep(gatheringJob.Resource, collector))
             .Add(new MoveStep(worker, () => gatheringJob.Destination.GetLandingPoint(worker.transform.position)))
-            .Add(new DepositStep(gatheringJob.Destination, gatheringJob.Resource))
+            .Add(new DepositStep(storage, gatheringJob.Resource))
             .Build();
 
         return true;

@@ -1,33 +1,38 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using YeLazzers.Buildings;
 
 public sealed class DepositStep : StepBase
 {
-    private readonly Station _building;
+    private readonly ResourceStorage _storage;
     private readonly Resource _resource;
 
-    public DepositStep(Station building, Resource resource)
+    public DepositStep(ResourceStorage storage, Resource resource)
     {
-        _building = building;
+        _storage = storage;
         _resource = resource;
     }
 
     protected override IEnumerator Run()
     {
-        if (_building == null || _resource == null)
+        if (_storage == null || _resource == null)
         {
             Fail();
             yield break;
         }
 
-        if (_building.TryDeposit(_resource))
+        _resource.Transform.DOMove(_storage.transform.position, 1f)
+            .SetEase(Ease.OutExpo)
+            .OnComplete(() =>
+            {
+                _storage.Deposit(_resource);
+                Succeed();
+            });
+
+        while (Result == StepResult.None)
         {
-            Succeed();
-        }
-        else
-        {
-            Fail();
+            yield return null;
         }
     }
 }
