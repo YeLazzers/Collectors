@@ -150,7 +150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jobBoard: {fileID: 6664105448903722032}
   _storage: {fileID: 7993107884156921458}
-  _icon: {fileID: 21300000, guid: 26986dc9cbff74c458ba04e03e102a44, type: 3}
   _spawner: {fileID: 9216551982880928090}
   _spawnRadius: 1
   _cost: 3
@@ -642,7 +641,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8858857291341679130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac527573fa708482781568dcdb158936, type: 3}
+  m_Script: {fileID: 11500000, guid: dbd8c9fd84cc7460aa436566957448d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &780104479389676618
@@ -765,7 +764,6 @@ MonoBehaviour:
   _jobBoard: {fileID: 6664105448903722032}
   _hub: {fileID: 8787195242181688133}
   _scanInterval: 5
-  _startCount: 3
 --- !u!114 &5164297728717768559
 MonoBehaviour:
   m_ObjectHideFlags: 0

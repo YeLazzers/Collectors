@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using YeLazzers.Jobs;
@@ -14,6 +15,8 @@ namespace YeLazzers.Buildings
         [SerializeField] private float _spawnRadius = 1f;
         [SerializeField] private int _cost = 3;
 
+        private readonly List<Worker> _workers = new List<Worker>();
+
         private Building _building;
 
         public Building Building => _building;
@@ -21,6 +24,8 @@ namespace YeLazzers.Buildings
         public JobBoard JobBoard => _jobBoard;
 
         public ResourceStorage Storage => _storage;
+
+        public int WorkerCount => _workers.Count;
 
         private void Awake()
         {
@@ -47,10 +52,21 @@ namespace YeLazzers.Buildings
             }
         }
 
+        public void AddWorker(Worker worker)
+        {
+            _workers.Add(worker);
+            worker.AssignToWorkerHub(this);
+        }
+
+        public void RemoveWorker(Worker worker)
+        {
+            _workers.Remove(worker);
+        }
+
         private void TrainWorker(Vector3 spawnPosition)
         {
             Worker worker = _spawner.Spawn(spawnPosition, transform.position);
-            worker.AssignToWorkerHub(this);
+            AddWorker(worker);
         }
 
         private Vector3 GetSpawnPosition(float angle)

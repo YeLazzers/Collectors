@@ -21,7 +21,6 @@ namespace YeLazzers.Jobs
         JobType Type { get; }
         JobStatus Status { get; }
 
-        void SetPriority(int priority);
         void SetStatus(JobStatus status);
     }
 }

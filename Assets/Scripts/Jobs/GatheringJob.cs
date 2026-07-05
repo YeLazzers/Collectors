@@ -17,15 +17,14 @@ namespace YeLazzers.Jobs
     public class GatheringJob : IJob
     {
         private readonly string _name = "Resource Gathering Job";
+        private readonly int _priority = 1;
 
-        private int _priority;
         private JobStatus _status;
         private GatheringJobContext _context;
 
-        public GatheringJob(GatheringJobContext context, int priority)
+        public GatheringJob(GatheringJobContext context)
         {
             _context = context;
-            _priority = priority;
             _status = JobStatus.Pending;
         }
 
@@ -41,10 +40,6 @@ namespace YeLazzers.Jobs
 
         public Building Destination => _context.Destination;
 
-        public void SetPriority(int priority)
-        {
-            _priority = priority;
-        }
 
         public void SetStatus(JobStatus status)
         {

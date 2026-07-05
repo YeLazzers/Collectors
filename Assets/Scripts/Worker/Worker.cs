@@ -37,6 +37,7 @@ public class Worker : MonoBehaviour, IPoolable<Worker>
 
     public void AssignToWorkerHub(WorkerHub hub)
     {
+        _hub?.RemoveWorker(this);
         _hub = hub;
 
         _jobRunner.SetJobBoard(hub.JobBoard);

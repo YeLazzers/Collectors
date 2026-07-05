@@ -7,18 +7,20 @@ namespace YeLazzers.Buildings
     public enum StationPolicyType
     {
         Idle,
-        Production,
+        Training,
         Construction,
     }
 
     public class StationPolicy : MonoBehaviour
     {
+        private const int MinWorkersToBuild = 2;
+
         [SerializeField] private ResourceStorage _storage;
         [SerializeField] private WorkerHub _hub;
         [SerializeField] private CustomLineRenderer _lineRenderer;
         [SerializeField] private JobBoard _jobBoard;
 
-        private StationPolicyType _currentPolicy = StationPolicyType.Production;
+        private StationPolicyType _currentPolicy = StationPolicyType.Training;
 
         private ConstructionSite _activeSite;
         private BuildingJob _activeBuildingJob;
@@ -29,18 +31,11 @@ namespace YeLazzers.Buildings
         {
             if (_activeSite != site)
             {
-                if (_activeSite != null)
-                {
-                    _activeSite.SiteCompleted -= OnSiteCompleted;
-                }
+                UnsubscribeFromActiveSite();
 
                 _activeSite = site;
                 _activeSite.SiteCompleted += OnSiteCompleted;
-            }
-
-            if (_activeBuildingJob == null)
-            {
-                _currentPolicy = StationPolicyType.Construction;
+                TryEnterConstruction();
             }
 
             _lineRenderer.DrawLine(new[] { transform.position, _activeSite.transform.position });
@@ -54,11 +49,7 @@ namespace YeLazzers.Buildings
         private void OnDisable()
         {
             _storage.AmountChanged -= OnResourceChanged;
-
-            if (_activeSite != null)
-            {
-                _activeSite.SiteCompleted -= OnSiteCompleted;
-            }
+            UnsubscribeFromActiveSite();
         }
 
         private void OnResourceChanged(int newAmount)
@@ -68,8 +59,9 @@ namespace YeLazzers.Buildings
                 default:
                 case StationPolicyType.Idle:
                     break;
-                case StationPolicyType.Production:
+                case StationPolicyType.Training:
                     _hub.TryTrainWorker();
+                    TryEnterConstruction();
                     break;
                 case StationPolicyType.Construction:
                     TryBuildConstruction(newAmount);
@@ -86,19 +78,41 @@ namespace YeLazzers.Buildings
 
             if (availableResources >= cost)
             {
-                _activeBuildingJob = new BuildingJob(new BuildingJobContext(_activeSite), 2);
+                _activeBuildingJob = new BuildingJob(new BuildingJobContext(_activeSite));
                 _jobBoard.Publish(_activeBuildingJob);
             }
         }
 
         private void OnSiteCompleted(ConstructionSite site, Action<Building> reportNewBuilding)
         {
-            site.SiteCompleted -= OnSiteCompleted;
+            UnsubscribeFromActiveSite();
 
             _activeSite = null;
             _activeBuildingJob = null;
-            _currentPolicy = StationPolicyType.Production;
+
             _lineRenderer.ClearLine();
+            SetPolicy(StationPolicyType.Training);
+        }
+
+        private void TryEnterConstruction()
+        {
+            if (_activeSite != null && _hub.WorkerCount >= MinWorkersToBuild)
+            {
+                SetPolicy(StationPolicyType.Construction);
+            }
+        }
+
+        private void SetPolicy(StationPolicyType policy)
+        {
+            _currentPolicy = policy;
+        }
+
+        private void UnsubscribeFromActiveSite()
+        {
+            if (_activeSite != null)
+            {
+                _activeSite.SiteCompleted -= OnSiteCompleted;
+            }
         }
     }
 }

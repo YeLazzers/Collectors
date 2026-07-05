@@ -24,7 +24,7 @@ public sealed class BuildStep : StepBase
 
         if (newBuilding != null && newBuilding.TryGetModule(out WorkerHub hub))
         {
-            _worker.AssignToWorkerHub(hub);
+            hub.AddWorker(_worker);
         }
 
         Succeed();

@@ -15,8 +15,8 @@ namespace YeLazzers.Jobs
     public class BuildingJob : IJob
     {
         private readonly string _name = "Building Job";
+        private readonly int _priority = 2;
 
-        private int _priority;
         private JobStatus _status;
         private BuildingJobContext _context;
 
@@ -27,16 +27,10 @@ namespace YeLazzers.Jobs
 
         public ConstructionSite Site => _context.Site;
 
-        public BuildingJob(BuildingJobContext context, int priority)
+        public BuildingJob(BuildingJobContext context)
         {
             _context = context;
-            _priority = priority;
             _status = JobStatus.Pending;
-        }
-
-        public void SetPriority(int priority)
-        {
-            _priority = priority;
         }
 
         public void SetStatus(JobStatus status)

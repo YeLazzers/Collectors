@@ -66,7 +66,7 @@ namespace YeLazzers.Buildings
             if (!_scannedResources.Contains(collectable))
             {
                 var jobContext = new GatheringJobContext((Resource)collectable, _building);
-                _jobBoard.Publish(new GatheringJob(jobContext, 1));
+                _jobBoard.Publish(new GatheringJob(jobContext));
 
                 _scannedResources.Add(collectable);
 
