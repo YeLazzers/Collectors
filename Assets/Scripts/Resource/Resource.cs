@@ -7,8 +7,6 @@ public class Resource : MonoBehaviour, IPoolable<Resource>, ICollectable, IHighl
 
     private GemAnimations _gemAnimations;
 
-    public event Action<Resource> Expired;
-
     public Transform Transform => transform;
 
     public ResourceType Type => _resourceConfig.ResourceType;

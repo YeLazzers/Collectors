@@ -11,8 +11,6 @@ public class Worker : MonoBehaviour, IPoolable<Worker>
     private WorkerHub _hub;
     private WorkerJobRunner _jobRunner;
 
-    public event Action<Worker> Expired;
-
     public float Speed => _speed;
 
     public float RotationSpeed => _rotationSpeed;

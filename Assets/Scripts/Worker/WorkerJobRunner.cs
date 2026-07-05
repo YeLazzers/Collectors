@@ -67,29 +67,23 @@ public sealed class WorkerJobRunner : MonoBehaviour, IJobExecutor
                 if (_gatheringPlanBuilder.TryBuild(gatheringJob, _worker, _grabber, out IWorkerPlan pipelinePlan))
                 {
                     StartPlan(pipelinePlan);
+                    return;
                 }
-                else
-                {
-                    FailCurrentJobAndTryNext();
-                }
-
                 break;
             case BuildingJob buildingJob:
                 if (_buildingPlanBuilder.TryBuild(buildingJob, _worker, out IWorkerPlan buildingPlan))
                 {
                     StartPlan(buildingPlan);
-                }
-                else
-                {
-                    FailCurrentJobAndTryNext();
+                    return;
                 }
 
                 break;
             default:
-                Debug.LogError($"[JobRunner] No plan builder for job type {job.GetType().Name}, failing immediately");
-                FailCurrentJobAndTryNext();
+                Debug.LogError($"[WorkerJobRunner] No plan builder for job type {job.GetType().Name}, failing immediately");
                 break;
         }
+        Debug.LogError($"[WorkerJobRunner] Failed to build plan for job {job.GetType().Name}, failing immediately");
+        FailCurrentJobAndTryNext();
     }
 
     private void TryGetJob()
@@ -139,12 +133,12 @@ public sealed class WorkerJobRunner : MonoBehaviour, IJobExecutor
         if (_activeStep != null && _activeStep.Result == StepResult.None)
         {
             _activeStep.Cancel();
-        }
 
-        if (_activePlanRoutine != null)
-        {
-            StopCoroutine(_activePlanRoutine);
-            _activePlanRoutine = null;
+            if (_activePlanRoutine != null)
+            {
+                StopCoroutine(_activePlanRoutine);
+                _activePlanRoutine = null;
+            }
         }
 
         _activeStep = null;

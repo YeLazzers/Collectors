@@ -35,7 +35,6 @@ public class PoolBase<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T>
     private T CreateFunc()
     {
         T poolable = GameObject.Instantiate(Prefab, transform);
-        poolable.Expired += Pool.Release;
 
         _createdCount++;
         Created?.Invoke(poolable);
@@ -59,7 +58,6 @@ public class PoolBase<T> : MonoBehaviour where T : MonoBehaviour, IPoolable<T>
 
     private void ActionOnDestroy(T poolable)
     {
-        poolable.Expired -= Pool.Release;
         GameObject.Destroy(poolable.gameObject);
     }
 }
