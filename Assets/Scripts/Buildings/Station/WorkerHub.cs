@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 using YeLazzers.Jobs;
+
+using Random = UnityEngine.Random;
 
 namespace YeLazzers.Buildings
 {
@@ -12,6 +14,7 @@ namespace YeLazzers.Buildings
         [SerializeField] private JobBoard _jobBoard;
         [SerializeField] private ResourceStorage _storage;
         [SerializeField] private WorkerSpawner _spawner;
+        [SerializeField] private Sprite _icon;
         [SerializeField] private float _spawnRadius = 1f;
         [SerializeField] private int _cost = 3;
 
@@ -19,11 +22,15 @@ namespace YeLazzers.Buildings
 
         private Building _building;
 
+        public event Action<int> WorkerCountChanged;
+
         public Building Building => _building;
 
         public JobBoard JobBoard => _jobBoard;
 
         public ResourceStorage Storage => _storage;
+
+        public Sprite Icon => _icon;
 
         public int WorkerCount => _workers.Count;
 
@@ -56,11 +63,13 @@ namespace YeLazzers.Buildings
         {
             _workers.Add(worker);
             worker.AssignToWorkerHub(this);
+            WorkerCountChanged?.Invoke(_workers.Count);
         }
 
         public void RemoveWorker(Worker worker)
         {
             _workers.Remove(worker);
+            WorkerCountChanged?.Invoke(_workers.Count);
         }
 
         private void TrainWorker(Vector3 spawnPosition)

@@ -25,7 +25,11 @@ namespace YeLazzers.Buildings
         private ConstructionSite _activeSite;
         private BuildingJob _activeBuildingJob;
 
+        public event Action<StationPolicyType> PolicyChanged;
+
         public ConstructionSite ActiveSite => _activeSite;
+
+        public StationPolicyType CurrentPolicy => _currentPolicy;
 
         public void SetActiveSite(ConstructionSite site)
         {
@@ -104,7 +108,11 @@ namespace YeLazzers.Buildings
 
         private void SetPolicy(StationPolicyType policy)
         {
+            if (_currentPolicy == policy)
+                return;
+
             _currentPolicy = policy;
+            PolicyChanged?.Invoke(policy);
         }
 
         private void UnsubscribeFromActiveSite()
