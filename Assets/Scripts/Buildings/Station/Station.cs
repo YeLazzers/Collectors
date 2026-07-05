@@ -19,9 +19,6 @@ namespace YeLazzers.Buildings
         [Header("Scanner Params")]
         [SerializeField] private float _scanInterval = 5f;
 
-        [Header("WorkerHub Params")]
-        [SerializeField] private int _startCount = 3;
-
         private Building _building;
         private WaitForSeconds _scanWait;
         private List<ICollectable> _scannedResources = new List<ICollectable>();
@@ -47,7 +44,11 @@ namespace YeLazzers.Buildings
         private void Start()
         {
             _interactable.Initialize(_building.View);
-            _hub.Initialize(_startCount);
+        }
+
+        public void Initialize(int startWorkerCount)
+        {
+            _hub.Initialize(startWorkerCount);
         }
 
         private IEnumerator Scanning()

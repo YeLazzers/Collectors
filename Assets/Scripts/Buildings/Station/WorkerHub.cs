@@ -9,14 +9,11 @@ namespace YeLazzers.Buildings
 
         [SerializeField] private JobBoard _jobBoard;
         [SerializeField] private ResourceStorage _storage;
-        [SerializeField] private Sprite _icon;
         [SerializeField] private WorkerSpawner _spawner;
         [SerializeField] private float _spawnRadius = 1f;
-        [SerializeField] private int _cost;
+        [SerializeField] private int _cost = 3;
 
         private Building _building;
-
-        public Sprite Icon => _icon;
 
         private void Awake()
         {

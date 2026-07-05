@@ -21,6 +21,8 @@ namespace YeLazzers.Buildings
         private ConstructionSite _activeSite;
         private BuildingJob _activeBuildingJob;
 
+        private int _onResourceChangedDepth = 0;
+
         public ConstructionSite ActiveSite => _activeSite;
 
         public void SetActiveSite(ConstructionSite site)
@@ -61,7 +63,17 @@ namespace YeLazzers.Buildings
 
         private void OnResourceChanged(int newAmount)
         {
+            _onResourceChangedDepth++;
+
+            if (_onResourceChangedDepth > 10)
+            {
+                Debug.LogError($"[LOOP DETECTED] OnResourceChanged depth={_onResourceChangedDepth}, policy={_currentPolicy}\n{System.Environment.StackTrace}");
+                _onResourceChangedDepth--;
+                return;
+            }
+
             Debug.Log($"Station Policy: {_currentPolicy}");
+
             switch (_currentPolicy)
             {
                 default:
@@ -74,6 +86,8 @@ namespace YeLazzers.Buildings
                     TryBuildConstruction(newAmount);
                     break;
             }
+
+            _onResourceChangedDepth--;
         }
 
         private void TryBuildConstruction(int availableResources)

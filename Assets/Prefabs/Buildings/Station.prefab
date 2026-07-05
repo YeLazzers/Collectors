@@ -153,7 +153,7 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 26986dc9cbff74c458ba04e03e102a44, type: 3}
   _spawner: {fileID: 9216551982880928090}
   _spawnRadius: 1
-  _cost: 0
+  _cost: 3
 --- !u!114 &9216551982880928090
 MonoBehaviour:
   m_ObjectHideFlags: 0

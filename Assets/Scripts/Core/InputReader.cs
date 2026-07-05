@@ -10,6 +10,7 @@ public class InputReader : MonoBehaviour
 
     public event Action<float> HorizontalMoving;
     public event Action<float> VerticalMoving;
+    public event Action<float> Scrolled;
     public event Action<Vector3> MouseMoved;
     public event Action<Vector3> LmbClicked;
     public event Action<Vector3> RmbClicked;
@@ -33,5 +34,6 @@ public class InputReader : MonoBehaviour
 
         HorizontalMoving?.Invoke(Input.GetAxis(nameof(Horizontal)));
         VerticalMoving?.Invoke(Input.GetAxis(nameof(Vertical)));
+        Scrolled?.Invoke(Input.GetAxis("Mouse ScrollWheel"));
     }
 }

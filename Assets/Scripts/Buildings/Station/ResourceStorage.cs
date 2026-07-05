@@ -7,7 +7,7 @@ namespace YeLazzers.Buildings
     {
         [SerializeField] private Sprite _icon;
 
-        private int _amount = 4;
+        private int _amount = 0;
 
         public event Action<int> AmountChanged;
 

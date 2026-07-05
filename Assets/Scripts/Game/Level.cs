@@ -22,17 +22,15 @@ namespace YeLazzers.Game
 
         public Terrain Terrain => _terrain;
 
+        public Bounds Bounds => new Bounds(_terrain.transform.position + _terrain.terrainData.size / 2f, _terrain.terrainData.size);
+
         public IReadOnlyList<Building> GetAllBuildings() => _buildings;
 
         public void Initialize(Material buildingMaterial)
         {
             _buildingMaterial = buildingMaterial;
 
-            var terrainPos = _terrain.transform.position;
-            var terrainSize = _terrain.terrainData.size;
-            var spawnBounds = new Bounds(terrainPos + terrainSize / 2f, terrainSize);
-
-            _resourceSpawner.Initialize(spawnBounds);
+            _resourceSpawner.Initialize(Bounds);
         }
 
         public Building SpawnBuilding(BuildingConfig config, Vector3 position)
