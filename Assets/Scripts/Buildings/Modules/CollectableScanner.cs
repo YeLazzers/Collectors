@@ -2,7 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 
-namespace YeLazzers.Buildings
+namespace YeLazzers.Buildings.Modules
 {
     public class Scanner : MonoBehaviour
     {

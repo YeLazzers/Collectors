@@ -150,7 +150,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 419282073866403767}
+  m_Father: {fileID: 1216867954763252531}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8787195242181688133
 MonoBehaviour:
@@ -466,55 +466,6 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!1 &3539986745132882919
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1233512060852788839}
-  - component: {fileID: 431459432833806535}
-  m_Layer: 0
-  m_Name: StationPolicy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1233512060852788839
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3539986745132882919}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7080795014430898157}
-  m_Father: {fileID: 419282073866403767}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &431459432833806535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3539986745132882919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b5318ae38830457da172cfa029ffade, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _storage: {fileID: 7993107884156921458}
-  _hub: {fileID: 8787195242181688133}
-  _lineRenderer: {fileID: 7367726858481009279}
-  _jobBoard: {fileID: 6664105448903722032}
 --- !u!1 &3693184644056749564
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +582,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1233512060852788839}
+  m_Father: {fileID: 7836021514383337561}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!120 &5693698521982900721
 LineRenderer:
@@ -763,7 +714,7 @@ GameObject:
   - component: {fileID: 3826489105870023629}
   - component: {fileID: 935458531923935730}
   m_Layer: 0
-  m_Name: Scanner
+  m_Name: CollectableScanner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -782,7 +733,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 419282073866403767}
+  m_Father: {fileID: 1216867954763252531}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &8426720032909481466
 MeshFilter:
@@ -1000,7 +951,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resourceStorage: {fileID: 7993107884156921458}
   _hub: {fileID: 8787195242181688133}
-  _policy: {fileID: 431459432833806535}
+  _policy: {fileID: 4648519207392069960}
   _resourcesUI: {fileID: 3841179592448375650}
   _workersUI: {fileID: 3471226082140764341}
   _policyUI: {fileID: 5592673461142985589}
@@ -1063,24 +1014,24 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7380371646778268691, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7080795014430898157}
     - targetCorrespondingSourceObject: {fileID: 1887098477566900089, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4650056356509944567}
     - targetCorrespondingSourceObject: {fileID: 1887098477566900089, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1769098363395157669}
-    - targetCorrespondingSourceObject: {fileID: 1081684383217781757, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 1887098477566900089, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 435706810224343052}
-    - targetCorrespondingSourceObject: {fileID: 1081684383217781757, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1418392508472219574}
-    - targetCorrespondingSourceObject: {fileID: 1081684383217781757, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 1887098477566900089, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3243082453475883163}
     - targetCorrespondingSourceObject: {fileID: 1081684383217781757, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1233512060852788839}
+      addedObject: {fileID: 1418392508472219574}
     - targetCorrespondingSourceObject: {fileID: 6281703267010171419, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8994710950538452820}
@@ -1088,6 +1039,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4031609176674419976, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6414593141469456763}
+    - targetCorrespondingSourceObject: {fileID: 4031609176674419976, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4648519207392069960}
   m_SourcePrefab: {fileID: 100100000, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
 --- !u!4 &419282073866403767 stripped
 Transform:
@@ -1121,9 +1075,30 @@ MonoBehaviour:
   _jobBoard: {fileID: 6664105448903722032}
   _hub: {fileID: 8787195242181688133}
   _scanInterval: 5
+--- !u!114 &4648519207392069960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4404621365644374338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b5318ae38830457da172cfa029ffade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _storage: {fileID: 7993107884156921458}
+  _hub: {fileID: 8787195242181688133}
+  _lineRenderer: {fileID: 7367726858481009279}
+  _jobBoard: {fileID: 6664105448903722032}
 --- !u!4 &6772968756050863697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6281703267010171419, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
+  m_PrefabInstance: {fileID: 780104479389676618}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7836021514383337561 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7380371646778268691, guid: b2f107e2a8a414311afef7bb814ddbba, type: 3}
   m_PrefabInstance: {fileID: 780104479389676618}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5948559370402077090

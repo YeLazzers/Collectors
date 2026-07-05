@@ -1,4 +1,4 @@
-using YeLazzers.Buildings;
+using YeLazzers.Buildings.Modules;
 using YeLazzers.Jobs;
 
 public sealed class GatheringPlanBuilder

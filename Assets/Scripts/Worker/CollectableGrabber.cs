@@ -4,6 +4,7 @@ using UnityEngine;
 public class CollectableGrabber : MonoBehaviour, ICollector
 {
     [SerializeField] private float _grabDuration = 3f;
+
     public void Collect(ICollectable collectable, TweenCallback onComplete = null)
     {
         collectable.Transform.SetParent(transform);

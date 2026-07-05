@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using YeLazzers.Buildings.Modules;
 using YeLazzers.Jobs;
 
 namespace YeLazzers.Buildings

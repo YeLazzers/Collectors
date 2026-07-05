@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using YeLazzers.Buildings.Modules;
 
 namespace YeLazzers.Buildings
 {

@@ -1,6 +1,5 @@
-using System;
 using UnityEngine;
-using YeLazzers.Buildings;
+using YeLazzers.Buildings.Modules;
 
 [RequireComponent(typeof(WorkerJobRunner))]
 public class Worker : MonoBehaviour, IPoolable<Worker>

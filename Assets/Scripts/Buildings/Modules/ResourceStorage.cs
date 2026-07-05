@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace YeLazzers.Buildings
+namespace YeLazzers.Buildings.Modules
 {
     public class ResourceStorage : MonoBehaviour
     {

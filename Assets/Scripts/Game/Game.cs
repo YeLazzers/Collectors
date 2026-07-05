@@ -1,5 +1,6 @@
 using UnityEngine;
 using YeLazzers.Buildings;
+using YeLazzers.Buildings.Modules;
 using YeLazzers.Core;
 
 namespace YeLazzers.Game

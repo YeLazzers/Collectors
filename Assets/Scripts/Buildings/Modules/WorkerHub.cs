@@ -5,7 +5,7 @@ using YeLazzers.Jobs;
 
 using Random = UnityEngine.Random;
 
-namespace YeLazzers.Buildings
+namespace YeLazzers.Buildings.Modules
 {
     public class WorkerHub : MonoBehaviour
     {

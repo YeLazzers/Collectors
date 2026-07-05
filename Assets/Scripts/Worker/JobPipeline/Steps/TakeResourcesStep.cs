@@ -1,5 +1,5 @@
 using System.Collections;
-using YeLazzers.Buildings;
+using YeLazzers.Buildings.Modules;
 
 public sealed class TakeResourcesStep : StepBase
 {
