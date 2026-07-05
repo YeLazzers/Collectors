@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace YeLazzers.Buildings
@@ -20,8 +21,6 @@ namespace YeLazzers.Buildings
 
         private ConstructionSite _activeSite;
         private BuildingJob _activeBuildingJob;
-
-        private int _onResourceChangedDepth = 0;
 
         public ConstructionSite ActiveSite => _activeSite;
 
@@ -63,17 +62,6 @@ namespace YeLazzers.Buildings
 
         private void OnResourceChanged(int newAmount)
         {
-            _onResourceChangedDepth++;
-
-            if (_onResourceChangedDepth > 10)
-            {
-                Debug.LogError($"[LOOP DETECTED] OnResourceChanged depth={_onResourceChangedDepth}, policy={_currentPolicy}\n{System.Environment.StackTrace}");
-                _onResourceChangedDepth--;
-                return;
-            }
-
-            Debug.Log($"Station Policy: {_currentPolicy}");
-
             switch (_currentPolicy)
             {
                 default:
@@ -86,16 +74,12 @@ namespace YeLazzers.Buildings
                     TryBuildConstruction(newAmount);
                     break;
             }
-
-            _onResourceChangedDepth--;
         }
 
         private void TryBuildConstruction(int availableResources)
         {
             if (_activeSite == null || _activeBuildingJob != null)
                 return;
-
-            Debug.Log($"TryBuilding {availableResources}");
 
             var cost = _activeSite.Config.Cost;
 
@@ -106,7 +90,7 @@ namespace YeLazzers.Buildings
             }
         }
 
-        private void OnSiteCompleted(ConstructionSite site)
+        private void OnSiteCompleted(ConstructionSite site, Action<Building> reportNewBuilding)
         {
             site.SiteCompleted -= OnSiteCompleted;
 

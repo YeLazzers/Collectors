@@ -8,7 +8,7 @@ namespace YeLazzers.Buildings
     {
         private Building _building;
 
-        public event Action<ConstructionSite> SiteCompleted;
+        public event Action<ConstructionSite, Action<Building>> SiteCompleted;
 
         public BuildingConfig Config => _building.Config;
 
@@ -24,9 +24,11 @@ namespace YeLazzers.Buildings
             _building.Initialize(config, position);
         }
 
-        public void Complete()
+        public Building Complete()
         {
-            SiteCompleted?.Invoke(this);
+            Building newBuilding = null;
+            SiteCompleted?.Invoke(this, building => newBuilding = building);
+            return newBuilding;
         }
     }
 }

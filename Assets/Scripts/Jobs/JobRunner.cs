@@ -86,7 +86,7 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
 
                 break;
             default:
-                Debug.Log($"[JobRunner] No plan builder for job type {job.GetType().Name}, failing immediately");
+                Debug.LogError($"[JobRunner] No plan builder for job type {job.GetType().Name}, failing immediately");
                 FailCurrentJobAndTryNext();
                 break;
         }

@@ -4,21 +4,29 @@ using YeLazzers.Buildings;
 public sealed class BuildStep : StepBase
 {
     private readonly ConstructionSite _site;
+    private readonly Worker _worker;
 
-    public BuildStep(ConstructionSite site)
+    public BuildStep(ConstructionSite site, Worker worker)
     {
         _site = site;
+        _worker = worker;
     }
 
     protected override IEnumerator Run()
     {
-        if (_site == null)
+        if (_site == null || _worker == null)
         {
             Fail();
             yield break;
         }
 
-        _site.Complete();
+        var newBuilding = _site.Complete();
+
+        if (newBuilding != null && newBuilding.TryGetModule(out WorkerHub hub))
+        {
+            _worker.AssignToWorkerHub(hub);
+        }
+
         Succeed();
 
         yield break;

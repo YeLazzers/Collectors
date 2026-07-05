@@ -90,7 +90,7 @@ namespace YeLazzers.Game
             }
         }
 
-        private void OnSiteCompleted(ConstructionSite site)
+        private void OnSiteCompleted(ConstructionSite site, Action<Building> reportNewBuilding)
         {
             var config = site.Config;
             var position = site.Position;
@@ -98,7 +98,8 @@ namespace YeLazzers.Game
             var siteBuilding = site.GetComponent<Building>();
             DestroyBuilding(siteBuilding);
 
-            SpawnBuilding(config, position);
+            var newBuilding = SpawnBuilding(config, position);
+            reportNewBuilding(newBuilding);
         }
     }
 }

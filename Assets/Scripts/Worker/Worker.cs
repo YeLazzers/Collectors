@@ -8,7 +8,7 @@ public class Worker : MonoBehaviour, IPoolable<Worker>
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
 
-    private Building _home;
+    private WorkerHub _hub;
     private JobRunner _jobRunner;
 
     public event Action<Worker> Expired;
@@ -17,7 +17,7 @@ public class Worker : MonoBehaviour, IPoolable<Worker>
 
     public float RotationSpeed => _rotationSpeed;
 
-    public Building Home => _home;
+    public WorkerHub Hub => _hub;
 
     private void Awake()
     {
@@ -37,11 +37,11 @@ public class Worker : MonoBehaviour, IPoolable<Worker>
         return this;
     }
 
-    public void AssignToStation(Building home, JobBoard jobBoard)
+    public void AssignToWorkerHub(WorkerHub hub)
     {
-        _home = home;
+        _hub = hub;
 
-        _jobRunner.SetJobBoard(jobBoard);
+        _jobRunner.SetJobBoard(hub.JobBoard);
         _jobRunner.Run();
     }
 }

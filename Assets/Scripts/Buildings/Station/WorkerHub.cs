@@ -15,6 +15,12 @@ namespace YeLazzers.Buildings
 
         private Building _building;
 
+        public Building Building => _building;
+
+        public JobBoard JobBoard => _jobBoard;
+
+        public ResourceStorage Storage => _storage;
+
         private void Awake()
         {
             _building = GetComponentInParent<Building>();
@@ -43,7 +49,7 @@ namespace YeLazzers.Buildings
         private void TrainWorker(Vector3 spawnPosition)
         {
             Worker worker = _spawner.Spawn(spawnPosition, transform.position);
-            worker.AssignToStation(_building, _jobBoard);
+            worker.AssignToWorkerHub(this);
         }
 
         private Vector3 GetSpawnPosition(float angle)
