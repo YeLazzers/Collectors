@@ -12,7 +12,7 @@ namespace YeLazzers.Buildings
 
         public BuildingConfig Config => _building.Config;
 
-        public PlacementFootprint Footprint => _building.View.Footprint;
+        public BuildingFootprint Footprint => _building.View.Footprint;
 
         public LayerMask FootprintMask => _footprintMask;
 

@@ -8,11 +8,11 @@ namespace YeLazzers.Buildings
         [SerializeField] private Material _material;
 
         [Header("Components")]
-        [SerializeField] private PlacementFootprint _footprint;
+        [SerializeField] private BuildingFootprint _footprint;
 
         private MeshView _meshView;
 
-        public PlacementFootprint Footprint => _footprint;
+        public BuildingFootprint Footprint => _footprint;
 
         public MeshView MeshView => _meshView;
 

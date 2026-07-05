@@ -65,7 +65,7 @@ namespace YeLazzers.Game
             site.transform.position = newPosition;
         }
 
-        public bool CanPlace(PlacementFootprint footprint, LayerMask mask, GameObject[] ignoreObjects = null)
+        public bool CanPlace(BuildingFootprint footprint, LayerMask mask, GameObject[] ignoreObjects = null)
         {
             return footprint.HasOverlapWithFootprint(mask, ignoreObjects) == false;
         }
