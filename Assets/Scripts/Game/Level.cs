@@ -10,6 +10,7 @@ namespace YeLazzers.Game
         [SerializeField] private ConstructionSite _constructionSitePrefab;
         [SerializeField] private ResourceSpawner _resourceSpawner;
         [SerializeField] private Terrain _terrain;
+        [SerializeField] private int _startResourceCount = 20;
 
         private Material _buildingMaterial;
         private readonly List<Building> _buildings = new List<Building>();
@@ -30,7 +31,7 @@ namespace YeLazzers.Game
         {
             _buildingMaterial = buildingMaterial;
 
-            _resourceSpawner.Initialize(Bounds);
+            _resourceSpawner.Initialize(Bounds, _startResourceCount);
         }
 
         public Building SpawnBuilding(BuildingConfig config, Vector3 position)

@@ -18,6 +18,7 @@ namespace YeLazzers.Core
         [SerializeField] private float _zoomSpeed = 10f;
         [SerializeField] private float _minHeight = 5f;
         [SerializeField] private float _maxHeight = 30f;
+        [SerializeField] private float _defaultHeight = 20f;
 
         private Bounds _bounds;
         private bool _hasBounds;
@@ -25,6 +26,7 @@ namespace YeLazzers.Core
         private void Awake()
         {
             ApplyAngle();
+            ApplyDefaultHeight();
         }
 
         private void OnEnable()
@@ -68,6 +70,13 @@ namespace YeLazzers.Core
         private void ApplyAngle()
         {
             transform.rotation = Quaternion.Euler(_pitch, _yaw, 0f);
+        }
+
+        private void ApplyDefaultHeight()
+        {
+            Vector3 position = transform.position;
+            position.y = Mathf.Clamp(_defaultHeight, _minHeight, _maxHeight);
+            transform.position = position;
         }
 
         private void OnHorizontalMoving(float value)

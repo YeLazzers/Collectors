@@ -173,6 +173,7 @@ MonoBehaviour:
   _zoomSpeed: 10
   _minHeight: 5
   _maxHeight: 30
+  _defaultHeight: 20
 --- !u!81 &174881609
 AudioListener:
   m_ObjectHideFlags: 0
@@ -608,6 +609,7 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  _startWorkerCount: 3
 --- !u!4 &624200627
 Transform:
   m_ObjectHideFlags: 0
@@ -874,18 +876,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1778700963}
     m_Modifications:
-    - target: {fileID: 602198892021097317, guid: 81337b97537a64dba959a672f89d1f0a, type: 3}
-      propertyPath: _maxResources
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 602198892021097317, guid: 81337b97537a64dba959a672f89d1f0a, type: 3}
-      propertyPath: _isBurstEnabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2233506365326219386, guid: 81337b97537a64dba959a672f89d1f0a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 4115650760609671122, guid: 81337b97537a64dba959a672f89d1f0a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

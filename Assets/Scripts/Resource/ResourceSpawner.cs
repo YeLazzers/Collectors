@@ -3,28 +3,22 @@ using UnityEngine;
 
 public class ResourceSpawner : PoolBase<Resource>
 {
-    [SerializeField] private int _maxResources = 10;
+    [SerializeField] private int _maxResources = 100;
     [SerializeField] private float _spawnIntervalMin = 3f;
     [SerializeField] private float _spawnIntervalMax = 5f;
-    [SerializeField] private bool _isBurstEnabled;
 
     private Bounds _spawnBounds;
 
-    public void Initialize(Bounds spawnBounds)
+    public void Initialize(Bounds spawnBounds, int startResourceCount)
     {
         _spawnBounds = spawnBounds;
 
-        if (_isBurstEnabled)
+        for (int i = 0; i < startResourceCount; i++)
         {
-            for (int i = 0; i < _maxResources; i++)
-            {
-                Spawn();
-            }
+            Spawn();
         }
-        else
-        {
-            StartCoroutine(SpawnResources());
-        }
+
+        StartCoroutine(SpawnResources());
     }
 
     public void Release(Resource resource)
