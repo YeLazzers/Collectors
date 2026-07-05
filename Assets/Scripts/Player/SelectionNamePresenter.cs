@@ -4,18 +4,19 @@ using UnityEngine;
 public class SelectionNamePresenter : MonoBehaviour
 {
     [SerializeField] private InputReader _inputReader;
-    [SerializeField] private SelectingMode _selector;
+    [SerializeField] private PlayerInputRouter _router;
     [SerializeField] private TextMeshProUGUI _nameLabel;
     [SerializeField] private Vector3 _labelOffset;
 
-    private void OnEnable()
+    private void Start()
     {
-        _selector.Hovered += OnHovered;
+        // _router.Selector.Hovered += OnHovered;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        _selector.Hovered -= OnHovered;
+        // if (_router.Selector != null)
+        //     _router.Selector.Hovered -= OnHovered;
     }
 
     private void UpdatePosition(Vector3 mousePosition)

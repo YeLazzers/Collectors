@@ -1,27 +1,24 @@
 using System.Collections;
-using UnityEngine;
 using YeLazzers.Buildings;
 
 public sealed class BuildStep : StepBase
 {
-    private readonly BuildingConstructor _builder;
+    private readonly ConstructionSite _site;
 
-    public BuildStep(BuildingConstructor builder)
+    public BuildStep(ConstructionSite site)
     {
-        _builder = builder;
+        _site = site;
     }
 
     protected override IEnumerator Run()
     {
-        if (_builder == null || _builder.IsBuildingInProgress == false)
+        if (_site == null)
         {
             Fail();
             yield break;
         }
 
-        Debug.Log($"[JobPipeline] BuildStep started. Builder={_builder.name}");
-
-        _builder.FinishBuilding();
+        _site.Complete();
         Succeed();
 
         yield break;

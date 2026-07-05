@@ -11,6 +11,7 @@ namespace YeLazzers.Game
         [SerializeField] private ResourceSpawner _resourceSpawner;
         [SerializeField] private Terrain _terrain;
 
+        private Material _buildingMaterial;
         private readonly List<Building> _buildings = new List<Building>();
 
         public event Action<Building> BuildingSpawned;
@@ -23,8 +24,10 @@ namespace YeLazzers.Game
 
         public IReadOnlyList<Building> GetAllBuildings() => _buildings;
 
-        public void Initialize()
+        public void Initialize(Material buildingMaterial)
         {
+            _buildingMaterial = buildingMaterial;
+
             var terrainPos = _terrain.transform.position;
             var terrainSize = _terrain.terrainData.size;
             var spawnBounds = new Bounds(terrainPos + terrainSize / 2f, terrainSize);
@@ -35,7 +38,7 @@ namespace YeLazzers.Game
         public Building SpawnBuilding(BuildingConfig config, Vector3 position)
         {
             var building = Instantiate(config.Prefab, position, Quaternion.identity);
-            building.Initialize(config, position);
+            building.Initialize(config, position, _buildingMaterial);
             Register(building);
             BuildingSpawned?.Invoke(building);
             return building;
@@ -63,47 +66,9 @@ namespace YeLazzers.Game
             site.transform.position = newPosition;
         }
 
-        public bool CanPlace(Vector3 position, Vector2 footprintSize)
+        public bool CanPlace(PlacementFootprint footprint, LayerMask mask, GameObject[] ignoreObjects = null)
         {
-            foreach (var building in _buildings)
-            {
-                var existingPos = building.transform.position;
-                var existingSize = building.Config.FootprintSize;
-
-                bool overlapsX = Mathf.Abs(position.x - existingPos.x) < (footprintSize.x + existingSize.x) / 2f;
-                bool overlapsZ = Mathf.Abs(position.z - existingPos.z) < (footprintSize.y + existingSize.y) / 2f;
-
-                if (overlapsX && overlapsZ)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public bool CanPlace(Vector3 position, Vector2 footprintSize, Building exclude)
-        {
-            foreach (var building in _buildings)
-            {
-                if (building == exclude)
-                {
-                    continue;
-                }
-
-                var existingPos = building.transform.position;
-                var existingSize = building.Config.FootprintSize;
-
-                bool overlapsX = Mathf.Abs(position.x - existingPos.x) < (footprintSize.x + existingSize.x) / 2f;
-                bool overlapsZ = Mathf.Abs(position.z - existingPos.z) < (footprintSize.y + existingSize.y) / 2f;
-
-                if (overlapsX && overlapsZ)
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return footprint.HasOverlapWithFootprint(mask, ignoreObjects) == false;
         }
 
         private void Register(Building building)

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class CursorChanger : MonoBehaviour
+public class Cursor : MonoBehaviour
 {
     [SerializeField] private Texture2D _dotTexture;
     [SerializeField] private Vector2 _hotspot = Vector2.zero;
@@ -15,18 +15,18 @@ public class CursorChanger : MonoBehaviour
 
     public void SetDefaultCursor()
     {
-        Cursor.visible = true;
-        Cursor.SetCursor(_defaultCursor, _hotspot, CursorMode.Auto);
+        UnityEngine.Cursor.visible = true;
+        UnityEngine.Cursor.SetCursor(_defaultCursor, _hotspot, CursorMode.Auto);
     }
 
     public void SetSelectCursor()
     {
-        Cursor.visible = true;
-        Cursor.SetCursor(_selecterCursor, _hotspot, CursorMode.Auto);
+        UnityEngine.Cursor.visible = true;
+        UnityEngine.Cursor.SetCursor(_selecterCursor, _hotspot, CursorMode.Auto);
     }
 
     public void HideCursor()
     {
-        Cursor.visible = false;
+        UnityEngine.Cursor.visible = false;
     }
 }

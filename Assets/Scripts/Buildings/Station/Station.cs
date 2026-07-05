@@ -47,7 +47,7 @@ namespace YeLazzers.Buildings
         private void Start()
         {
             _interactable.Initialize(_building.View);
-            _hub.TrainWorker(_startCount);
+            _hub.Initialize(_startCount);
         }
 
         private IEnumerator Scanning()

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class JobBoard : MonoBehaviour
 {
+    [SerializeField]
     private readonly List<IJob> _jobs = new();
 
     public event Action<IJob> JobAdded;
@@ -13,14 +14,14 @@ public class JobBoard : MonoBehaviour
     public void Publish(IJob job)
     {
         _jobs.Add(job);
-        Debug.Log($"Job published: {job.Name}");
+
         JobAdded?.Invoke(job);
         Changed?.Invoke();
     }
 
     public bool TryGetJob(out IJob job)
     {
-        var sortedJobs = _jobs.OrderBy(j => j.Priority);
+        var sortedJobs = _jobs.OrderByDescending(j => j.Priority);
         job = sortedJobs.FirstOrDefault(j => j.Status == JobStatus.Pending);
 
         if (job != null)

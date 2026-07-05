@@ -16,7 +16,7 @@ namespace YeLazzers.Buildings
 
         public MeshView MeshView => _meshView;
 
-        public void RenderModel(BuildingConfig config)
+        public void RenderModel(BuildingConfig config, Material ownerMaterial = null)
         {
             if (_meshView == null)
             {
@@ -24,8 +24,9 @@ namespace YeLazzers.Buildings
                 _meshView.gameObject.name = "Model";
             }
 
-            if (_material != null)
-                _meshView.SetMaterial(_material);
+            var material = ownerMaterial != null ? ownerMaterial : _material;
+            if (material != null)
+                _meshView.SetMaterial(material);
 
             _footprint?.Initialize(config.FootprintSize);
         }

@@ -107,5 +107,8 @@ docs/
 .codex/
 .claude/
 AGENTS.md
+
+# macOS
+.DS_Store
 CLAUDE.md
 memory/

@@ -13,8 +13,7 @@ namespace YeLazzers.Buildings
     {
         [SerializeField] private ResourceStorage _storage;
         [SerializeField] private WorkerHub _hub;
-        [SerializeField] private WorkerTrainer _trainer;
-        [SerializeField] private BuildingConstructor _builder;
+        [SerializeField] private CustomLineRenderer _lineRenderer;
         [SerializeField] private JobBoard _jobBoard;
 
         private StationPolicyType _currentPolicy = StationPolicyType.Production;
@@ -22,33 +21,54 @@ namespace YeLazzers.Buildings
         private ConstructionSite _activeSite;
         private BuildingJob _activeBuildingJob;
 
+        public ConstructionSite ActiveSite => _activeSite;
+
+        public void SetActiveSite(ConstructionSite site)
+        {
+            if (_activeSite != site)
+            {
+                if (_activeSite != null)
+                {
+                    _activeSite.SiteCompleted -= OnSiteCompleted;
+                }
+
+                _activeSite = site;
+                _activeSite.SiteCompleted += OnSiteCompleted;
+            }
+
+            if (_activeBuildingJob == null)
+            {
+                _currentPolicy = StationPolicyType.Construction;
+            }
+
+            _lineRenderer.DrawLine(new[] { transform.position, _activeSite.transform.position });
+        }
+
         private void OnEnable()
         {
-            _builder.SitePlaced += OnSitePlaced;
             _storage.AmountChanged += OnResourceChanged;
         }
 
         private void OnDisable()
         {
-            _builder.SitePlaced -= OnSitePlaced;
             _storage.AmountChanged -= OnResourceChanged;
-        }
 
-        private void OnSitePlaced(ConstructionSite site)
-        {
-            _activeSite = site;
-            _currentPolicy = StationPolicyType.Construction;
+            if (_activeSite != null)
+            {
+                _activeSite.SiteCompleted -= OnSiteCompleted;
+            }
         }
 
         private void OnResourceChanged(int newAmount)
         {
+            Debug.Log($"Station Policy: {_currentPolicy}");
             switch (_currentPolicy)
             {
                 default:
                 case StationPolicyType.Idle:
                     break;
                 case StationPolicyType.Production:
-                    _trainer.TryTrainWorker();
+                    _hub.TryTrainWorker();
                     break;
                 case StationPolicyType.Construction:
                     TryBuildConstruction(newAmount);
@@ -61,13 +81,25 @@ namespace YeLazzers.Buildings
             if (_activeSite == null || _activeBuildingJob != null)
                 return;
 
+            Debug.Log($"TryBuilding {availableResources}");
+
             var cost = _activeSite.Config.Cost;
 
             if (availableResources >= cost)
             {
-                _activeBuildingJob = new BuildingJob(new BuildingJobContext(_activeSite.Config, _activeSite.Position, _builder), 2);
+                _activeBuildingJob = new BuildingJob(new BuildingJobContext(_activeSite), 2);
                 _jobBoard.Publish(_activeBuildingJob);
             }
+        }
+
+        private void OnSiteCompleted(ConstructionSite site)
+        {
+            site.SiteCompleted -= OnSiteCompleted;
+
+            _activeSite = null;
+            _activeBuildingJob = null;
+            _currentPolicy = StationPolicyType.Production;
+            _lineRenderer.ClearLine();
         }
     }
 }

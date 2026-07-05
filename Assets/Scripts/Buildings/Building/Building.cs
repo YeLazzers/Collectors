@@ -13,11 +13,11 @@ namespace YeLazzers.Buildings
 
         public BuildingView View => _view;
 
-        public void Initialize(BuildingConfig config, Vector3 position)
+        public void Initialize(BuildingConfig config, Vector3 position, Material material = null)
         {
             _config = config;
             transform.position = position;
-            _view.RenderModel(_config);
+            _view.RenderModel(_config, material);
         }
 
         public Vector3 GetLandingPoint(Vector3 originPos)

@@ -7,6 +7,7 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
     [SerializeField] private CollectableGrabber _grabber;
 
     private readonly GatheringPlanBuilder _gatheringPlanBuilder = new();
+    private readonly BuildingPlanBuilder _buildingPlanBuilder = new();
 
     private IJob _currentJob;
     private JobBoard _jobBoard;
@@ -73,8 +74,19 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
                 }
 
                 break;
+            case BuildingJob buildingJob:
+                if (_buildingPlanBuilder.TryBuild(buildingJob, _worker, out IWorkerPlan buildingPlan))
+                {
+                    StartPlan(buildingPlan);
+                }
+                else
+                {
+                    FailCurrentJobAndTryNext();
+                }
+
+                break;
             default:
-                Debug.LogWarning($"Unsupported job type in JobRunner: {job.GetType().Name}");
+                Debug.Log($"[JobRunner] No plan builder for job type {job.GetType().Name}, failing immediately");
                 FailCurrentJobAndTryNext();
                 break;
         }

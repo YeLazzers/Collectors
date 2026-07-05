@@ -9,10 +9,12 @@ namespace YeLazzers.Buildings
         [SerializeField] private PlacementPreviewView _previewView;
 
         private Building _building;
-        private bool _isValidPosition = false;
 
         public BuildingConfig Config => _building.Config;
-        public bool IsValidPosition => _isValidPosition;
+
+        public PlacementFootprint Footprint => _building.View.Footprint;
+
+        public LayerMask FootprintMask => _footprintMask;
 
         private void Awake()
         {
@@ -28,15 +30,11 @@ namespace YeLazzers.Buildings
         public void UpdatePosition(Vector3 position)
         {
             transform.position = position;
-
-            Validate();
         }
 
-        private void Validate()
+        public void SetValid(bool isValid)
         {
-            _isValidPosition = _building.View.Footprint.HasOverlapWithFootprint(_footprintMask) == false;
-
-            _previewView.SetValid(_isValidPosition);
+            _previewView.SetValid(isValid);
         }
     }
 }
