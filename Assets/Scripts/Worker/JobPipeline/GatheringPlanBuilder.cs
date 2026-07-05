@@ -1,4 +1,5 @@
 using YeLazzers.Buildings;
+using YeLazzers.Jobs;
 
 public sealed class GatheringPlanBuilder
 {

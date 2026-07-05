@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using YeLazzers.Jobs;
 
-public sealed class JobRunner : MonoBehaviour, IJobExecutor
+public sealed class WorkerJobRunner : MonoBehaviour, IJobExecutor
 {
     [SerializeField] private Worker _worker;
     [SerializeField] private CollectableGrabber _grabber;
@@ -60,7 +61,6 @@ public sealed class JobRunner : MonoBehaviour, IJobExecutor
     {
         _currentJob = job;
 
-        // TODO: сделать фабрику при росте числа типов задач
         switch (job)
         {
             case GatheringJob gatheringJob:

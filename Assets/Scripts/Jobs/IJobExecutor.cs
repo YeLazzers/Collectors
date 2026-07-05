@@ -1,4 +1,7 @@
-public interface IJobExecutor
+namespace YeLazzers.Jobs
 {
-    bool IsIdle { get; }
+    public interface IJobExecutor
+    {
+        bool IsIdle { get; }
+    }
 }

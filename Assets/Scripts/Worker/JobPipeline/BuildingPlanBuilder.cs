@@ -1,5 +1,6 @@
 using UnityEngine;
 using YeLazzers.Buildings;
+using YeLazzers.Jobs;
 
 public sealed class BuildingPlanBuilder
 {

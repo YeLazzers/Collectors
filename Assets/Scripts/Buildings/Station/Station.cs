@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using YeLazzers.Buildings.Modules;
+using YeLazzers.Jobs;
 
 namespace YeLazzers.Buildings
 {

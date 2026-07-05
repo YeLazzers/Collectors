@@ -2,14 +2,14 @@ using System;
 using UnityEngine;
 using YeLazzers.Buildings;
 
-[RequireComponent(typeof(JobRunner))]
+[RequireComponent(typeof(WorkerJobRunner))]
 public class Worker : MonoBehaviour, IPoolable<Worker>
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
 
     private WorkerHub _hub;
-    private JobRunner _jobRunner;
+    private WorkerJobRunner _jobRunner;
 
     public event Action<Worker> Expired;
 
@@ -22,7 +22,7 @@ public class Worker : MonoBehaviour, IPoolable<Worker>
     private void Awake()
     {
         name = $"{name} {GetInstanceID()}";
-        _jobRunner = GetComponent<JobRunner>();
+        _jobRunner = GetComponent<WorkerJobRunner>();
     }
 
     public Worker Initialize(Vector3 position)
